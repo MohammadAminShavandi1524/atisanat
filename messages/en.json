@@ -1,0 +1,14 @@
+{
+  "Manifest": {
+    "name": "ATI Sanat",
+    "shortName": "ATI Sanat",
+    "description": "An industrial and engineering company specializing in high-precision manufacturing of tight-tolerance components using advanced CNC equipment and modern CAM software."
+  },
+  "Error": {
+    "description": "<p>We've unfortunately encountered an error.</p><p>You can try to <retry>reload the page</retry> you were visiting.</p>",
+    "title": "Something went wrong!"
+  },
+  "LocaleLayout": {
+    "title": "ATI Sanat"
+  }
+}
