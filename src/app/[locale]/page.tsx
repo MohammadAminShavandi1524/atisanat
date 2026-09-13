@@ -2,15 +2,10 @@ import { Locale, useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { use } from "react";
 
-
 export default function IndexPage({ params }: PageProps<"/[locale]">) {
   const { locale } = use(params);
 
   setRequestLocale(locale as Locale);
 
-  return (
-    <div className="">
-   mmd
-    </div>
-  );
+  return <div className="h-1000"></div>;
 }

@@ -272,11 +272,11 @@
     }
   }
 
-  /* .headerPadding {
-    padding-top: 124px;
+  .headerPadding {
+    padding-top: 84px;
   }
 
-  @media (min-width: 64rem) {
+  /* @media (min-width: 64rem) {
     .headerPadding {
       padding-top: 110px;
     }
@@ -337,6 +337,6 @@
   }
 
   :lang(en) {
-    font-family: var(--font-roboto-condensed), sans-serif;
+    font-family: var(--font-inter), sans-serif;
   }
 }

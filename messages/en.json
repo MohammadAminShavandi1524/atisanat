@@ -10,5 +10,24 @@
   },
   "LocaleLayout": {
     "title": "ATI Sanat"
+  },
+  "Header": {
+    "logoName": "ATI SANAT",
+    "logoDescription": "Precision Engineering",
+    "Navigation": {
+      "home": "Home",
+      "products": "Products",
+      "machiningChallenges": "Machining Challenges",
+      "contactUs": "Contact Us",
+      "aboutUs": "About Us",
+      "faq": "FAQ"
+    }
+  },
+  "FAQ": {
+    "title": "Frequently Asked Questions",
+    "description": "Find answers to common questions about our machining services, production process, technical drawing reviews, and working with ATI Sanat.",
+    "sectionTitle": "Answers to Your Questions",
+    "sectionDescription": "If you cannot find the answer you need or your project requires a more detailed technical review, you can contact our team directly.",
+    "contact": "Contact Us"
   }
 }
