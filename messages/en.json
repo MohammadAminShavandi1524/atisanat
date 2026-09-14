@@ -23,11 +23,123 @@
       "faq": "FAQ"
     }
   },
+  "Home": {
+    "BrandStatement": {
+      "slogan": "Precision, Order, Evolution",
+      "title": "Beyond an Industrial Workshop; A Precision Engineering Center for Critical Machined Components",
+      "description": "We define industry from a different perspective. We have built an operation where precision is not merely a number, but the foundation of everything we do. By utilizing CNC equipment and up-to-date CAM software, we manufacture high-tolerance components with a strong focus on precision and control."
+    },
+    "FeaturedMachines": {
+      "title": "Precision Machining with CNC Equipment",
+      "description": "Our machining equipment is used to manufacture precise, complex components with demanding dimensional tolerances.",
+      "threeHalfAxis": {
+        "title": "3.5-Axis CNC Milling",
+        "description": "Equipped with a rotary table for precise machining of components that require access and processing from multiple angles."
+      },
+      "threeAxis": {
+        "title": "3-Axis CNC Milling",
+        "description": "Designed for precise industrial component manufacturing with controlled axis movement and high surface quality."
+      },
+      "fourAxis": {
+        "title": "4-Axis CNC Milling",
+        "description": "Suitable for complex multi-sided components while reducing repositioning during the machining process."
+      }
+    },
+    "CoreValues": {
+      "title": "Core Values",
+      "description": "The principles that shape our approach to machining, quality control, and precision component manufacturing.",
+      "precision": {
+        "title": "Precision First",
+        "description": "We challenge dimensional tolerances. For us, hundredths of a millimeter are a starting point, not the finish line."
+      },
+      "infrastructure": {
+        "title": "Modern Infrastructure",
+        "description": "An organized environment, standardized infrastructure, and operational discipline help improve focus and reduce human error."
+      },
+      "strategicIndustries": {
+        "title": "Strategic Industry Expertise",
+        "description": "Our machining experience includes components used across oil and gas, automotive, steel, and energy industries."
+      },
+      "noShortcuts": {
+        "title": "No Cheap Shortcuts",
+        "description": "Component quality is not sacrificed for faster production or lower cost, and manufacturing standards remain the priority."
+      }
+    },
+    "EquipmentCapabilities": {
+      "title": "Equipment & Capabilities",
+
+      "threeHalfAxis": {
+        "title": "3.5-Axis CNC Milling",
+        "description": "Equipped with a rotary table for precise machining from multiple angles."
+      },
+
+      "threeAxis": {
+        "title": "3-Axis CNC Milling",
+        "description": "For precise industrial component machining and controlled manufacturing processes."
+      },
+
+      "fourAxis": {
+        "title": "4-Axis CNC Milling",
+        "description": "Suitable for complex components and multi-sided machining operations."
+      },
+
+      "manualLathe": {
+        "title": "Manual Lathe",
+        "description": "Used for manual machining and complementary manufacturing operations."
+      },
+
+      "surfaceGrinding": {
+        "title": "Surface Grinding",
+        "description": "Used for flat grinding operations and achieving precise component surfaces."
+      },
+
+      "columnDrill": {
+        "title": "MS32b Column Drill",
+        "description": "Used for precise drilling operations during component manufacturing."
+      }
+    },
+    "Industries": {
+      "title": "Industries",
+      "items": {
+        "automotive": "Automotive Parts",
+        "power": "Power Generation",
+        "machinery": "Gearbox & Machinery",
+        "steel": "Steel, Pipe & Rolling",
+        "mold": "Mold & Die",
+        "oilGas": "Oil & Gas",
+        "railway": "Railway Industry",
+        "aerospace": "Aerospace"
+      }
+    },
+    "MachiningChallenges": {
+      "title": "Machining Challenges",
+      "readMore": "Read Article",
+      "items": {
+        "chatter": {
+          "title": "Controlling Chatter in Milling",
+          "description": "Machining vibration can reduce surface quality, dimensional accuracy, and tool life. Proper cutting parameters, tooling, and workholding play a major role in controlling chatter."
+        },
+        "toolWear": {
+          "title": "Reducing Tool Wear and Extending Tool Life",
+          "description": "Controlling cutting speed, feed rate, cooling conditions, and tool selection can reduce premature wear and improve machining process stability."
+        },
+        "surfaceFinish": {
+          "title": "Improving Surface Finish and Tolerance Control",
+          "description": "Achieving a precise surface and controlled tolerance requires coordination between the machine, cutting tool, machining parameters, and proper workholding."
+        }
+      }
+    }
+  },
   "FAQ": {
     "title": "Frequently Asked Questions",
     "description": "Find answers to common questions about our machining services, production process, technical drawing reviews, and working with ATI Sanat.",
     "sectionTitle": "Answers to Your Questions",
     "sectionDescription": "If you cannot find the answer you need or your project requires a more detailed technical review, you can contact our team directly.",
     "contact": "Contact Us"
+  },
+  "Footer": {
+    "quickAccess": "Quick Access",
+      "contact": "Contact",
+    "address": "Karaj, Alborz"
   }
 }

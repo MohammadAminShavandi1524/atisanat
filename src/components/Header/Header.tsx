@@ -5,7 +5,6 @@ import { useLocale } from "next-intl";
 
 import Logo from "./Logo";
 
-
 import { cn } from "@/lib/utils";
 import Nav from "./Nav";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -50,12 +49,12 @@ const Header = () => {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-transform duration-500 ease-out border-b-border border-b",
+        "border-b-border bg-background/95 fixed inset-x-0 top-0 z-50 border-b transition-transform duration-500 ease-out",
         showHeader ? "translate-y-0" : "-translate-y-full",
       )}
     >
       <div className="w90">
-        <div className=" bg-background/95 flex h-[84px] pb-1.5 items-center">
+        <div className="flex h-[84px] items-center pb-1.5">
           <div className="shrink-0">
             <Logo />
           </div>
