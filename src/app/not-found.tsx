@@ -1,13 +1,16 @@
-"use client";
+import { getTranslations } from "next-intl/server";
 
-import Error from "next/error";
+import NotFound from "@/components/ui/404-page-not-found";
 
-export default function GlobalNotFound() {
+export default async function LocaleNotFound() {
+  const t = await getTranslations("NotFound");
+
   return (
-    <html lang="en">
-      <body>
-        <Error statusCode={404} />;
-      </body>
-    </html>
+    <NotFound
+      title={t("title")}
+      description={t("description")}
+      homeLabel={t("home")}
+      homeHref="/"
+    />
   );
 }

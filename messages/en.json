@@ -8,16 +8,23 @@
     "description": "<p>We've unfortunately encountered an error.</p><p>You can try to <retry>reload the page</retry> you were visiting.</p>",
     "title": "Something went wrong!"
   },
+  "NotFound": {
+    "title": "Page Not Found",
+    "description": "Sorry, the page you are looking for could not be found.",
+    "home": "Return Home"
+  },
   "LocaleLayout": {
-    "title": "ATI Sanat"
+    "title": "ATI SANAT Gostar Pouya"
   },
   "Header": {
-    "logoName": "ATI SANAT",
+    "logoName": "ATI SANAT Gostar Pouya",
     "logoDescription": "Precision Engineering",
     "Navigation": {
       "home": "Home",
       "products": "Products",
       "machiningChallenges": "Machining Challenges",
+      "cooperation": "Cooperation",
+      "standardTables": "Standard Tables",
       "contactUs": "Contact Us",
       "aboutUs": "About Us",
       "faq": "FAQ"
@@ -121,7 +128,7 @@
         },
         "toolWear": {
           "title": "Reducing Tool Wear and Extending Tool Life",
-          "description": "Controlling cutting speed, feed rate, cooling conditions, and tool selection can reduce premature wear and improve machining process stability."
+          "description": "Controlling cutting speed, feed rate, cooling conditions, and tool selection can reduce premature wear, improve machining process stability, and enhance overall tool performance."
         },
         "surfaceFinish": {
           "title": "Improving Surface Finish and Tolerance Control",
@@ -139,7 +146,7 @@
   },
   "Footer": {
     "quickAccess": "Quick Access",
-      "contact": "Contact",
-    "address": "Karaj, Alborz"
+    "contact": "Contact",
+    "address": "Karaj, Alborz, Iran"
   }
 }

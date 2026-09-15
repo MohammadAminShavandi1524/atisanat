@@ -56,7 +56,7 @@ const BrandStatement2 = () => {
           </div>
 
           {/* Content */}
-          <div className="relative grid grid-cols-[0.85fr_1.15fr] items-start gap-16 px-12 py-14">
+          <div className="relative grid grid-cols-[0.75fr_1.25fr] items-start gap-16 px-12 py-14">
             <motion.div
               initial={{
                 opacity: 0,

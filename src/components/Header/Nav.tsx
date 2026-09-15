@@ -3,8 +3,6 @@
 import { useLocale, useTranslations } from "next-intl";
 import NavItem from "./NavItem";
 
-
-
 const Nav = () => {
   const locale = useLocale();
   const t = useTranslations("Header.Navigation");
@@ -19,6 +17,16 @@ const Nav = () => {
         <NavItem
           label={t("machiningChallenges")}
           href={`/${locale}/machining-challenges`}
+        />
+
+        <NavItem
+          label={t("cooperation")}
+          href={`/${locale}/cooperation`}
+        />
+
+        <NavItem
+          label={t("standardTables")}
+          href={`/${locale}/standard-tables`}
         />
 
         <NavItem label={t("contactUs")} href={`/${locale}/contact-us`} />

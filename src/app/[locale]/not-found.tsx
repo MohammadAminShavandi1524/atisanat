@@ -1,10 +1,16 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
+import NotFound from "@/components/ui/404-page-not-found";
 
-export default function NotFoundPage() {
-  const t = useTranslations("NotFoundPage");
+export default async function LocaleNotFound() {
+  const t = await getTranslations("NotFound");
 
   return (
-    <div> not found </div>
+    <NotFound
+      title={t("title")}
+      description={t("description")}
+      homeLabel={t("home")}
+      homeHref="/"
+    />
   );
 }

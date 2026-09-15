@@ -11,17 +11,20 @@ const Logo = () => {
   return (
     <Link
       href={`/${locale}`}
-      className="flex shrink-0 items-center gap-x-2.5"
+      className="flex shrink-0 items-center gap-x-3"
       aria-label={t("logoName")}
+      
     >
-      <div className="relative aspect-[1520/403] w-[150px] shrink-0">
+      <div
+     
+      className="relative aspect-[1520/403] w-[150px] shrink-0 hidden">
         <Image
           src="/logo.png"
           alt={t("logoName")}
           fill
           priority
           sizes="150px"
-          className="object-contain"
+          className="object-contain "
         />
       </div>
 

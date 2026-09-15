@@ -14,7 +14,6 @@ import { Metadata } from "next";
 import { routing } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
-import { ThemeProvider } from "@/components/theme/Providers";
 import AppToaster from "@/components/AppToaster";
 
 import { CustomToastProvider } from "@/components/ui/custom-toast";
@@ -67,45 +66,41 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   return (
-    <html
-      lang={locale}
+    <div
       dir={locale === "en" ? "ltr" : "rtl"}
-      suppressHydrationWarning
+      lang={locale}
+      className={cn(
+        inter.variable,
+        locale === "fa"
+          ? "font-IRANYekanX"
+          : "font-[family-name:var(--font-inter)]",
+      )}
     >
-      <body
-        className={cn(
-          inter.variable,
-          locale === "fa"
-            ? "font-IRANYekanX"
-            : "font-[family-name:var(--font-inter)]",
-        )}
-      >
-        <NextIntlClientProvider>
-          {/* <ThemeProvider> */}
-          <MobileSidebar>
-            <AppToaster />
+      <NextIntlClientProvider>
+        {/* <ThemeProvider> */}
+        <MobileSidebar>
+          <AppToaster />
 
-            <MobileSidebarContent width="min(88vw, 380px)">
-              <MobileMenu />
-            </MobileSidebarContent>
+          <MobileSidebarContent width="min(88vw, 380px)">
+            <MobileMenu />
+          </MobileSidebarContent>
 
-            <div className="bg-background text-foreground relative">
-              <Header />
+          <div className="bg-background text-foreground relative">
+            <Header />
 
-              <main className="headerPadding">
-                <CustomToastProvider>
-                  <SmoothScrollProvider>{children}</SmoothScrollProvider>
-                </CustomToastProvider>
-              </main>
+            <main className="headerPadding">
+              <CustomToastProvider>
+                <SmoothScrollProvider>{children}</SmoothScrollProvider>
+              </CustomToastProvider>
+            </main>
 
-              <Footer />
+            <Footer />
 
-              <ScrollToTop />
-            </div>
-          </MobileSidebar>
-          {/* </ThemeProvider> */}
-        </NextIntlClientProvider>
-      </body>
-    </html>
+            <ScrollToTop />
+          </div>
+        </MobileSidebar>
+        {/* </ThemeProvider> */}
+      </NextIntlClientProvider>
+    </div>
   );
 }

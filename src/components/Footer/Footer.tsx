@@ -50,10 +50,10 @@ const Footer = () => {
   ];
 
   const landlines = [
-    "02634900071",
-    "02634900093",
-    "02634900182",
-    "02634900149",
+    "026-34900071",
+    "026-34900093",
+    "026-34900182",
+    "026-34900149",
   ];
 
   const socials = [
@@ -95,7 +95,7 @@ const Footer = () => {
                 />
               </div>
 
-              <span className="text-foreground pt-2 text-[28px] leading-none font-semibold">
+              <span className="text-foreground pt-3.25 text-[28px] leading-none font-semibold">
                 {brandT("logoName")}
               </span>
             </Link>
@@ -137,7 +137,9 @@ const Footer = () => {
                   className="text-custom-primary mt-1 shrink-0"
                 />
 
-                <div className="grid grid-cols-2 gap-x-10 gap-y-3">
+
+
+                <div className="grid grid-cols-1 gap-x-10 gap-y-3">
                   {landlines.map((phone) => (
                     <Link
                       key={phone}
