@@ -14,6 +14,8 @@ import {
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 
+import FooterBottom from "./FooterBottom";
+
 const Footer = () => {
   const locale = useLocale();
 
@@ -77,7 +79,7 @@ const Footer = () => {
   return (
     <footer className="border-border bg-secondary-bg border-t">
       <div className="w90">
-        <div className="grid grid-cols-2 gap-24 py-20">
+        <div className="grid grid-cols-2 gap-24 py-14">
           {/* Brand + Quick Access */}
           <div>
             <Link
@@ -137,8 +139,6 @@ const Footer = () => {
                   className="text-custom-primary mt-1 shrink-0"
                 />
 
-
-
                 <div className="grid grid-cols-1 gap-x-10 gap-y-3">
                   {landlines.map((phone) => (
                     <Link
@@ -161,11 +161,11 @@ const Footer = () => {
                 />
 
                 <Link
-                  href="tel:09125629632"
+                  href="tel:+989125629632"
                   dir="ltr"
                   className="text-muted-foreground hover:text-custom-primary text-[17px] transition-colors duration-300"
                 >
-                  09125629632
+                  +98 912 562 9632
                 </Link>
               </div>
 
@@ -222,6 +222,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
+
+      <FooterBottom />
     </footer>
   );
 };

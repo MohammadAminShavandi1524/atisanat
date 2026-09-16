@@ -13,6 +13,16 @@ const BrandStatement = () => {
     .split(isRTL ? "،" : ",")
     .map((word) => word.trim());
 
+  const getSloganOffset = (index: number) => {
+    if (isRTL) {
+      return index * 72;
+    }
+
+    const englishOffsets = [0, 150, 210];
+
+    return englishOffsets[index] ?? index * 72;
+  };
+
   return (
     <section className="bg-background overflow-hidden">
       <div className="w90 py-20">
@@ -60,11 +70,17 @@ const BrandStatement = () => {
                       delay: index * 0.1,
                       ease: [0.22, 1, 0.36, 1],
                     }}
-                    className="text-foreground hover:text-custom-primary cursor-default text-[64px] leading-[1.12] font-semibold transition-colors duration-300"
+                    style={{
+                      marginInlineStart: `${getSloganOffset(index)}px`,
+                    }}
+                    className="text-foreground hover:text-custom-primary w-fit cursor-default text-[64px] leading-[1.12] font-semibold transition-colors duration-300"
                   >
                     {word}
+
                     {index !== sloganWords.length - 1 && (
-                      <span className="text-custom-primary">،</span>
+                      <span className="text-custom-primary">
+                        {isRTL ? "،" : ","}
+                      </span>
                     )}
                   </motion.span>
                 ))}

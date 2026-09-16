@@ -22,7 +22,7 @@ const NavItem = ({ label, href }: NavItemProps) => {
       <Link
         href={href}
         className={cn(
-          "block pt-3 text-[18px] font-medium transition-colors duration-300",
+          "block pt-2.75 text-[17px] font-medium transition-colors duration-300",
           "text-foreground/75 hover:text-custom-primary",
           isActive && "text-custom-primary",
         )}

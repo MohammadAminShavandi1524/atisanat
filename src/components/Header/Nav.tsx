@@ -1,6 +1,8 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
+
+import CooperationDropdown from "./CooperationDropdown";
 import NavItem from "./NavItem";
 
 const Nav = () => {
@@ -19,10 +21,7 @@ const Nav = () => {
           href={`/${locale}/machining-challenges`}
         />
 
-        <NavItem
-          label={t("cooperation")}
-          href={`/${locale}/cooperation`}
-        />
+        <CooperationDropdown />
 
         <NavItem
           label={t("standardTables")}
@@ -32,8 +31,6 @@ const Nav = () => {
         <NavItem label={t("contactUs")} href={`/${locale}/contact-us`} />
 
         <NavItem label={t("aboutUs")} href={`/${locale}/about-us`} />
-
-        <NavItem label={t("faq")} href={`/${locale}/faq`} />
       </ul>
     </nav>
   );

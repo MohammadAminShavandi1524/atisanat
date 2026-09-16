@@ -73,9 +73,9 @@ const CoreValues = () => {
             once: true,
             amount: 0.25,
           }}
-          className="border-border grid grid-cols-4 overflow-hidden rounded-2xl border"
+          className="grid grid-cols-4 gap-5"
         >
-          {values.map((value, index) => (
+          {values.map((value) => (
             <motion.article
               key={value}
               variants={itemVariants}
@@ -83,10 +83,7 @@ const CoreValues = () => {
                 duration: 0.45,
                 ease,
               }}
-              className={[
-                "group relative min-h-[235px] overflow-hidden p-8",
-                index !== values.length - 1 ? "border-border border-e" : "",
-              ].join(" ")}
+              className="border-border group relative min-h-[235px] overflow-hidden rounded-2xl border p-8"
             >
               <div className="bg-custom-primary/0 group-hover:bg-custom-primary/5 absolute inset-0 transition-colors duration-500 ease-out" />
 
