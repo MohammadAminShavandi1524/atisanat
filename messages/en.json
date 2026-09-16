@@ -140,6 +140,46 @@
       }
     }
   },
+  "Contact": {
+    "title": "Contact Us",
+    "description": "To contact ATI Sanat, complete the form below or use the provided contact information.",
+    "info": {
+      "title": "Contact Information",
+      "phone": "Phone",
+      "mobile": "Mobile",
+      "email": "Email",
+      "address": "Address",
+      "addressValue": "Karaj, Alborz, Iran"
+    },
+    "form": {
+      "title": "Send a Message",
+      "name": "Full Name",
+      "namePlaceholder": "Full name",
+      "phone": "Phone Number",
+      "phonePlaceholder": "09123456789",
+      "email": "Email",
+      "emailPlaceholder": "example@email.com",
+      "companyName": "Company Name",
+      "companyPlaceholder": "Company name",
+      "message": "Message",
+      "messagePlaceholder": "Write your message...",
+      "submit": "Send Message",
+      "sending": "Sending..."
+    },
+    "validation": {
+      "nameRequired": "Full name is required.",
+      "phoneRequired": "Phone number is required.",
+      "phoneInvalid": "Please enter a valid phone number.",
+      "emailRequired": "Email is required.",
+      "emailInvalid": "Please enter a valid email address.",
+      "companyRequired": "Company name is required.",
+      "messageRequired": "Message is required."
+    },
+    "toast": {
+      "success": "Your message was sent successfully.",
+      "error": "There was an error sending your message."
+    }
+  },
   "FAQ": {
     "title": "Frequently Asked Questions",
     "description": "Find answers to common questions about our machining services, production process, technical drawing reviews, and working with ATI Sanat.",
