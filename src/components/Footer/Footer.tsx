@@ -38,12 +38,24 @@ const Footer = () => {
       href: `/${locale}/machining-challenges`,
     },
     {
-      label: navT("aboutUs"),
-      href: `/${locale}/about-us`,
+      label: navT("submitResume"),
+      href: `/${locale}/cooperation/resume`,
+    },
+    {
+      label: navT("businessCooperation"),
+      href: `/${locale}/cooperation/business`,
+    },
+    {
+      label: navT("standardTables"),
+      href: `/${locale}/standard-tables`,
     },
     {
       label: navT("contactUs"),
       href: `/${locale}/contact-us`,
+    },
+    {
+      label: navT("aboutUs"),
+      href: `/${locale}/about-us`,
     },
     {
       label: navT("faq"),

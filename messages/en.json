@@ -180,6 +180,81 @@
       "error": "There was an error sending your message."
     }
   },
+  "Resume": {
+    "title": "Submit Resume",
+    "description": "Complete your information and submit your resume as a PDF file.",
+    "form": {
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Full name",
+      "phone": "Phone Number",
+      "phonePlaceholder": "09123456789",
+      "email": "Email",
+      "emailPlaceholder": "example@email.com",
+      "submit": "Submit Resume",
+      "submitting": "Submitting...",
+      "resume": {
+        "label": "Resume File",
+        "placeholder": "Select or drop your resume PDF here",
+        "uploading": "Uploading resume",
+        "finalizing": "Finalizing upload",
+        "remove": "Remove resume file"
+      }
+    },
+    "validation": {
+      "fullNameRequired": "Full name is required.",
+      "emailRequired": "Email is required.",
+      "emailInvalid": "Please enter a valid email address.",
+      "phoneRequired": "Phone number is required.",
+      "phoneInvalid": "Please enter a valid phone number.",
+      "resumeRequired": "Resume file is required.",
+      "resumeInvalid": "Resume file must be in PDF format.",
+      "resumeUploadFailed": "Resume file upload failed."
+    },
+    "toast": {
+      "success": "Your resume was submitted successfully.",
+      "error": "There was an error submitting your resume.",
+      "uploadError": "There was an error uploading your resume."
+    }
+  },
+  "BusinessCooperation": {
+    "title": "Business Cooperation",
+    "description": "Complete your information and submit a PDF file for ATI Sanat to review your cooperation request.",
+    "form": {
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Full name",
+      "phone": "Phone Number",
+      "phonePlaceholder": "09123456789",
+      "email": "Email",
+      "emailPlaceholder": "example@email.com",
+      "company": "Company Name",
+      "companyOptional": "Optional",
+      "companyPlaceholder": "Company name",
+      "submit": "Submit Request",
+      "submitting": "Submitting...",
+      "resume": {
+        "label": "PDF File",
+        "placeholder": "Select or drop your PDF file here",
+        "uploading": "Uploading file",
+        "finalizing": "Finalizing upload",
+        "remove": "Remove file"
+      }
+    },
+    "validation": {
+      "fullNameRequired": "Full name is required.",
+      "emailRequired": "Email is required.",
+      "emailInvalid": "Please enter a valid email address.",
+      "phoneRequired": "Phone number is required.",
+      "phoneInvalid": "Please enter a valid phone number.",
+      "resumeRequired": "A PDF file is required.",
+      "resumeInvalid": "The selected file must be in PDF format.",
+      "resumeUploadFailed": "File upload failed."
+    },
+    "toast": {
+      "success": "Your cooperation request was submitted successfully.",
+      "error": "There was an error submitting your cooperation request.",
+      "uploadError": "There was an error uploading the file."
+    }
+  },
   "FAQ": {
     "title": "Frequently Asked Questions",
     "description": "Find answers to common questions about our machining services, production process, technical drawing reviews, and working with ATI Sanat.",

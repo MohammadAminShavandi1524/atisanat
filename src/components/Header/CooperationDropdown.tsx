@@ -32,11 +32,11 @@ const CooperationDropdown = () => {
 
   return (
     <li className="group relative shrink-0">
-      <Link
-        href={href}
+      <div
+       
         className={cn(
           "flex items-center gap-x-1 pt-2.75 text-[17px] font-medium transition-colors duration-300",
-          "text-foreground/75 hover:text-custom-primary",
+          "text-foreground/75 hover:text-custom-primary cursor-default",
           isActive && "text-custom-primary",
         )}
       >
@@ -47,7 +47,7 @@ const CooperationDropdown = () => {
           strokeWidth={1.8}
           className="mt-[2px] transition-transform duration-300 group-hover:rotate-180"
         />
-      </Link>
+      </div>
 
       <div className="pointer-events-none absolute start-0 top-full z-50 pt-4 opacity-0 transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:pointer-events-auto group-hover:opacity-100">
         <div className="border-border bg-background w-[220px] overflow-hidden rounded-lg border p-1.5 shadow-[0_14px_40px_rgba(0,0,0,0.08)]">

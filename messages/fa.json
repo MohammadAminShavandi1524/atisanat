@@ -180,6 +180,81 @@
       "error": "ارسال پیام با خطا مواجه شد."
     }
   },
+  "Resume": {
+    "title": "ارسال رزومه",
+    "description": "اطلاعات خود را تکمیل کرده و فایل رزومه را در قالب PDF ارسال کنید.",
+    "form": {
+      "fullName": "نام و نام خانوادگی",
+      "fullNamePlaceholder": "نام و نام خانوادگی",
+      "phone": "شماره تماس",
+      "phonePlaceholder": "09123456789",
+      "email": "ایمیل",
+      "emailPlaceholder": "example@email.com",
+      "submit": "ارسال رزومه",
+      "submitting": "در حال ارسال...",
+      "resume": {
+        "label": "فایل رزومه",
+        "placeholder": "فایل PDF رزومه را انتخاب یا اینجا رها کنید",
+        "uploading": "در حال بارگذاری رزومه",
+        "finalizing": "در حال تکمیل بارگذاری",
+        "remove": "حذف فایل رزومه"
+      }
+    },
+    "validation": {
+      "fullNameRequired": "نام و نام خانوادگی الزامی است.",
+      "emailRequired": "ایمیل الزامی است.",
+      "emailInvalid": "ایمیل واردشده معتبر نیست.",
+      "phoneRequired": "شماره تماس الزامی است.",
+      "phoneInvalid": "شماره تماس واردشده معتبر نیست.",
+      "resumeRequired": "فایل رزومه الزامی است.",
+      "resumeInvalid": "فایل رزومه باید با فرمت PDF باشد.",
+      "resumeUploadFailed": "بارگذاری فایل رزومه با خطا مواجه شد."
+    },
+    "toast": {
+      "success": "رزومه شما با موفقیت ارسال شد.",
+      "error": "ارسال رزومه با خطا مواجه شد.",
+      "uploadError": "بارگذاری فایل رزومه با خطا مواجه شد."
+    }
+  },
+  "BusinessCooperation": {
+    "title": "همکاری تجاری",
+    "description": "برای بررسی زمینه‌های همکاری با آتی صنعت، اطلاعات خود را تکمیل کرده و فایل مربوطه را در قالب PDF ارسال کنید.",
+    "form": {
+      "fullName": "نام و نام خانوادگی",
+      "fullNamePlaceholder": "نام و نام خانوادگی",
+      "phone": "شماره تماس",
+      "phonePlaceholder": "09123456789",
+      "email": "ایمیل",
+      "emailPlaceholder": "example@email.com",
+      "company": "نام شرکت",
+      "companyOptional": "اختیاری",
+      "companyPlaceholder": "نام شرکت",
+      "submit": "ارسال درخواست همکاری",
+      "submitting": "در حال ارسال...",
+      "resume": {
+        "label": "فایل PDF",
+        "placeholder": "فایل PDF را انتخاب یا در این قسمت رها کنید",
+        "uploading": "در حال بارگذاری فایل",
+        "finalizing": "در حال تکمیل بارگذاری",
+        "remove": "حذف فایل"
+      }
+    },
+    "validation": {
+      "fullNameRequired": "نام و نام خانوادگی الزامی است.",
+      "emailRequired": "ایمیل الزامی است.",
+      "emailInvalid": "ایمیل واردشده معتبر نیست.",
+      "phoneRequired": "شماره تماس الزامی است.",
+      "phoneInvalid": "شماره تماس واردشده معتبر نیست.",
+      "resumeRequired": "ارسال فایل PDF الزامی است.",
+      "resumeInvalid": "فایل انتخاب‌شده باید با فرمت PDF باشد.",
+      "resumeUploadFailed": "بارگذاری فایل با خطا مواجه شد."
+    },
+    "toast": {
+      "success": "درخواست همکاری شما با موفقیت ارسال شد.",
+      "error": "ارسال درخواست همکاری با خطا مواجه شد.",
+      "uploadError": "بارگذاری فایل با خطا مواجه شد."
+    }
+  },
   "FAQ": {
     "title": "سوالات متداول",
     "description": "پاسخ سوالات متداول درباره خدمات ماشین‌کاری، فرآیند تولید، بررسی نقشه‌های فنی و نحوه همکاری با آتی صنعت را در این بخش مشاهده کنید.",
