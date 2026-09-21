@@ -2,6 +2,7 @@ import { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 
 import BusinessCooperationPage from "@/components/cooperation/business/BusinessCooperationPage";
+import BusinessCooperationPage2 from "@/components/cooperation/business/BusinessCooperationPage2";
 
 interface BusinessCooperationRouteProps {
   params: Promise<{
@@ -16,5 +17,10 @@ export default async function BusinessCooperationRoute({
 
   setRequestLocale(locale);
 
-  return <BusinessCooperationPage />;
+  return (
+    <>
+      <BusinessCooperationPage />
+      <BusinessCooperationPage2 />
+    </>
+  );
 }

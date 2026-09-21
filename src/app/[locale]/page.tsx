@@ -27,19 +27,20 @@ export default function IndexPage({ params }: PageProps<"/[locale]">) {
       <Hero />
       <BrandStatement />
       {/* <BrandStatement2 /> */}
-      <FeaturedMachines />
+      {/* <FeaturedMachines /> */}
       <FeaturedMachines2 />
       {/* <FeaturedMachines3 /> */}
       <CoreValues />
-      <CoreValues2 />
-      <CoreValues3 />
+      {/* <CoreValues2 /> */}
+      {/* <CoreValues3 /> */}
       <EquipmentCapabilities />
-      <EquipmentCapabilities2 />
-      <Industries />
-      <Industries2 />
-      <Industries3 />
+      {/* <EquipmentCapabilities2 /> */}
 
       <MachiningChallenges />
+
+      {/* <Industries /> */}
+      <Industries2 />
+      {/* <Industries3 /> */}
     </>
   );
 }

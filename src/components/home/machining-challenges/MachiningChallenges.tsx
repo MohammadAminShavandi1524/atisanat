@@ -18,7 +18,7 @@ const challenges = [
   {
     id: 2,
     slug: "reducing-tool-wear",
-    image: "/home/machining-challenges/tool-wear.png",
+    image: "/home/machining-challenges/tool-wear2.png",
     titleKey: "items.toolWear.title",
     descriptionKey: "items.toolWear.description",
   },
@@ -41,7 +41,7 @@ const MachiningChallenges = () => {
   const ArrowIcon = isRTL ? ArrowUpLeft : ArrowUpRight;
 
   return (
-    <section className="bg-secondary-bg overflow-hidden">
+    <section className="bg-background overflow-hidden">
       <div className="w90 py-24">
         <motion.h2
           initial={{

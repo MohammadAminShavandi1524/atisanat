@@ -20,7 +20,7 @@ import {
   type BusinessCooperationFormValues,
 } from "./business-cooperation.schema";
 
-const BusinessCooperationForm = () => {
+const BusinessCooperationForm2 = () => {
   const locale = useLocale();
   const t = useTranslations("BusinessCooperation");
 
@@ -165,9 +165,12 @@ const BusinessCooperationForm = () => {
   const isFormBusy = isSubmitting || isUploading || isFinalizing;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">
-      {/* Full Name + Phone */}
-      <div className="grid grid-cols-2 gap-6">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="border-border rounded-2xl border p-12"
+    >
+      {/* Fields */}
+      <div className="grid grid-cols-2 gap-x-7 gap-y-7">
         {/* Full Name */}
         <div className="min-w-0">
           <div className="mb-2.5 flex items-center justify-between gap-4">
@@ -191,7 +194,7 @@ const BusinessCooperationForm = () => {
             autoComplete="name"
             placeholder={t("form.fullNamePlaceholder")}
             {...register("fullName")}
-            className="border-border bg-secondary-bg/35 text-foreground placeholder:text-muted-foreground focus:border-custom-primary h-13 w-full rounded-xl border px-4 text-[14px] transition-colors duration-300 outline-none"
+            className="border-border bg-background text-foreground placeholder:text-muted-foreground focus:border-custom-primary h-13 w-full rounded-xl border px-4 text-[14px] transition-colors duration-300 outline-none"
           />
         </div>
 
@@ -219,13 +222,10 @@ const BusinessCooperationForm = () => {
             autoComplete="tel"
             placeholder={t("form.phonePlaceholder")}
             {...register("phoneNumber")}
-            className="border-border bg-secondary-bg/35 text-foreground placeholder:text-muted-foreground focus:border-custom-primary h-13 w-full rounded-xl border px-4 text-[14px] transition-colors duration-300 outline-none"
+            className="border-border bg-background text-foreground placeholder:text-muted-foreground focus:border-custom-primary h-13 w-full rounded-xl border px-4 text-[14px] transition-colors duration-300 outline-none"
           />
         </div>
-      </div>
 
-      {/* Email + Company */}
-      <div className="grid grid-cols-2 gap-6">
         {/* Email */}
         <div className="min-w-0">
           <div className="mb-2.5 flex items-center justify-between gap-4">
@@ -249,7 +249,7 @@ const BusinessCooperationForm = () => {
             autoComplete="email"
             placeholder={t("form.emailPlaceholder")}
             {...register("email")}
-            className="border-border bg-secondary-bg/35 text-foreground placeholder:text-muted-foreground focus:border-custom-primary h-13 w-full rounded-xl border px-4 text-[14px] transition-colors duration-300 outline-none"
+            className="border-border bg-background text-foreground placeholder:text-muted-foreground focus:border-custom-primary h-13 w-full rounded-xl border px-4 text-[14px] transition-colors duration-300 outline-none"
           />
         </div>
 
@@ -274,23 +274,25 @@ const BusinessCooperationForm = () => {
             autoComplete="organization"
             placeholder={t("form.companyPlaceholder")}
             {...register("company")}
-            className="border-border bg-secondary-bg/35 text-foreground placeholder:text-muted-foreground focus:border-custom-primary h-13 w-full rounded-xl border px-4 text-[14px] transition-colors duration-300 outline-none"
+            className="border-border bg-background text-foreground placeholder:text-muted-foreground focus:border-custom-primary h-13 w-full rounded-xl border px-4 text-[14px] transition-colors duration-300 outline-none"
           />
         </div>
       </div>
 
       {/* Resume */}
-      <BusinessResumeUploadField
-        value={resumeFile}
-        onChange={handleResumeChange}
-        error={errors.resumeUrl?.message}
-        progress={uploadProgress}
-        isUploading={isUploading}
-        isFinalizing={isFinalizing}
-      />
+      <div className="border-border mt-9 border-t pt-8">
+        <BusinessResumeUploadField
+          value={resumeFile}
+          onChange={handleResumeChange}
+          error={errors.resumeUrl?.message}
+          progress={uploadProgress}
+          isUploading={isUploading}
+          isFinalizing={isFinalizing}
+        />
+      </div>
 
       {/* Submit */}
-      <div className="flex justify-end pt-1">
+      <div className="mt-8 flex justify-end">
         <button
           type="submit"
           disabled={isFormBusy}
@@ -305,4 +307,4 @@ const BusinessCooperationForm = () => {
   );
 };
 
-export default BusinessCooperationForm;
+export default BusinessCooperationForm2;

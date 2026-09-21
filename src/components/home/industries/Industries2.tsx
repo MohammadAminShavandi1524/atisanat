@@ -57,7 +57,7 @@ const Industries2 = () => {
   const [activeIndustry, setActiveIndustry] = useState<string | null>(null);
 
   return (
-    <section className="bg-background overflow-hidden">
+    <section className="bg-secondary-bg overflow-hidden ">
       <div className="w90 py-24">
         <motion.h2
           initial={{

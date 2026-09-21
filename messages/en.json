@@ -42,17 +42,20 @@
     "FeaturedMachines": {
       "title": "Precision Machining with CNC Equipment",
       "description": "Our machining equipment is used to manufacture precise, complex components with demanding dimensional tolerances.",
+
       "threeHalfAxis": {
         "title": "3.5-Axis CNC Milling",
         "description": "Equipped with a rotary table for precise machining of components that require access and processing from multiple angles."
       },
+
       "threeAxis": {
-        "title": "3-Axis CNC Milling",
-        "description": "Designed for precise industrial component manufacturing with controlled axis movement and high surface quality."
-      },
-      "fourAxis": {
         "title": "4-Axis CNC Milling",
         "description": "Suitable for complex multi-sided components while reducing repositioning during the machining process."
+      },
+
+      "fourAxis": {
+        "title": "3-Axis CNC Milling",
+        "description": "Designed for precise industrial component manufacturing with controlled axis movement and high surface quality."
       }
     },
     "CoreValues": {
@@ -180,6 +183,35 @@
       "error": "There was an error sending your message."
     }
   },
+  "About": {
+    "hero": {
+      "slogan": "Precision, Discipline, Evolution",
+      "title": "Beyond an Industrial Workshop; an Engineering Center for Precision-Machined Critical Components",
+      "description": "For us, precision is more than a number. It is an approach that continues through every stage of production, from planning to the final manufactured component.",
+      "summary": "Using CNC equipment, CAM software and controlled manufacturing processes, we focus on components where quality and tolerance cannot be compromised."
+    },
+    "introduction": {
+      "title": "Engineering High-Precision Components",
+      "paragraph1": "We define industry from a different perspective. For us, precision is not merely a number; it is a philosophy that shapes every stage of the manufacturing process.",
+      "paragraph2": "By utilizing CNC equipment and modern CAM software, we focus on the production of high-tolerance components. We understand that in strategic industries such as oil and gas, automotive, steel and energy, even a single micron can make the difference between reliable performance and a serious failure. That is why quality and precision remain our priorities.",
+      "paragraph3": "Our infrastructure reflects the same philosophy. A disciplined and standardized environment is an integral part of our engineering process, allowing every component to be manufactured under controlled conditions with complete focus on quality."
+    },
+    "ceo": {
+      "role": "CEO Message",
+      "title": "A Commitment to Standards That Cannot Be Seen",
+      "paragraph1": "Many people associate industry with crowded and unstructured environments, but I believe the quality of the final product is directly connected to the discipline of the environment in which it is produced.",
+      "paragraph2": "My goal in this company is to create a bridge between complex engineering ideas and components manufactured with high precision. Instead of competing on price, which can lead to compromised quality, we have chosen to compete through precision and expertise. Our focus is on projects that demand close engineering attention, where even a small error is unacceptable.",
+      "paragraph3": "We are here to give our business partners in the oil, automotive, steel and energy industries confidence that their components are produced in a modern environment using advanced technologies and under complete control.",
+      "focus": {
+        "label": "Focus",
+        "value": "Precision & Expertise"
+      },
+      "commitment": {
+        "label": "Commitment",
+        "value": "Quality Without Compromise"
+      }
+    }
+  },
   "Resume": {
     "title": "Submit Resume",
     "description": "Complete your information and submit your resume as a PDF file.",
@@ -253,6 +285,26 @@
       "success": "Your cooperation request was submitted successfully.",
       "error": "There was an error submitting your cooperation request.",
       "uploadError": "There was an error uploading the file."
+    }
+  },
+  "MachiningChallengesPage": {
+    "title": "Machining Challenges",
+    "description": "In precision machining, factors such as vibration, tool wear, and surface quality control can directly affect dimensional accuracy, process stability, and overall production cost. This section explores key machining challenges and the factors involved in controlling them.",
+    "readMore": "Read Article",
+
+    "article": {
+      "preparedBy": "Prepared by",
+      "author": "ATI Sanat Technical Team",
+      "readTime": "min read",
+
+      "moreChallenges": "More Challenges",
+      "viewAll": "View All",
+
+      "tagsTitle": "Related Topics",
+      "tagsDescription": "Explore the main topics and technical keywords related to this machining challenge.",
+
+      "shareTitle": "Share This Article",
+      "shareDescription": "If you found this article useful, you can share it with colleagues and professionals in the machining industry."
     }
   },
   "FAQ": {
