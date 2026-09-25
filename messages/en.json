@@ -143,6 +143,10 @@
       }
     }
   },
+  "ProductsPage": {
+    "title": "Products",
+    "description": "A selection of ATI Sanat capabilities in precision part manufacturing and engineered tooling."
+  },
   "Contact": {
     "title": "Contact Us",
     "description": "To contact ATI Sanat, complete the form below or use the provided contact information.",
