@@ -255,6 +255,20 @@
   "BusinessCooperation": {
     "title": "Business Cooperation",
     "description": "Complete your information and submit a PDF file for ATI Sanat to review your cooperation request.",
+    "features": {
+      "fast": {
+        "title": "Fast & Transparent Process",
+        "description": "Cooperation requests are reviewed as quickly as possible."
+      },
+      "partners": {
+        "title": "Trusted Partnerships",
+        "description": "Creating new and sustainable business opportunities."
+      },
+      "growth": {
+        "title": "Shared Growth",
+        "description": "A reliable path toward developing your business."
+      }
+    },
     "form": {
       "fullName": "Full Name",
       "fullNamePlaceholder": "Full name",
