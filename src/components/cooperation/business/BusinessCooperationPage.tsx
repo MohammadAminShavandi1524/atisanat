@@ -46,6 +46,10 @@ const BusinessCooperationPage = () => {
               </p>
             </div>
 
+            <div className="mt-10 flex flex-col gap-y-8">
+
+            </div>
+
             <div className="bg-custom-primary/8 pointer-events-none absolute -start-24 -bottom-24 size-[320px] rounded-full blur-[110px]" />
           </div>
 

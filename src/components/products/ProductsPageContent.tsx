@@ -21,7 +21,7 @@ const ProductsPageContent = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-14 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-14 lg:grid-cols-2 ">
         {productCategories.map((category) => (
           <ProductCategorySection
             key={category.id}

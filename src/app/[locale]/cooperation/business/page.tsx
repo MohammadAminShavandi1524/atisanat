@@ -20,7 +20,7 @@ export default async function BusinessCooperationRoute({
   return (
     <>
       <BusinessCooperationPage />
-      <BusinessCooperationPage2 />
+      {/* <BusinessCooperationPage2 /> */}
     </>
   );
 }

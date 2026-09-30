@@ -23,6 +23,8 @@ const ProductCategorySection = ({
 }: ProductCategorySectionProps) => {
   const title = locale === "fa" ? category.name_fa : category.name_en;
 
+  const remainder = products.length % 3;
+
   return (
     <section>
       {/* Category Header */}
@@ -33,15 +35,24 @@ const ProductCategorySection = ({
       </div>
 
       {/* Products */}
-      <div className="grid grid-cols-3 gap-3 xl:gap-4 2xl:gap-5">
-        {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            locale={locale}
-            onOpen={onOpenProduct}
-          />
-        ))}
+      <div className="grid grid-cols-6 gap-3 xl:gap-4 2xl:gap-5">
+        {products.map((product, index) => {
+          const isFirstOfLastTwo =
+            remainder === 2 && index === products.length - 2;
+
+          return (
+            <div
+              key={product.id}
+              className={`col-span-2 ${isFirstOfLastTwo ? "col-start-2" : ""}`}
+            >
+              <ProductCard
+                product={product}
+                locale={locale}
+                onOpen={onOpenProduct}
+              />
+            </div>
+          );
+        })}
       </div>
     </section>
   );
