@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useLocale } from "next-intl";
+import Image from "next/image";
+import { useLocale, useTranslations } from "next-intl";
 
 import Logo from "./Logo";
 
@@ -11,6 +12,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 
 const Header = () => {
   const locale = useLocale();
+  const t = useTranslations("Header");
 
   const lastScrollY = useRef(0);
   const [showHeader, setShowHeader] = useState(true);
@@ -63,8 +65,22 @@ const Header = () => {
             <Nav />
           </div>
 
-          <div className="shrink-0">
+          <div
+            dir={locale === "fa" ? "rtl" : "ltr"}
+            className="flex shrink-0 items-center gap-5"
+          >
             <LanguageSwitcher defaultLocale={locale} />
+
+            <div className="relative aspect-[1520/403] w-[150px] shrink-0">
+              <Image
+                src="/logo.png"
+                alt={t("logoName")}
+                fill
+                priority
+                sizes="150px"
+                className="object-contain"
+              />
+            </div>
           </div>
         </div>
       </div>

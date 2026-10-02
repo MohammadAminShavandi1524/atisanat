@@ -5,9 +5,9 @@ import ContactPage3 from "@/components/contact/ContactPage3";
 const Page = () => {
   return (
     <>
-      <ContactPage />;
+      {/* <ContactPage />; */}
       <ContactPage2 />;
-      <ContactPage3 />;
+      {/* <ContactPage3 />; */}
     </>
   );
 };

@@ -22,12 +22,12 @@
     "Navigation": {
       "home": "Home",
       "products": "Products",
+      "machineDimensions": "Machine Dimensions",
       "machiningChallenges": "Machining Challenges",
       "standardTables": "Standard Tables",
       "contactUs": "Contact Us",
       "aboutUs": "About Us",
       "faq": "FAQ",
-
       "cooperation": "Cooperation",
       "submitResume": "Submit Resume",
       "businessCooperation": "Business Cooperation"
@@ -59,7 +59,7 @@
       }
     },
     "CoreValues": {
-      "title": "Core Values",
+      "title": "ATI Sanat Values",
       "description": "The principles that shape our approach to machining, quality control, and precision component manufacturing.",
       "precision": {
         "title": "Precision First",
@@ -75,7 +75,7 @@
       },
       "noShortcuts": {
         "title": "No Cheap Shortcuts",
-        "description": "Component quality is not sacrificed for faster production or lower cost, and manufacturing standards remain the priority."
+        "description": "At our company, product quality is never sacrificed to reduce production time or achieve a lower price."
       }
     },
     "EquipmentCapabilities": {
@@ -107,7 +107,7 @@
       },
 
       "columnDrill": {
-        "title": "MS32b Column Drill",
+        "title": "MS32B Column Drill",
         "description": "Used for precise drilling operations during component manufacturing."
       }
     },
@@ -188,6 +188,9 @@
     }
   },
   "About": {
+    "opening": {
+      "description": "We have come together from diverse industrial backgrounds, including MAPNA and aerospace, bringing expertise in manufacturing engineering, metallurgy and tooling engineering. Drawing on a combined century of individual experience, we address the challenges of manufacturing machined components in accordance with international standards."
+    },
     "hero": {
       "slogan": "Precision, Discipline, Evolution",
       "title": "Beyond an Industrial Workshop; an Engineering Center for Precision-Machined Critical Components",
@@ -219,6 +222,16 @@
   "Resume": {
     "title": "Submit Resume",
     "description": "Complete your information and submit your resume as a PDF file.",
+    "fields": {
+      "title": "Related Fields",
+      "machineTools": "Machine Tools",
+      "moldMaking": "Mold Making",
+      "mechanicalEngineering": "Mechanical Engineering",
+      "solidMechanicsDesign": "Solid Mechanics Design",
+      "technicalVocational": "Technical and Vocational Training",
+      "precisionTurning": "Precision Turning",
+      "precisionMilling": "Precision Milling"
+    },
     "form": {
       "fullName": "Full Name",
       "fullNamePlaceholder": "Full name",

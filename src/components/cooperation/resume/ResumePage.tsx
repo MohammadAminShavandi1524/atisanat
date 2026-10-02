@@ -7,6 +7,16 @@ import ResumeForm from "./ResumeForm";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
+const fieldKeys = [
+  "machineTools",
+  "moldMaking",
+  "mechanicalEngineering",
+  "solidMechanicsDesign",
+  "technicalVocational",
+  "precisionTurning",
+  "precisionMilling",
+] as const;
+
 const ResumePage = () => {
   const locale = useLocale();
   const t = useTranslations("Resume");
@@ -36,7 +46,7 @@ const ResumePage = () => {
         >
           {/* Intro */}
           <div className="bg-secondary-bg relative flex min-h-[650px] flex-col justify-between p-12">
-            <div>
+            <div className="relative z-10">
               <h1 className="text-foreground max-w-md text-[50px] leading-[1.1] font-semibold">
                 {t("title")}
               </h1>
@@ -44,6 +54,23 @@ const ResumePage = () => {
               <p className="text-muted-foreground mt-6 max-w-md text-[16px] leading-8">
                 {t("description")}
               </p>
+
+              <div className="border-border mt-10 border-t pt-8">
+                <h2 className="text-foreground text-xl font-semibold">
+                  {t("fields.title")}
+                </h2>
+
+                <ul className="mt-5 flex flex-wrap gap-3">
+                  {fieldKeys.map((field) => (
+                    <li
+                      key={field}
+                      className="border-border bg-background/70 text-foreground rounded-lg border px-4 py-2.5 text-sm leading-6"
+                    >
+                      {t(`fields.${field}`)}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
             <div className="bg-custom-primary/8 pointer-events-none absolute -start-24 -bottom-24 size-[320px] rounded-full blur-[110px]" />

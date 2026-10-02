@@ -72,6 +72,46 @@ const AboutSection = () => {
       ref={rootRef}
       className="bg-background text-foreground overflow-hidden"
     >
+      {/* Opening */}
+      <section className="about-reveal">
+        <div className="w90 3xl:pt-24 mx-auto pt-20 xl:pt-16 2xl:pt-20">
+          <div className="border-border bg-secondary-bg rounded-2xl border p-8 xl:p-10 2xl:p-12">
+            <p className="border-custom-primary border-s-4 ps-6 text-lg leading-9 font-medium xl:text-xl xl:leading-10 2xl:text-[22px] 2xl:leading-[2]">
+              {t("opening.description")}
+            </p>
+          </div>
+        </div>
+      </section>
+      {/* Opening */}
+      <section className="about-reveal">
+        <div className="w90 3xl:pt-24 mx-auto pt-20 xl:pt-16 2xl:pt-20">
+          <div className="border-border relative overflow-hidden rounded-2xl border px-8 py-12 xl:px-12 xl:py-14 2xl:px-16 2xl:py-16">
+            <div className="bg-custom-primary/8 pointer-events-none absolute -end-20 -top-20 size-72 rounded-full blur-[90px]" />
+
+            <div className="relative flex flex-col items-start gap-6 lg:flex-row lg:gap-10">
+              <div className="bg-custom-primary/10 flex size-16 shrink-0 items-center justify-center rounded-2xl">
+                <Quote
+                  className="text-custom-primary size-8"
+                  strokeWidth={1.4}
+                  aria-hidden="true"
+                />
+              </div>
+
+              <div className="min-w-0 flex-1">
+                <p className="text-foreground text-lg leading-9 font-medium xl:text-xl xl:leading-10 2xl:text-[24px] 2xl:leading-[2]">
+                  {t("opening.description")}
+                </p>
+
+                <div
+                  className="bg-custom-primary mt-8 h-1 w-20 rounded-full"
+                  aria-hidden="true"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Hero */}
       <section className="about-hero">
         <div className="w90 3xl:py-24 mx-auto py-20 xl:py-16 2xl:py-20">

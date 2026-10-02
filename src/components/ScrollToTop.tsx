@@ -52,7 +52,7 @@ const ScrollToTop = () => {
       className={cn(
         "border-border-secondary bg-background text-foreground",
         "fixed end-6 bottom-6 z-40",
-        "flex size-12 cursor-pointer items-center justify-center border",
+        "flex size-12 cursor-pointer items-center justify-center rounded-lg border",
         "shadow-[0_8px_30px_rgba(0,0,0,0.10)]",
         "transition-[opacity,transform,background-color,border-color,color] duration-300 ease-out",
         "hover:border-custom-primary hover:bg-custom-primary hover:text-white",

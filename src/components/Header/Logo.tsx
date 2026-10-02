@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -24,7 +25,7 @@ const Logo = () => {
       aria-label={t("logoName")}
     >
       {/* Keeps the component width equal to the logo name width */}
-      <span className="invisible col-start-1 row-start-1 pt-2.5 text-[24px] leading-none font-semibold whitespace-nowrap">
+      <span className="invisible col-start-1 row-start-1 pt-2.5 text-[26px] leading-none font-semibold whitespace-nowrap">
         {t("logoName")}
       </span>
 
@@ -55,7 +56,9 @@ const Logo = () => {
             ease,
           },
         }}
-        className="text-foreground col-start-1 row-start-1 pt-3.5 text-[24px] leading-none font-semibold whitespace-nowrap"
+        className={cn( locale === "fa" ? "text-[26px]" : "text-[24px]" , 
+          "text-foreground col-start-1 row-start-1 pt-3.5  leading-none font-semibold whitespace-nowrap",
+        )}
       >
         {t("logoName")}
       </motion.span>

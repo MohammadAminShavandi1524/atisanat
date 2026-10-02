@@ -43,7 +43,7 @@ const LanguageSwitcher = ({ defaultLocale }: LanguageSwitcherProps) => {
         "shadow-[0_2px_8px_rgba(32,43,58,0.05)]",
         "transition-all duration-300",
         "hover:border-custom-primary/50 hover:bg-secondary-bg hover:shadow-[0_6px_18px_rgba(20,88,150,0.10)]",
-        "active:scale-[0.97] ms-30",
+        "active:scale-[0.97] rtl:ms-6",
         isPending && "pointer-events-none opacity-50",
       )}
     >
