@@ -52,7 +52,7 @@ const Logo = ({ variant = "desktop" }: LogoProps) => {
           />
         </div>
 
-        <span className="text-foreground hidden pt-2 text-[22px] leading-none font-semibold whitespace-nowrap sm:inline sm:text-[23px]">
+        <span className="text-foreground hidden rtl:pt-1.5 ltr:pt-2 text-[22px] leading-none font-semibold whitespace-nowrap sm:inline sm:text-[23px]">
           {t("logoName")}
         </span>
       </Link>
