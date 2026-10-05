@@ -12,7 +12,7 @@ const FooterBottom = () => {
 
   return (
     <div dir={isRTL ? "rtl" : "ltr"} className="border-border border-t">
-      <div className="w90 flex items-center justify-between py-4">
+      <div className="w90 flex items-center justify-between py-4 max-lg:hidden">
         <p className="text-muted-foreground text-sm leading-6">
           {t("bottom.copyright")}
         </p>

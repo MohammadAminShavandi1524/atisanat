@@ -90,7 +90,6 @@ const ProductModal = ({ product, locale, onClose }: ProductModalProps) => {
 
     if (reduceMotion || !overlay || !modal) {
       finishClose();
-
       return;
     }
 
@@ -134,7 +133,6 @@ const ProductModal = ({ product, locale, onClose }: ProductModalProps) => {
 
     return () => {
       document.body.style.overflow = previousOverflow;
-
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [activeProduct, handleClose]);
@@ -153,7 +151,7 @@ const ProductModal = ({ product, locale, onClose }: ProductModalProps) => {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/45 p-5 backdrop-blur-[2px]"
+      className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-black/45 p-3 backdrop-blur-[2px] sm:p-5"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) {
           handleClose();
@@ -162,36 +160,36 @@ const ProductModal = ({ product, locale, onClose }: ProductModalProps) => {
     >
       <div
         ref={modalRef}
-        className="border-border bg-background relative grid max-h-[90vh] w-full max-w-5xl overflow-hidden rounded-2xl border lg:grid-cols-[1fr_0.85fr]"
+        className="border-border bg-background relative grid max-h-[92vh] w-full max-w-5xl overflow-y-auto rounded-2xl border lg:grid-cols-[1fr_0.85fr] lg:overflow-hidden"
       >
         <button
           type="button"
           onClick={handleClose}
           aria-label="Close"
-          className="border-border bg-background text-muted-foreground hover:text-foreground absolute end-4 top-4 z-10 flex size-10 cursor-pointer items-center justify-center rounded-xl border transition-colors"
+          className="border-border bg-background text-muted-foreground hover:text-foreground absolute end-3 top-3 z-10 flex size-9 cursor-pointer items-center justify-center rounded-xl border transition-colors sm:end-4 sm:top-4 sm:size-10"
         >
           <X size={19} strokeWidth={1.7} />
         </button>
 
         {/* Image */}
-        <div className="bg-secondary-bg relative min-h-[360px] lg:min-h-[560px]">
+        <div className=" relative min-h-[240px] sm:min-h-[360px] lg:min-h-[560px]">
           <Image
             src={activeProduct.image}
             alt={title}
             fill
             sizes="(max-width: 1024px) 100vw, 55vw"
-            className="object-contain p-6 lg:p-8"
+            className="object-contain p-5 sm:p-6 lg:p-8"
             priority
           />
         </div>
 
         {/* Content */}
-        <div className="flex flex-col justify-center p-8 lg:p-10 xl:p-12">
-          <h2 className="text-foreground text-2xl leading-tight font-semibold xl:text-3xl">
+        <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10 xl:p-12">
+          <h2 className="text-foreground text-xl leading-tight font-semibold sm:text-2xl xl:text-3xl">
             {title}
           </h2>
 
-          <p className="text-muted-foreground mt-5 text-sm leading-7 xl:text-base xl:leading-8">
+          <p className="text-muted-foreground mt-4 text-sm leading-7 sm:mt-5 sm:text-base sm:leading-8">
             {description}
           </p>
         </div>

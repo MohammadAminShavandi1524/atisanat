@@ -22,8 +22,8 @@ const ChallengeFooter = ({ tags }: ChallengeFooterProps) => {
   }, []);
 
   return (
-    <section className="mt-14 sm:mt-16 lg:mt-20">
-      <div className="bg-secondary-bg grid grid-cols-1 gap-10 rounded-2xl p-7 sm:p-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:gap-14 xl:p-10 2xl:gap-20">
+    <section className="challenge-footer mt-12 sm:mt-16 lg:mt-20">
+      <div className="bg-secondary-bg grid grid-cols-1 gap-8 rounded-2xl p-5 sm:gap-10 sm:p-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:gap-14 xl:p-10 2xl:gap-20">
         {/* Tags */}
         <div className="min-w-0">
           <h3 className="text-foreground text-lg font-semibold sm:text-xl">

@@ -1,7 +1,16 @@
 const Hero = () => {
   return (
-    <section className="bg-secondary-bg relative h-[calc(100svh-84px)] w-full overflow-hidden">
-      {/* Video will be added here later */}
+    <section className="relative aspect-[2/1] w-full overflow-hidden bg-black">
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        src="/video.webm"
+        poster="/poster.webp"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+      />
     </section>
   );
 };

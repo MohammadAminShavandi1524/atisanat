@@ -1,5 +1,3 @@
-import "./globals.css";
-import "../Webfonts/fontiran.css";
 import { ReactNode } from "react";
 
 type Props = {
@@ -7,9 +5,5 @@ type Props = {
 };
 
 export default function RootLayout({ children }: Props) {
-  return (
-    <html suppressHydrationWarning>
-      <body>{children}</body>
-    </html>
-  );
+  return children;
 }

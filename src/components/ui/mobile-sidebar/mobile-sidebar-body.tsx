@@ -13,7 +13,7 @@ export function MobileSidebarBody({
     <div
       data-lenis-prevent
       data-lenis-prevent-wheel
-      className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-6 py-5"
+      className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-2.75 py-5"
     >
       {children}
     </div>

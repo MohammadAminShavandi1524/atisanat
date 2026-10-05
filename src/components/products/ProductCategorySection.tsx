@@ -26,7 +26,7 @@ const ProductCategorySection = ({
   const remainder = products.length % 3;
 
   return (
-    <section>
+    <section className="product-category-section">
       {/* Category Header */}
       <div className="border-foreground/70 mb-7 border-b pb-5 text-center">
         <h2 className="text-foreground text-xl font-semibold xl:text-2xl">
@@ -35,7 +35,7 @@ const ProductCategorySection = ({
       </div>
 
       {/* Products */}
-      <div className="grid grid-cols-6 gap-3 xl:gap-4 2xl:gap-5">
+      <div className="grid grid-cols-1 s:grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4 xl:grid-cols-6 2xl:gap-5">
         {products.map((product, index) => {
           const isFirstOfLastTwo =
             remainder === 2 && index === products.length - 2;
@@ -43,7 +43,9 @@ const ProductCategorySection = ({
           return (
             <div
               key={product.id}
-              className={`col-span-2 ${isFirstOfLastTwo ? "col-start-2" : ""}`}
+              className={`product-card col-span-1 xl:col-span-2 ${
+                isFirstOfLastTwo ? "xl:col-start-2" : ""
+              }`}
             >
               <ProductCard
                 product={product}

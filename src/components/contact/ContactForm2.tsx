@@ -3,7 +3,6 @@
 import { useMemo } from "react";
 
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 
 import { useForm } from "react-hook-form";
@@ -14,12 +13,9 @@ import { useCustomToast } from "@/components/ui/custom-toast";
 import { createContact } from "./contact.api";
 import { ContactFormValues, createContactSchema } from "./contact.schema";
 
-const ease = [0.16, 1, 0.3, 1] as const;
-
 const ContactForm2 = () => {
   const locale = useLocale();
   const t = useTranslations("Contact");
-
   const toast = useCustomToast();
 
   const isRTL = locale === "fa";
@@ -66,38 +62,19 @@ const ContactForm2 = () => {
       });
 
       reset();
-
       toast.success(t("toast.success"));
     } catch (error) {
       console.error("CREATE CONTACT ERROR:", error);
-
       toast.error(t("toast.error"));
     }
   };
 
   return (
-    <motion.form
-      initial={{
-        opacity: 0,
-        y: 20,
-      }}
-      whileInView={{
-        opacity: 1,
-        y: 0,
-      }}
-      viewport={{
-        once: true,
-        amount: 0.2,
-      }}
-      transition={{
-        duration: 0.7,
-        delay: 0.16,
-        ease,
-      }}
+    <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mt-10"
+      className="contact-form-fields mt-8 sm:mt-10"
     >
-      <div className="grid grid-cols-2 gap-x-6 gap-y-7">
+      <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 sm:gap-y-7">
         {/* Name */}
         <div className="min-w-0">
           <div className="mb-2.5 flex items-center justify-between gap-4">
@@ -209,7 +186,7 @@ const ContactForm2 = () => {
         </div>
 
         {/* Message */}
-        <div className="col-span-2 min-w-0">
+        <div className="min-w-0 sm:col-span-2">
           <div className="mb-2.5 flex items-center justify-between gap-4">
             <label
               htmlFor="message"
@@ -240,14 +217,14 @@ const ContactForm2 = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="bg-custom-primary text-primary-foreground inline-flex min-h-12 min-w-[180px] cursor-pointer items-center justify-center gap-3 rounded-xl px-6 text-[15px] font-medium transition-opacity duration-300 disabled:cursor-not-allowed disabled:opacity-50"
+          className="bg-custom-primary text-primary-foreground inline-flex min-h-12 w-full cursor-pointer items-center justify-center gap-3 rounded-xl px-6 text-[15px] font-medium transition-opacity duration-300 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto sm:min-w-[180px]"
         >
           <span>{isSubmitting ? t("form.sending") : t("form.submit")}</span>
 
           <ArrowIcon size={18} strokeWidth={1.8} />
         </button>
       </div>
-    </motion.form>
+    </form>
   );
 };
 

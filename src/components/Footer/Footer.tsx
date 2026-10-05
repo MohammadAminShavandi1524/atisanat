@@ -90,7 +90,7 @@ const Footer = () => {
 
   return (
     <footer className="border-border bg-secondary-bg border-t">
-      <div className="w90">
+      <div className="w90 max-lg:hidden">
         <div className="grid grid-cols-2 gap-24 py-14">
           {/* Brand + Quick Access */}
           <div>

@@ -1,16 +1,12 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import { Quote } from "lucide-react";
 
 import { useLocale, useTranslations } from "next-intl";
 
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+import { animateAboutPage } from "./aboutAnimations";
 
 const AboutSection = () => {
   const t = useTranslations("About");
@@ -18,54 +14,11 @@ const AboutSection = () => {
 
   const rootRef = useRef<HTMLElement>(null);
 
-  useGSAP(
-    () => {
-      const reduceMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
+  useEffect(() => {
+    if (!rootRef.current) return;
 
-      if (reduceMotion) return;
-
-      gsap.fromTo(
-        ".about-hero",
-        {
-          opacity: 0,
-          y: 24,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
-        },
-      );
-
-      gsap.utils.toArray<HTMLElement>(".about-reveal").forEach((element) => {
-        gsap.fromTo(
-          element,
-          {
-            opacity: 0,
-            y: 28,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.75,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: element,
-              start: "top 86%",
-              once: true,
-            },
-          },
-        );
-      });
-    },
-    {
-      scope: rootRef,
-      dependencies: [locale],
-    },
-  );
+    return animateAboutPage(rootRef.current);
+  }, [locale]);
 
   return (
     <main
@@ -73,37 +26,27 @@ const AboutSection = () => {
       className="bg-background text-foreground overflow-hidden"
     >
       {/* Opening */}
-      <section className="about-reveal">
-        <div className="w90 3xl:pt-24 mx-auto pt-20 xl:pt-16 2xl:pt-20">
-          <div className="border-border bg-secondary-bg rounded-2xl border p-8 xl:p-10 2xl:p-12">
-            <p className="border-custom-primary border-s-4 ps-6 text-lg leading-9 font-medium xl:text-xl xl:leading-10 2xl:text-[22px] 2xl:leading-[2]">
-              {t("opening.description")}
-            </p>
-          </div>
-        </div>
-      </section>
-      {/* Opening */}
-      <section className="about-reveal">
-        <div className="w90 3xl:pt-24 mx-auto pt-20 xl:pt-16 2xl:pt-20">
-          <div className="border-border relative overflow-hidden rounded-2xl border px-8 py-12 xl:px-12 xl:py-14 2xl:px-16 2xl:py-16">
+      <section className="about-opening">
+        <div className="w90 3xl:pt-24 mx-auto pt-10 sm:pt-14 xl:pt-16 2xl:pt-20">
+          <div className="border-border relative overflow-hidden rounded-2xl border px-5 py-8 sm:px-8 sm:py-10 xl:px-12 xl:py-14 2xl:px-16 2xl:py-16">
             <div className="bg-custom-primary/8 pointer-events-none absolute -end-20 -top-20 size-72 rounded-full blur-[90px]" />
 
-            <div className="relative flex flex-col items-start gap-6 lg:flex-row lg:gap-10">
-              <div className="bg-custom-primary/10 flex size-16 shrink-0 items-center justify-center rounded-2xl">
+            <div className="relative flex flex-col items-start gap-5 sm:gap-6 lg:flex-row lg:gap-10">
+              <div className="bg-custom-primary/10 flex size-14 shrink-0 items-center justify-center rounded-2xl sm:size-16">
                 <Quote
-                  className="text-custom-primary size-8"
+                  className="text-custom-primary size-7 sm:size-8"
                   strokeWidth={1.4}
                   aria-hidden="true"
                 />
               </div>
 
               <div className="min-w-0 flex-1">
-                <p className="text-foreground text-lg leading-9 font-medium xl:text-xl xl:leading-10 2xl:text-[24px] 2xl:leading-[2]">
+                <p className="text-foreground text-justify text-base leading-8 font-medium sm:text-lg sm:leading-9 xl:text-xl xl:leading-10 2xl:text-[24px] 2xl:leading-[2]">
                   {t("opening.description")}
                 </p>
 
                 <div
-                  className="bg-custom-primary mt-8 h-1 w-20 rounded-full"
+                  className="bg-custom-primary mt-6 h-1 w-16 rounded-full sm:mt-8 sm:w-20"
                   aria-hidden="true"
                 />
               </div>
@@ -114,24 +57,24 @@ const AboutSection = () => {
 
       {/* Hero */}
       <section className="about-hero">
-        <div className="w90 3xl:py-24 mx-auto py-20 xl:py-16 2xl:py-20">
-          <div className="grid items-center gap-10 lg:grid-cols-2 xl:gap-12 2xl:gap-16">
+        <div className="w90 3xl:py-24 mx-auto py-14 sm:py-16 xl:py-16 2xl:py-20">
+          <div className="grid items-center gap-8 sm:gap-10 lg:grid-cols-2 xl:gap-12 2xl:gap-16">
             <div>
-              <h1 className="3xl:text-[56px] text-[48px] leading-[1.12] font-semibold tracking-[-0.04em] xl:text-[42px] 2xl:text-[50px]">
+              <h1 className="3xl:text-[56px] text-[36px] leading-[1.18] font-semibold tracking-[-0.04em] sm:text-[42px] lg:text-[48px] xl:text-[42px] 2xl:text-[50px]">
                 {t("hero.slogan")}
               </h1>
 
-              <p className="text-muted-foreground mt-6 text-base leading-8 xl:mt-5 xl:text-[14px] xl:leading-7 2xl:text-[15px] 2xl:leading-8">
+              <p className="text-muted-foreground mt-5 text-justify text-sm leading-7 sm:mt-6 sm:text-base sm:leading-8 xl:mt-5 xl:text-[14px] xl:leading-7 2xl:text-[15px] 2xl:leading-8">
                 {t("hero.description")}
               </p>
             </div>
 
-            <div className="bg-secondary-bg 3xl:p-10 rounded-2xl p-8 xl:p-6 2xl:p-8">
-              <h2 className="3xl:text-[27px] text-2xl leading-[1.5] font-semibold tracking-[-0.025em] xl:text-xl 2xl:text-[24px]">
+            <div className="bg-secondary-bg 3xl:p-10 rounded-2xl p-6 sm:p-8 xl:p-6 2xl:p-8">
+              <h2 className="3xl:text-[27px] text-xl leading-[1.5] font-semibold tracking-[-0.025em] sm:text-2xl xl:text-xl 2xl:text-[24px]">
                 {t("hero.title")}
               </h2>
 
-              <p className="text-muted-foreground mt-5 text-base leading-8 xl:text-[14px] xl:leading-7 2xl:text-[15px] 2xl:leading-8">
+              <p className="text-muted-foreground mt-4 text-justify text-sm leading-7 sm:mt-5 sm:text-base sm:leading-8 xl:text-[14px] xl:leading-7 2xl:text-[15px] 2xl:leading-8">
                 {t("hero.summary")}
               </p>
             </div>
@@ -140,30 +83,30 @@ const AboutSection = () => {
       </section>
 
       {/* Introduction */}
-      <section className="about-reveal bg-secondary-bg">
-        <div className="w90 3xl:py-24 mx-auto py-20 xl:py-16 2xl:py-20">
-          <div className="grid gap-10 lg:grid-cols-[0.8fr_2.2fr] xl:gap-12 2xl:gap-16">
+      <section className="about-introduction bg-secondary-bg">
+        <div className="w90 3xl:py-24 mx-auto py-14 sm:py-16 xl:py-16 2xl:py-20">
+          <div className="grid gap-8 sm:gap-10 lg:grid-cols-[0.8fr_2.2fr] xl:gap-12 2xl:gap-16">
             <div>
-              <h2 className="3xl:text-[38px] text-[34px] leading-[1.35] font-semibold tracking-[-0.03em] xl:text-[28px] 2xl:text-[34px]">
+              <h2 className="3xl:text-[38px] text-[30px] leading-[1.35] font-semibold tracking-[-0.03em] sm:text-[34px] xl:text-[28px] 2xl:text-[34px]">
                 {t("introduction.title")}
               </h2>
             </div>
 
-            <div className="grid gap-7 md:grid-cols-2 xl:gap-8 2xl:gap-10">
-              <div className="bg-background rounded-xl p-7 xl:p-6 2xl:p-7">
-                <p className="text-foreground text-base leading-8 xl:text-[14px] xl:leading-7 2xl:text-[15px] 2xl:leading-8">
+            <div className="grid gap-5 sm:grid-cols-2 xl:gap-8 2xl:gap-10">
+              <div className="about-introduction-card bg-background rounded-xl p-5 sm:p-7 xl:p-6 2xl:p-7">
+                <p className="text-foreground text-justify text-sm leading-7 sm:text-base sm:leading-8 xl:text-[14px] xl:leading-7 2xl:text-[15px] 2xl:leading-8">
                   {t("introduction.paragraph1")}
                 </p>
               </div>
 
-              <div className="bg-background rounded-xl p-7 xl:p-6 2xl:p-7">
-                <p className="text-muted-foreground text-base leading-8 xl:text-[14px] xl:leading-7 2xl:text-[15px] 2xl:leading-8">
+              <div className="about-introduction-card bg-background rounded-xl p-5 sm:p-7 xl:p-6 2xl:p-7">
+                <p className="text-muted-foreground text-justify text-sm leading-7 sm:text-base sm:leading-8 xl:text-[14px] xl:leading-7 2xl:text-[15px] 2xl:leading-8">
                   {t("introduction.paragraph2")}
                 </p>
               </div>
 
-              <div className="bg-background rounded-xl p-7 md:col-span-2 xl:p-6 2xl:p-7">
-                <p className="text-muted-foreground text-base leading-8 xl:text-[14px] xl:leading-7 2xl:text-[15px] 2xl:leading-8">
+              <div className="about-introduction-card bg-background rounded-xl p-5 sm:col-span-2 sm:p-7 xl:p-6 2xl:p-7">
+                <p className="text-muted-foreground text-justify text-sm leading-7 sm:text-base sm:leading-8 xl:text-[14px] xl:leading-7 2xl:text-[15px] 2xl:leading-8">
                   {t("introduction.paragraph3")}
                 </p>
               </div>
@@ -173,10 +116,10 @@ const AboutSection = () => {
       </section>
 
       {/* CEO Message */}
-      <section className="about-reveal">
-        <div className="w90 3xl:py-24 mx-auto py-20 xl:py-16 2xl:py-20">
-          <div className="mb-10 flex items-center gap-5 xl:mb-8">
-            <div className="bg-secondary-bg flex size-12 shrink-0 items-center justify-center rounded-lg">
+      <section className="about-ceo">
+        <div className="w90 3xl:py-24 mx-auto py-14 sm:py-16 xl:py-16 2xl:py-20">
+          <div className="mb-8 flex items-start gap-4 sm:mb-10 sm:items-center sm:gap-5 xl:mb-8">
+            <div className="bg-secondary-bg flex size-11 shrink-0 items-center justify-center rounded-lg sm:size-12">
               <Quote className="text-custom-primary size-5" strokeWidth={1.5} />
             </div>
 
@@ -185,49 +128,49 @@ const AboutSection = () => {
                 {t("ceo.role")}
               </p>
 
-              <h2 className="3xl:text-[38px] mt-1.5 text-[34px] leading-[1.3] font-semibold tracking-[-0.03em] xl:text-[28px] 2xl:text-[34px]">
+              <h2 className="3xl:text-[38px] mt-1.5 text-[28px] leading-[1.3] font-semibold tracking-[-0.03em] sm:text-[34px] xl:text-[28px] 2xl:text-[34px]">
                 {t("ceo.title")}
               </h2>
             </div>
           </div>
 
-          <div className="grid gap-6 lg:grid-cols-3 xl:gap-5 2xl:gap-6">
-            <div className="bg-secondary-bg rounded-xl p-7 xl:p-6 2xl:p-7">
-              <p className="text-foreground text-base leading-8 xl:text-[14px] xl:leading-7 2xl:text-[15px] 2xl:leading-8">
+          <div className="grid gap-5 sm:gap-6 lg:grid-cols-3 xl:gap-5 2xl:gap-6">
+            <div className="about-ceo-card bg-secondary-bg rounded-xl p-5 sm:p-7 xl:p-6 2xl:p-7">
+              <p className="text-foreground text-justify text-sm leading-7 sm:text-base sm:leading-8 xl:text-[14px] xl:leading-7 2xl:text-[15px] 2xl:leading-8">
                 {t("ceo.paragraph1")}
               </p>
             </div>
 
-            <div className="bg-secondary-bg rounded-xl p-7 xl:p-6 2xl:p-7">
-              <p className="text-muted-foreground text-base leading-8 xl:text-[14px] xl:leading-7 2xl:text-[15px] 2xl:leading-8">
+            <div className="about-ceo-card bg-secondary-bg rounded-xl p-5 sm:p-7 xl:p-6 2xl:p-7">
+              <p className="text-muted-foreground text-justify text-sm leading-7 sm:text-base sm:leading-8 xl:text-[14px] xl:leading-7 2xl:text-[15px] 2xl:leading-8">
                 {t("ceo.paragraph2")}
               </p>
             </div>
 
-            <div className="bg-secondary-bg rounded-xl p-7 xl:p-6 2xl:p-7">
-              <p className="text-muted-foreground text-base leading-8 xl:text-[14px] xl:leading-7 2xl:text-[15px] 2xl:leading-8">
+            <div className="about-ceo-card bg-secondary-bg rounded-xl p-5 sm:p-7 xl:p-6 2xl:p-7">
+              <p className="text-muted-foreground text-justify text-sm leading-7 sm:text-base sm:leading-8 xl:text-[14px] xl:leading-7 2xl:text-[15px] 2xl:leading-8">
                 {t("ceo.paragraph3")}
               </p>
             </div>
           </div>
 
-          <div className="mt-6 grid gap-6 sm:grid-cols-2 xl:gap-5 2xl:gap-6">
-            <div className="bg-secondary-bg rounded-xl px-7 py-6 xl:px-6 xl:py-5 2xl:px-7 2xl:py-6">
+          <div className="mt-5 grid gap-5 sm:mt-6 sm:grid-cols-2 xl:gap-5 2xl:gap-6">
+            <div className="about-ceo-meta bg-secondary-bg rounded-xl px-5 py-5 sm:px-7 sm:py-6 xl:px-6 xl:py-5 2xl:px-7 2xl:py-6">
               <span className="text-muted-foreground text-sm">
                 {t("ceo.focus.label")}
               </span>
 
-              <p className="mt-2 text-base font-semibold">
+              <p className="mt-2 text-sm font-semibold sm:text-base">
                 {t("ceo.focus.value")}
               </p>
             </div>
 
-            <div className="bg-secondary-bg rounded-xl px-7 py-6 xl:px-6 xl:py-5 2xl:px-7 2xl:py-6">
+            <div className="about-ceo-meta bg-secondary-bg rounded-xl px-5 py-5 sm:px-7 sm:py-6 xl:px-6 xl:py-5 2xl:px-7 2xl:py-6">
               <span className="text-muted-foreground text-sm">
                 {t("ceo.commitment.label")}
               </span>
 
-              <p className="mt-2 text-base font-semibold">
+              <p className="mt-2 text-sm font-semibold sm:text-base">
                 {t("ceo.commitment.value")}
               </p>
             </div>

@@ -127,10 +127,8 @@
   --card-secondary-foreground: #202b3a;
   --card-tertiary-foreground: #202b3a;
 
-
-
   --border: #bdc9d5;
---border-secondary: #8f9faf;
+  --border-secondary: #8f9faf;
 
   /* Input / Ring */
   --input: #e0e6ec;
@@ -275,32 +273,26 @@
   }
 
   .headerPadding {
-    padding-top: 84px;
+    padding-top: 73px;
   }
 
-  /* @media (min-width: 64rem) {
+  @media (min-width: 1024px) {
     .headerPadding {
-      padding-top: 110px;
+      padding-top: 77px;
     }
   }
 
-  @media (min-width: 80rem) {
+  @media (min-width: 1280px) {
     .headerPadding {
-      padding-top: 122px;
+      padding-top: 81px;
     }
   }
 
-  @media (min-width: 96rem) {
+  @media (min-width: 1536px) {
     .headerPadding {
-      padding-top: 125px;
+      padding-top: 85px;
     }
   }
-
-  @media (min-width: 106rem) {
-    .headerPadding {
-      padding-top: 140px;
-    }
-  } */
 
   /* Global Scrollbar */
   * {
