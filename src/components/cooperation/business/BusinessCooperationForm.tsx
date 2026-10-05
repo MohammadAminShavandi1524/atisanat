@@ -38,13 +38,10 @@ const BusinessCooperationForm = () => {
     () =>
       createBusinessCooperationSchema({
         fullNameRequired: t("validation.fullNameRequired"),
-
         emailRequired: t("validation.emailRequired"),
         emailInvalid: t("validation.emailInvalid"),
-
         phoneRequired: t("validation.phoneRequired"),
         phoneInvalid: t("validation.phoneInvalid"),
-
         resumeRequired: t("validation.resumeRequired"),
       }),
     [t],
@@ -57,11 +54,9 @@ const BusinessCooperationForm = () => {
     setValue,
     setError,
     clearErrors,
-
     formState: { errors, isSubmitting },
   } = useForm<BusinessCooperationFormValues>({
     resolver: zodResolver(schema),
-
     defaultValues: {
       fullName: "",
       email: "",
@@ -77,7 +72,6 @@ const BusinessCooperationForm = () => {
       setUploadProgress(0);
       setIsUploading(false);
       setIsFinalizing(false);
-
       setValue("resumeUrl", "");
 
       return;
@@ -105,7 +99,6 @@ const BusinessCooperationForm = () => {
         onProgress: (progress) => {
           setUploadProgress(progress);
         },
-
         onFinalizing: () => {
           setUploadProgress(100);
           setIsFinalizing(true);
@@ -122,7 +115,6 @@ const BusinessCooperationForm = () => {
 
       setResumeFile(undefined);
       setUploadProgress(0);
-
       setValue("resumeUrl", "");
 
       setError("resumeUrl", {
@@ -167,8 +159,7 @@ const BusinessCooperationForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">
       {/* Full Name + Phone */}
-      <div className="grid grid-cols-2 gap-6">
-        {/* Full Name */}
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <div className="min-w-0">
           <div className="mb-2.5 flex items-center justify-between gap-4">
             <label
@@ -195,7 +186,6 @@ const BusinessCooperationForm = () => {
           />
         </div>
 
-        {/* Phone */}
         <div className="min-w-0">
           <div className="mb-2.5 flex items-center justify-between gap-4">
             <label
@@ -215,7 +205,7 @@ const BusinessCooperationForm = () => {
           <input
             id="phoneNumber"
             type="tel"
-            dir={locale === "en" ? "ltr" : "rtl"}
+            dir="ltr"
             autoComplete="tel"
             placeholder={t("form.phonePlaceholder")}
             {...register("phoneNumber")}
@@ -225,8 +215,7 @@ const BusinessCooperationForm = () => {
       </div>
 
       {/* Email + Company */}
-      <div className="grid grid-cols-2 gap-6">
-        {/* Email */}
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <div className="min-w-0">
           <div className="mb-2.5 flex items-center justify-between gap-4">
             <label
@@ -246,6 +235,7 @@ const BusinessCooperationForm = () => {
           <input
             id="email"
             type="email"
+            dir="ltr"
             autoComplete="email"
             placeholder={t("form.emailPlaceholder")}
             {...register("email")}
@@ -253,7 +243,6 @@ const BusinessCooperationForm = () => {
           />
         </div>
 
-        {/* Company */}
         <div className="min-w-0">
           <div className="mb-2.5 flex items-center justify-between gap-4">
             <label
@@ -279,7 +268,6 @@ const BusinessCooperationForm = () => {
         </div>
       </div>
 
-      {/* Resume */}
       <BusinessResumeUploadField
         value={resumeFile}
         onChange={handleResumeChange}
@@ -289,12 +277,11 @@ const BusinessCooperationForm = () => {
         isFinalizing={isFinalizing}
       />
 
-      {/* Submit */}
       <div className="flex justify-end pt-1">
         <button
           type="submit"
           disabled={isFormBusy}
-          className="bg-custom-primary text-primary-foreground inline-flex min-h-12 min-w-[190px] cursor-pointer items-center justify-center gap-3 rounded-xl px-6 text-[15px] font-medium transition-opacity duration-300 disabled:cursor-not-allowed disabled:opacity-50"
+          className="bg-custom-primary text-primary-foreground inline-flex min-h-12 w-full cursor-pointer items-center justify-center gap-3 rounded-xl px-6 text-[15px] font-medium transition-opacity duration-300 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto sm:min-w-[190px]"
         >
           <span>{isSubmitting ? t("form.submitting") : t("form.submit")}</span>
 

@@ -3,20 +3,14 @@
 import { type ChangeEvent, type DragEvent, useRef } from "react";
 
 import { FileText, UploadCloud, X } from "lucide-react";
-
 import { useTranslations } from "next-intl";
 
 interface BusinessResumeUploadFieldProps {
   value?: File;
-
   onChange: (file?: File) => void;
-
   error?: string;
-
   progress: number;
-
   isUploading: boolean;
-
   isFinalizing: boolean;
 }
 
@@ -33,9 +27,7 @@ const BusinessResumeUploadField = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleFile = (file?: File) => {
-    if (!file) {
-      return;
-    }
+    if (!file) return;
 
     onChange(file);
   };
@@ -90,7 +82,7 @@ const BusinessResumeUploadField = ({
           }}
           onDragOver={(event) => event.preventDefault()}
           onDrop={handleDrop}
-          className="border-border bg-background hover:border-custom-primary/60 flex min-h-[300px] flex-1 cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed px-8 py-8 text-center transition-colors duration-300"
+          className="border-border bg-background hover:border-custom-primary/60 flex min-h-[220px] flex-1 cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed px-5 py-8 text-center transition-colors duration-300 sm:min-h-[300px] sm:px-8"
         >
           <div className="border-border bg-secondary-bg flex size-14 items-center justify-center rounded-xl border">
             <UploadCloud
@@ -108,37 +100,35 @@ const BusinessResumeUploadField = ({
         </div>
       ) : (
         <div className="border-border bg-background rounded-xl border p-5">
-          <div>
-            <div className="flex items-center gap-4">
-              <div className="border-border bg-secondary-bg flex size-12 shrink-0 items-center justify-center rounded-xl border">
-                <FileText
-                  size={21}
-                  strokeWidth={1.6}
-                  className="text-custom-primary"
-                />
-              </div>
-
-              <div className="min-w-0 flex-1">
-                <p className="text-foreground truncate text-[14px] font-medium">
-                  {value.name}
-                </p>
-
-                <span className="text-muted-foreground mt-1.5 block text-xs">
-                  {(value.size / 1024 / 1024).toFixed(2)} MB
-                </span>
-              </div>
-
-              {!isUploading && (
-                <button
-                  type="button"
-                  onClick={handleRemove}
-                  aria-label={t("form.resume.remove")}
-                  className="text-muted-foreground hover:text-destructive flex size-8 cursor-pointer items-center justify-center transition-colors duration-300"
-                >
-                  <X size={18} strokeWidth={1.7} />
-                </button>
-              )}
+          <div className="flex items-center gap-4">
+            <div className="border-border bg-secondary-bg flex size-12 shrink-0 items-center justify-center rounded-xl border">
+              <FileText
+                size={21}
+                strokeWidth={1.6}
+                className="text-custom-primary"
+              />
             </div>
+
+            <div className="min-w-0 flex-1">
+              <p className="text-foreground truncate text-[14px] font-medium">
+                {value.name}
+              </p>
+
+              <span className="text-muted-foreground mt-1.5 block text-xs">
+                {(value.size / 1024 / 1024).toFixed(2)} MB
+              </span>
+            </div>
+
+            {!isUploading && (
+              <button
+                type="button"
+                onClick={handleRemove}
+                aria-label={t("form.resume.remove")}
+                className="text-muted-foreground hover:text-destructive flex size-8 cursor-pointer items-center justify-center transition-colors duration-300"
+              >
+                <X size={18} strokeWidth={1.7} />
+              </button>
+            )}
           </div>
 
           {showProgress && (
@@ -158,9 +148,7 @@ const BusinessResumeUploadField = ({
               <div className="bg-border h-1.5 w-full overflow-hidden rounded-full">
                 <div
                   className="bg-custom-primary h-full transition-[width] duration-200"
-                  style={{
-                    width: `${progress}%`,
-                  }}
+                  style={{ width: `${progress}%` }}
                 />
               </div>
             </div>
