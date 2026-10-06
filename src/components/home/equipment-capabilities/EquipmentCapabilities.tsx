@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+
+import { animateEquipmentCapabilities } from "./equipmentCapabilitiesAnimations";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -37,12 +39,30 @@ const equipment = {
   },
 } as const;
 
+const mobileEquipment = [
+  {
+    id: equipment.left.id,
+    image: equipment.left.image,
+    orientation: "portrait",
+  },
+  ...equipment.center.map((item) => ({
+    ...item,
+    orientation: "landscape",
+  })),
+  {
+    id: equipment.right.id,
+    image: equipment.right.image,
+    orientation: "portrait",
+  },
+] as const;
+
 type EquipmentCardProps = {
   id: string;
   image: string;
   activeId: string | null;
   setActiveId: (id: string | null) => void;
   sizes: string;
+  isDesktop: boolean;
 };
 
 const EquipmentCard = ({
@@ -51,6 +71,7 @@ const EquipmentCard = ({
   activeId,
   setActiveId,
   sizes,
+  isDesktop,
 }: EquipmentCardProps) => {
   const t = useTranslations("Home.EquipmentCapabilities");
 
@@ -60,23 +81,27 @@ const EquipmentCard = ({
 
   return (
     <motion.article
-      onMouseEnter={() => setActiveId(id)}
+      onMouseEnter={() => {
+        if (isDesktop) {
+          setActiveId(id);
+        }
+      }}
       initial={false}
       animate={{
-        opacity: isInactive ? 0.72 : 1,
-        scale: isActive ? 1.01 : 1,
+        opacity: isDesktop && isInactive ? 0.72 : 1,
+        scale: isDesktop && isActive ? 1.01 : 1,
       }}
       transition={{
         duration: 0.65,
         ease,
       }}
-      className="border-border relative h-full w-full overflow-hidden rounded-2xl border"
+      className="equipment-card border-border relative h-full w-full overflow-hidden rounded-2xl border"
     >
       <motion.div
         initial={false}
         animate={{
-          scale: isActive ? 1.055 : 1,
-          filter: isInactive ? "blur(0.5px)" : "blur(0px)",
+          scale: isDesktop && isActive ? 1.055 : 1,
+          filter: isDesktop && isInactive ? "blur(0.5px)" : "blur(0px)",
         }}
         transition={{
           duration: 0.9,
@@ -96,7 +121,7 @@ const EquipmentCard = ({
       <motion.div
         initial={false}
         animate={{
-          opacity: isActive ? 0.8 : 0.5,
+          opacity: isDesktop ? (isActive ? 0.8 : 0.5) : 0.64,
         }}
         transition={{
           duration: 0.6,
@@ -109,15 +134,15 @@ const EquipmentCard = ({
       <motion.div
         initial={false}
         animate={{
-          y: isActive ? -62 : 0,
+          y: isDesktop && isActive ? -62 : 0,
         }}
         transition={{
           duration: 0.65,
           ease,
         }}
-        className="absolute inset-x-6 bottom-6 z-10"
+        className="absolute inset-x-5 bottom-[72px] z-10 sm:inset-x-6 lg:bottom-6"
       >
-        <h3 className="text-[22px] leading-[1.35] font-semibold text-white">
+        <h3 className="text-[19px] leading-[1.35] font-semibold text-white sm:text-[22px]">
           {t(`${id}.title`)}
         </h3>
       </motion.div>
@@ -126,8 +151,8 @@ const EquipmentCard = ({
       <motion.div
         initial={false}
         animate={{
-          opacity: isActive ? 1 : 0,
-          y: isActive ? 0 : 18,
+          opacity: isDesktop ? (isActive ? 1 : 0) : 1,
+          y: isDesktop && isActive ? 0 : 18,
         }}
         transition={{
           opacity: {
@@ -140,12 +165,24 @@ const EquipmentCard = ({
             ease,
           },
         }}
-        className="absolute inset-x-6 bottom-6 z-10 h-[48px] overflow-hidden"
+        className="absolute inset-x-5 bottom-5 z-10 min-h-[60px] overflow-hidden sm:inset-x-6 lg:h-[48px]"
       >
-        <p className="text-[14px] leading-6 text-white/80">
+        <p className="line-clamp-3 text-[13px] leading-6 text-white/80 sm:text-[14px]">
           {t(`${id}.description`)}
         </p>
       </motion.div>
+
+      <motion.span
+        initial={false}
+        animate={{
+          scaleX: isDesktop ? (isActive ? 1 : 0) : 1,
+        }}
+        transition={{
+          duration: 0.75,
+          ease,
+        }}
+        className="bg-custom-primary origin-start absolute inset-x-0 bottom-0 z-20 h-1"
+      />
     </motion.article>
   );
 };
@@ -153,52 +190,70 @@ const EquipmentCard = ({
 const EquipmentCapabilities = () => {
   const t = useTranslations("Home.EquipmentCapabilities");
 
+  const rootRef = useRef<HTMLElement>(null);
+
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    if (!rootRef.current) return;
+
+    return animateEquipmentCapabilities(rootRef.current);
+  }, []);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+
+    const handleChange = () => {
+      setIsDesktop(mediaQuery.matches);
+
+      if (!mediaQuery.matches) {
+        setActiveId(null);
+      }
+    };
+
+    handleChange();
+    mediaQuery.addEventListener("change", handleChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleChange);
+    };
+  }, []);
 
   return (
-    <section className="bg-secondary-bg overflow-hidden">
-      <div className="w90 py-24">
-        <motion.h2
-          initial={{
-            opacity: 0,
-            y: 24,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-            amount: 0.6,
-          }}
-          transition={{
-            duration: 0.75,
-            ease,
-          }}
-          className="text-foreground mb-12 text-[40px] leading-[1.2] font-semibold"
-        >
+    <section ref={rootRef} className="bg-secondary-bg overflow-hidden">
+      <div className="w90 py-10 sm:py-14 lg:py-16 2xl:py-24">
+        <h2 className="equipment-title text-foreground mb-8 text-[30px] leading-[1.2] font-semibold sm:mb-10 sm:text-[36px] lg:mb-12 lg:text-[40px]">
           {t("title")}
-        </motion.h2>
+        </h2>
 
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 35,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-            amount: 0.15,
-          }}
-          transition={{
-            duration: 0.9,
-            ease,
-          }}
+        {/* Mobile / Tablet */}
+        <div className="equipment-grid grid grid-cols-1 gap-4 lg:hidden">
+          {mobileEquipment.map((item) => (
+            <div
+              key={item.id}
+              className={
+                item.orientation === "portrait"
+                  ? "aspect-[3/4] min-w-0"
+                  : "aspect-[4/3] min-w-0"
+              }
+            >
+              <EquipmentCard
+                id={item.id}
+                image={item.image}
+                activeId={activeId}
+                setActiveId={setActiveId}
+                sizes="100vw"
+                isDesktop={false}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop */}
+        <div
           onMouseLeave={() => setActiveId(null)}
-          className="grid aspect-[17/6] grid-cols-[1.125fr_2fr_1.125fr] gap-4"
+          className="equipment-grid hidden aspect-[17/6] grid-cols-[1.125fr_2fr_1.125fr] gap-4 lg:grid"
         >
           <div className="min-w-0">
             <EquipmentCard
@@ -207,6 +262,7 @@ const EquipmentCapabilities = () => {
               activeId={activeId}
               setActiveId={setActiveId}
               sizes="27vw"
+              isDesktop={isDesktop}
             />
           </div>
 
@@ -219,6 +275,7 @@ const EquipmentCapabilities = () => {
                   activeId={activeId}
                   setActiveId={setActiveId}
                   sizes="24vw"
+                  isDesktop={isDesktop}
                 />
               </div>
             ))}
@@ -231,9 +288,10 @@ const EquipmentCapabilities = () => {
               activeId={activeId}
               setActiveId={setActiveId}
               sizes="27vw"
+              isDesktop={isDesktop}
             />
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
