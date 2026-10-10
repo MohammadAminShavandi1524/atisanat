@@ -12,42 +12,42 @@ const industries = [
   {
     id: "automotive",
     image: "/home/industries/automotive.webp",
-    className: "col-span-3",
+    className: "col-span-2 sm:col-span-2 lg:col-span-3",
   },
   {
     id: "power",
     image: "/home/industries/Power.webp",
-    className: "col-span-2",
+    className: "col-span-2 s:col-span-1 sm:col-span-2 lg:col-span-2",
   },
   {
     id: "machinery",
     image: "/home/industries/Gearbox.webp",
-    className: "col-span-4",
+    className: "col-span-2 s:col-span-1 sm:col-span-4 lg:col-span-4",
   },
   {
     id: "steel",
     image: "/home/industries/steel.webp",
-    className: "col-span-3",
+    className: "col-span-2 sm:col-span-2 lg:col-span-3",
   },
   {
     id: "mold",
     image: "/home/industries/mold.webp",
-    className: "col-span-3",
+    className: "col-span-2 s:col-span-1 sm:col-span-2 lg:col-span-3",
   },
   {
     id: "oilGas",
     image: "/home/industries/oil.webp",
-    className: "col-span-4",
+    className: "col-span-2 s:col-span-1 sm:col-span-2 lg:col-span-4",
   },
   {
     id: "railway",
     image: "/home/industries/Railway.webp",
-    className: "col-span-3",
+    className: "col-span-2 sm:col-span-2 lg:col-span-3",
   },
   {
     id: "aerospace",
     image: "/home/industries/aerospace.webp",
-    className: "col-span-2",
+    className: "col-span-2 sm:col-span-4 lg:col-span-2",
   },
 ] as const;
 
@@ -57,8 +57,8 @@ const Industries2 = () => {
   const [activeIndustry, setActiveIndustry] = useState<string | null>(null);
 
   return (
-    <section className="bg-secondary-bg overflow-hidden ">
-      <div className="w90 py-24">
+    <section className="bg-secondary-bg overflow-hidden">
+      <div className="w90 py-10 sm:py-14 lg:py-16 2xl:py-24">
         <motion.h2
           initial={{
             opacity: 0,
@@ -76,7 +76,7 @@ const Industries2 = () => {
             duration: 0.75,
             ease,
           }}
-          className="text-foreground mb-12 text-[40px] leading-[1.2] font-semibold"
+          className="text-foreground mb-8 text-[28px] leading-[1.2] font-semibold sm:mb-10 sm:text-[32px] lg:mb-12 lg:text-[36px] 2xl:text-[40px]"
         >
           {t("title")}
         </motion.h2>
@@ -99,7 +99,7 @@ const Industries2 = () => {
             ease,
           }}
           onMouseLeave={() => setActiveIndustry(null)}
-          className="grid grid-cols-12 gap-4"
+          className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4 lg:grid-cols-12"
         >
           {industries.map((industry, index) => {
             const isActive = activeIndustry === industry.id;
@@ -141,7 +141,9 @@ const Industries2 = () => {
                 }}
                 className={[
                   industry.className,
-                  isFirstRow ? "h-[340px]" : "h-[390px]",
+                  isFirstRow
+                    ? "h-[220px] sm:h-[280px] lg:h-[300px] 2xl:h-[340px]"
+                    : "h-[240px] sm:h-[280px] lg:h-[340px] 2xl:h-[390px]",
                   "border-border bg-card group relative cursor-pointer overflow-hidden rounded-[12px] border",
                 ].join(" ")}
               >
@@ -177,7 +179,7 @@ const Industries2 = () => {
                   className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/5 to-transparent"
                 />
 
-                <div className="absolute inset-x-0 bottom-0 z-10 p-6">
+                <div className="absolute inset-x-0 bottom-0 z-10 p-3 sm:p-4 lg:p-5 2xl:p-6">
                   <motion.div
                     initial={false}
                     animate={{
@@ -188,7 +190,7 @@ const Industries2 = () => {
                       ease,
                     }}
                   >
-                    <h3 className="text-[20px] leading-[1.35] font-semibold text-white">
+                    <h3 className="text-[15px] leading-[1.35] font-semibold text-white sm:text-[17px] lg:text-[18px] 2xl:text-[20px]">
                       {t(`items.${industry.id}`)}
                     </h3>
                   </motion.div>

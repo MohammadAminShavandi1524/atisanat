@@ -21,8 +21,8 @@ export default function IndexPage({ params }: PageProps<"/[locale]">) {
       <FeaturedMachines2 />
       <CoreValues />
       <EquipmentCapabilities />
-      {/* <MachiningChallenges /> */}
-      {/* <Industries2 /> */}
+      <MachiningChallenges />
+      <Industries2 />
     </>
   );
 }

@@ -29,7 +29,7 @@ const NavItem = ({ label, href }: NavItemProps) => {
           "block pt-2.75 font-medium transition-colors duration-300",
           isEnglish
             ? "3xl:text-[16px] text-[13px] xl:text-[14px] 2xl:text-[15px]"
-            : "3xl:text-[18px] text-[14px] xl:text-[15px] 2xl:text-[17px]",
+            : "3xl:text-[17px] text-[14px] xl:text-[15px] 2xl:text-[17px]",
           "text-foreground/75 hover:text-custom-primary",
           isActive && "text-custom-primary",
         )}

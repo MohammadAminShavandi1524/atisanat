@@ -75,7 +75,7 @@ const CoreValues = () => {
           {values.map((value, index) => (
             <article
               key={value}
-              className="core-value-card border-border group relative min-h-[200px] overflow-hidden rounded-2xl border p-5 sm:min-h-[220px] sm:p-6 lg:min-h-[235px] lg:p-8"
+              className="core-value-card border-border group relative overflow-hidden rounded-2xl border p-4 sm:p-5 lg:p-6"
             >
               <div className="bg-custom-primary/0 group-hover:bg-custom-primary/5 absolute inset-0 transition-colors duration-500 ease-out" />
 
@@ -89,7 +89,7 @@ const CoreValues = () => {
                       ? `${titleMinHeight}px`
                       : undefined,
                   }}
-                  className="text-foreground group-hover:text-custom-primary text-[20px] leading-[1.4] font-semibold transition-all duration-500 ease-out sm:text-[21px] lg:text-[23px]"
+                  className="text-foreground group-hover:text-custom-primary text-[20px] leading-[1.4] font-semibold transition-all duration-500 ease-out sm:text-[18px] lg:text-[20px] 2xl:text-[22px]"
                 >
                   {t(`${value}.title`)}
                 </h3>

@@ -69,7 +69,7 @@ const Logo = ({ variant = "desktop" }: LogoProps) => {
     >
       <span
         className={cn(
-          "invisible col-start-1 row-start-1 pt-2.5 leading-none font-semibold whitespace-nowrap",
+          "invisible col-start-1 row-start-1 pt-2 leading-none font-semibold whitespace-nowrap",
           locale === "en"
             ? "text-[20px] xl:text-[21px] 2xl:text-[23px]"
             : "text-[21px] xl:text-[23px] 2xl:text-[26px]",
@@ -87,7 +87,7 @@ const Logo = ({ variant = "desktop" }: LogoProps) => {
         }}
         transition={{ duration: 0.6, ease }}
         className={cn(
-          "text-foreground col-start-1 row-start-1 pt-2.5 leading-none font-semibold whitespace-nowrap",
+          "text-foreground col-start-1 row-start-1 pt-2 leading-none font-semibold whitespace-nowrap",
           locale === "en"
             ? "text-[20px] xl:text-[21px] 2xl:text-[23px]"
             : "text-[21px] xl:text-[23px] 2xl:text-[26px]",

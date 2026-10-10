@@ -39,7 +39,7 @@ const CooperationDropdown = () => {
           "flex cursor-default items-center font-medium transition-colors duration-300",
           isEnglish
             ? "3xl:text-[16px] gap-x-0.5 pt-2.75 text-[13px] xl:text-[14px] 2xl:text-[15px]"
-            : "3xl:text-[18px] gap-x-1 pt-2.75 text-[14px] xl:text-[15px] 2xl:text-[17px]",
+            : "3xl:text-[17px] gap-x-1 pt-2.75 text-[14px] xl:text-[15px] 2xl:text-[17px]",
           "text-foreground/75 hover:text-custom-primary",
           isActive && "text-custom-primary",
         )}

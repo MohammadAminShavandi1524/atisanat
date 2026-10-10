@@ -42,7 +42,7 @@ const MachiningChallenges = () => {
 
   return (
     <section className="bg-background overflow-hidden">
-      <div className="w90 py-24">
+      <div className="w90 py-10 sm:py-14 lg:py-16 2xl:py-24">
         <motion.h2
           initial={{
             opacity: 0,
@@ -60,12 +60,12 @@ const MachiningChallenges = () => {
             duration: 0.75,
             ease,
           }}
-          className="text-foreground mb-12 text-[40px] leading-[1.2] font-semibold"
+          className="text-foreground mb-8 text-[28px] leading-[1.2] font-semibold sm:mb-10 sm:text-[32px] lg:mb-12 lg:text-[36px] 2xl:text-[40px]"
         >
           {t("title")}
         </motion.h2>
 
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:grid-rows-[auto_auto_auto_auto] lg:gap-x-6 lg:gap-y-0">
           {challenges.map((challenge, index) => (
             <motion.article
               key={challenge.id}
@@ -86,14 +86,14 @@ const MachiningChallenges = () => {
                 delay: index * 0.09,
                 ease,
               }}
-              className="group h-full"
+              className="group bg-secondary-bg shadow-primary h-full min-w-0 overflow-hidden rounded-[12px] lg:row-span-4 lg:grid lg:grid-rows-[subgrid]"
             >
               <Link
                 href={`/${locale}/machining-challenges/${challenge.slug}`}
-                className="flex h-full flex-col"
+                className="flex h-full min-w-0 flex-col lg:row-span-4 lg:grid lg:grid-rows-[subgrid]"
               >
                 {/* Image */}
-                <div className="border-border relative aspect-video shrink-0 overflow-hidden rounded-[12px] border">
+                <div className="relative aspect-video shrink-0 overflow-hidden">
                   <motion.div
                     whileHover={{
                       scale: 1.055,
@@ -108,7 +108,7 @@ const MachiningChallenges = () => {
                       src={challenge.image}
                       alt={t(challenge.titleKey)}
                       fill
-                      sizes="33vw"
+                      sizes="(max-width: 639px) 90vw, (max-width: 1023px) 44vw, 30vw"
                       className="object-cover"
                     />
                   </motion.div>
@@ -117,31 +117,27 @@ const MachiningChallenges = () => {
                 </div>
 
                 {/* Content */}
-                <div className="flex min-h-[235px] flex-1 flex-col pt-6">
-                  {/* Fixed title area */}
-                  <div className="min-h-[70px]">
-                    <h3 className="text-foreground group-hover:text-custom-primary line-clamp-2 text-[24px] leading-[1.45] font-semibold transition-colors duration-500">
+                <div className="flex min-h-[200px] flex-1 flex-col px-4 pt-5 pb-5 sm:min-h-[215px] sm:px-5 sm:pt-6 sm:pb-6 lg:contents">
+                  {/* Title */}
+                  <div className="lg:px-5 lg:pt-6">
+                    <h3 className="text-foreground group-hover:text-custom-primary line-clamp-2 pb-2 text-[20px] leading-[1.45] font-semibold transition-colors duration-500 sm:text-[18px] xl:text-xl">
                       {t(challenge.titleKey)}
                     </h3>
                   </div>
 
-                  {/* Fixed description area */}
-                  <div className="mt-3 min-h-[84px]">
-                    <p className="text-muted-foreground line-clamp-3 text-justify text-[15px] leading-7">
+                  {/* Description */}
+                  <div className="mt-2 min-h-0 sm:mt-3 sm:min-h-[84px] lg:mt-0 lg:min-h-0 lg:px-5 lg:pt-3">
+                    <p className="text-muted-foreground line-clamp-3 text-justify text-[14px] leading-6 sm:text-[15px] sm:leading-7">
                       {t(challenge.descriptionKey)}
                     </p>
                   </div>
 
-                  {/* Always aligned at bottom */}
-                  <div className="mt-auto pt-5">
-                    <div className="text-custom-primary inline-flex items-center gap-2 text-[15px] font-medium">
+                  {/* Read More */}
+                  <div className="mt-auto pt-4 sm:pt-5 lg:mt-0 lg:px-5 lg:pb-6">
+                    <div className="text-custom-primary inline-flex items-center gap-2 text-[14px] font-medium sm:text-[15px]">
                       <span>{t("readMore")}</span>
 
-                      <ArrowIcon
-                        size={18}
-                        strokeWidth={1.8}
-                        className="transition-transform duration-500 group-hover:-translate-y-1"
-                      />
+                      <ArrowIcon strokeWidth={1.8} className="size-4.5" />
                     </div>
                   </div>
                 </div>
