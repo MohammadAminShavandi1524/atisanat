@@ -263,6 +263,40 @@
       "success": "Your resume was submitted successfully.",
       "error": "There was an error submitting your resume.",
       "uploadError": "There was an error uploading your resume."
+    },
+
+    "method": {
+      "title": "Choose How to Submit Your Resume",
+      "description": "Select the method that works best for you.",
+      "file": {
+        "title": "Upload Resume (PDF)",
+        "description": "Enter your contact information and upload your resume as a PDF file."
+      },
+      "questions": {
+        "title": "Answer Resume Questions",
+        "description": "Answer the questions below to submit your resume without uploading a file."
+      }
+    },
+    "dynamic": {
+      "title": "Resume Questions",
+      "description": "Please answer all the following questions to complete your resume submission.",
+      "loading": "Loading resume questions...",
+      "loadError": "Unable to load the resume questions.",
+      "retry": "Try Again",
+      "empty": "No resume questions are available at the moment.",
+      "form": {
+        "answerPlaceholder": "Write your answer here...",
+        "submit": "Submit Answers",
+        "submitting": "Submitting..."
+      },
+      "validation": {
+        "answerRequired": "This question must be answered.",
+        "allAnswersRequired": "Please answer all questions before submitting."
+      },
+      "toast": {
+        "success": "Your answers were submitted successfully.",
+        "error": "There was an error submitting your answers."
+      }
     }
   },
   "BusinessCooperation": {

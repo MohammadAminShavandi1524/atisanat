@@ -20,7 +20,7 @@ export const uploadResumePdf = (
 
     const xhr = new XMLHttpRequest();
 
-    xhr.open("POST", "/api/upload/resume");
+    xhr.open("POST", "/api/resume");
 
     xhr.upload.onprogress = (event) => {
       if (!event.lengthComputable) {

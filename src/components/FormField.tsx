@@ -34,10 +34,12 @@ export const FormField = (props: FormFieldProps) => {
 
   return (
     <div className={cn("flex flex-col gap-2 sm:gap-3", containerClassName)}>
-      <div className="flex  gap-1 px-1.5 sm:flex-row items-center justify-between">
+      <div className="flex items-center justify-between gap-1 px-1.5 sm:flex-row">
         <label className="text-foreground text-sm font-semibold">{label}</label>
 
-        {error && <p className="text-xs text-red-500 pt-0.5">{error.message}</p>}
+        {error && (
+          <p className="pt-0.5 text-xs text-red-500">{error.message}</p>
+        )}
       </div>
 
       {as === "textarea" ? (
@@ -45,11 +47,11 @@ export const FormField = (props: FormFieldProps) => {
           {...(rest as TextareaHTMLAttributes<HTMLTextAreaElement>)}
           {...register}
           className={cn(
-            "bg-secondary-bg text-foreground placeholder:text-muted-foreground h-28 w-full resize-none rounded-lg border px-3 py-3 text-sm transition-colors outline-none sm:h-24 sm:px-4 sm:py-2.5 sm:text-base rtl:text-right",
+            "bg-secondary-bg text-foreground placeholder:text-muted-foreground h-30 w-full resize-none rounded-lg border px-3 py-3 text-sm transition-colors outline-none sm:px-4 sm:py-2.5 sm:text-base rtl:text-right",
 
             error
               ? "border-red-500 focus:border-red-500"
-              : "border-foreground/8 focus:border-primary",
+              : "border-foreground/8 focus:border-custom-primary",
           )}
         />
       ) : (
