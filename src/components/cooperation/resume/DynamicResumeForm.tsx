@@ -144,7 +144,7 @@ const DynamicResumeForm = () => {
       onSubmit={handleSubmit(handleValidSubmit, handleInvalidSubmit)}
       className="space-y-6"
     >
-      <div className="grid grid-cols-1 gap-x-6 gap-y-5 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
         {questions.map((question, index) => {
           const fieldName = String(question.id);
           const questionText =

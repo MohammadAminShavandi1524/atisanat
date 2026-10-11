@@ -159,12 +159,12 @@ const ResumeForm = () => {
   const isFormBusy = isSubmitting || isUploading || isFinalizing;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 sm:space-y-7">
       {/* Full Name + Phone */}
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
         {/* Full Name */}
         <div className="min-w-0">
-          <div className="mb-2.5 flex items-center justify-between gap-4">
+          <div className="mb-2.5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
             <label
               htmlFor="fullName"
               className="text-foreground text-[14px] font-medium"
@@ -185,13 +185,13 @@ const ResumeForm = () => {
             autoComplete="name"
             placeholder={t("form.fullNamePlaceholder")}
             {...register("fullName")}
-            className="border-border bg-secondary-bg/35 text-foreground placeholder:text-muted-foreground focus:border-custom-primary h-13 w-full rounded-xl border px-4 text-[14px] transition-colors duration-300 outline-none"
+            className="border-border bg-secondary-bg/35 text-foreground placeholder:text-muted-foreground focus:border-custom-primary h-12 w-full min-w-0 rounded-xl border px-3 text-[14px] transition-colors duration-300 outline-none sm:h-13 sm:px-4"
           />
         </div>
 
         {/* Phone */}
         <div className="min-w-0">
-          <div className="mb-2.5 flex items-center justify-between gap-4">
+          <div className="mb-2.5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
             <label
               htmlFor="phoneNumber"
               className="text-foreground text-[14px] font-medium"
@@ -213,14 +213,14 @@ const ResumeForm = () => {
             autoComplete="tel"
             placeholder={t("form.phonePlaceholder")}
             {...register("phoneNumber")}
-            className="border-border bg-secondary-bg/35 text-foreground placeholder:text-muted-foreground focus:border-custom-primary h-13 w-full rounded-xl border px-4 text-[14px] transition-colors duration-300 outline-none"
+            className="border-border bg-secondary-bg/35 text-foreground placeholder:text-muted-foreground focus:border-custom-primary h-12 w-full min-w-0 rounded-xl border px-3 text-[14px] transition-colors duration-300 outline-none sm:h-13 sm:px-4"
           />
         </div>
       </div>
 
       {/* Email */}
       <div className="min-w-0">
-        <div className="mb-2.5 flex items-center justify-between gap-4">
+        <div className="mb-2.5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
           <label
             htmlFor="email"
             className="text-foreground text-[14px] font-medium"
@@ -241,7 +241,7 @@ const ResumeForm = () => {
           autoComplete="email"
           placeholder={t("form.emailPlaceholder")}
           {...register("email")}
-          className="border-border bg-secondary-bg/35 text-foreground placeholder:text-muted-foreground focus:border-custom-primary h-13 w-full rounded-xl border px-4 text-[14px] transition-colors duration-300 outline-none"
+          className="border-border bg-secondary-bg/35 text-foreground placeholder:text-muted-foreground focus:border-custom-primary h-12 w-full min-w-0 rounded-xl border px-3 text-[14px] transition-colors duration-300 outline-none sm:h-13 sm:px-4"
         />
       </div>
 
@@ -260,7 +260,7 @@ const ResumeForm = () => {
         <button
           type="submit"
           disabled={isFormBusy}
-          className="bg-custom-primary text-primary-foreground inline-flex min-h-12 min-w-[190px] cursor-pointer items-center justify-center gap-3 rounded-xl px-6 text-[15px] font-medium transition-opacity duration-300 disabled:cursor-not-allowed disabled:opacity-50"
+          className="bg-custom-primary text-primary-foreground inline-flex min-h-12 w-full min-w-[190px] cursor-pointer items-center justify-center gap-3 rounded-xl px-6 text-[15px] font-medium transition-opacity duration-300 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
         >
           <span>{isSubmitting ? t("form.submitting") : t("form.submit")}</span>
 

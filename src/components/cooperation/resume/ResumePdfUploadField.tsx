@@ -54,8 +54,8 @@ const ResumePdfUploadField = ({
   const showProgress = isUploading && (progress > 0 || isFinalizing);
 
   return (
-    <div>
-      <div className="mb-2.5 flex items-center justify-between gap-3">
+    <div className="min-w-0">
+      <div className="mb-2.5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
         <label className="text-foreground text-[14px] font-medium">
           {t("form.resume.label")}
         </label>
@@ -83,7 +83,7 @@ const ResumePdfUploadField = ({
           }}
           onDragOver={(event) => event.preventDefault()}
           onDrop={handleDrop}
-          className="border-border bg-secondary-bg/25 hover:border-custom-primary/60 hover:bg-custom-primary/[0.025] flex min-h-[190px] cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed px-8 py-7 text-center transition-colors duration-300"
+          className="border-border bg-secondary-bg/25 hover:border-custom-primary/60 hover:bg-custom-primary/[0.025] flex min-h-[170px] cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed px-4 py-6 text-center transition-colors duration-300 sm:min-h-[190px] sm:px-8 sm:py-7"
         >
           <div className="border-border bg-background flex size-12 items-center justify-center rounded-xl border">
             <UploadCloud
@@ -93,15 +93,15 @@ const ResumePdfUploadField = ({
             />
           </div>
 
-          <p className="text-foreground mt-4 text-[14px] font-medium">
+          <p className="text-foreground mt-4 text-[14px] leading-6 font-medium">
             {t("form.resume.placeholder")}
           </p>
 
           <span className="text-muted-foreground mt-1.5 text-xs">PDF</span>
         </div>
       ) : (
-        <div className="border-border bg-secondary-bg/25 rounded-xl border p-5">
-          <div className="flex items-center gap-4">
+        <div className="border-border bg-secondary-bg/25 rounded-xl border p-4 sm:p-5">
+          <div className="flex min-w-0 items-center gap-3 sm:gap-4">
             <div className="border-border bg-background flex size-12 shrink-0 items-center justify-center rounded-xl border">
               <FileText
                 size={21}
@@ -125,7 +125,7 @@ const ResumePdfUploadField = ({
                 type="button"
                 onClick={handleRemove}
                 aria-label={t("form.resume.remove")}
-                className="text-muted-foreground hover:text-destructive flex size-9 cursor-pointer items-center justify-center rounded-lg transition-colors duration-300"
+                className="text-muted-foreground hover:text-destructive flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-lg transition-colors duration-300"
               >
                 <X size={18} strokeWidth={1.7} />
               </button>
@@ -134,7 +134,7 @@ const ResumePdfUploadField = ({
 
           {showProgress && (
             <div className="mt-5">
-              <div className="mb-2 flex items-center justify-between gap-3">
+              <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
                 <span className="text-muted-foreground text-xs">
                   {isFinalizing
                     ? t("form.resume.finalizing")
