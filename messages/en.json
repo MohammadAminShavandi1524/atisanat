@@ -147,6 +147,52 @@
     "title": "Products",
     "description": "A selection of ATI Sanat capabilities in precision part manufacturing and engineered tooling."
   },
+  "MachineDimensions": {
+    "hero": {
+      "title": "Machine Dimensions",
+      "description": "Specifications and workpiece dimensions of our machinery by manufacturing process and country of origin."
+    },
+    "table": {
+      "headers": {
+        "row": "No.",
+        "process": "Machining Process",
+        "dimensions": "Workpiece Block Dimensions",
+        "country": "Country of Origin"
+      },
+      "rows": [
+        {
+          "process": "4-Axis Milling",
+          "dimensions": "Q250 × L400",
+          "country": "Taiwan"
+        },
+        {
+          "process": "3/5-Axis Milling",
+          "dimensions": "300 × 300 × 600",
+          "country": "Germany"
+        },
+        {
+          "process": "3-Axis Milling",
+          "dimensions": "500 × 400 × 800",
+          "country": "Taiwan"
+        },
+        {
+          "process": "3-Axis Turning",
+          "dimensions": "500 × 300",
+          "country": "South Korea"
+        },
+        {
+          "process": "Magnetic Surface Grinding",
+          "dimensions": "500 × 200",
+          "country": "Germany"
+        },
+        {
+          "process": "Manual Machines",
+          "dimensions": "Lathe and Column Drill Press",
+          "country": "Iran, Tabriz"
+        }
+      ]
+    }
+  },
   "Contact": {
     "title": "Contact Us",
     "description": "To contact ATI Sanat, complete the form below or use the provided contact information.",
