@@ -87,13 +87,13 @@
       },
 
       "threeAxis": {
-        "title": "3-Axis CNC Milling",
-        "description": "For precise industrial component machining and controlled manufacturing processes."
+        "title": "4-Axis CNC Milling",
+        "description": "Suitable for complex components and multi-sided machining operations."
       },
 
       "fourAxis": {
-        "title": "4-Axis CNC Milling",
-        "description": "Suitable for complex components and multi-sided machining operations."
+        "title": "3-Axis CNC Milling",
+        "description": "For precise industrial component machining and controlled manufacturing processes."
       },
 
       "manualLathe": {
@@ -108,7 +108,7 @@
 
       "columnDrill": {
         "title": "MS32B Column Drill",
-        "description": "Used for precise drilling operations during component manufacturing."
+        "description": "Used for drilling operations during component manufacturing."
       }
     },
     "Industries": {

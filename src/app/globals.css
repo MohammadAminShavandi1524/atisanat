@@ -127,8 +127,8 @@
   --card-secondary-foreground: #202b3a;
   --card-tertiary-foreground: #202b3a;
 
-  --border: #bdc9d5;
-  --border-secondary: #8f9faf;
+  --border: #93a3b3;
+  --border-secondary: #71869a;
 
   /* Input / Ring */
   --input: #e0e6ec;
@@ -201,9 +201,8 @@
   --card-secondary-foreground: #f6f8fa;
   --card-tertiary-foreground: #f6f8fa;
 
-  /* Borders */
-  --border: #2d3a49;
-  --border-secondary: #465668;
+  --border: #46576a;
+  --border-secondary: #65798f;
 
   /* Input / Ring */
   --input: #263443;
