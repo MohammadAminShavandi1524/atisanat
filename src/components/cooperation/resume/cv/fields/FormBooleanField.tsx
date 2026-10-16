@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import {
   Controller,
@@ -7,17 +7,12 @@ import {
   type Path,
 } from "react-hook-form";
 
-import {
-  cn,
-} from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
-import type {
-  CVResumeFormValues,
-} from "../cv-resume.types";
+import type { CVResumeFormValues } from "../cv-resume.types";
 
 interface FormBooleanFieldProps {
-  name:
-    Path<CVResumeFormValues>;
+  name: Path<CVResumeFormValues>;
 
   control:
     Control<CVResumeFormValues>;
@@ -51,16 +46,12 @@ const FormBooleanField = ({
     <Controller
       name={name}
       control={control}
-      render={({
-        field,
-      }) => {
+      render={({ field }) => {
         const isYes =
-          field.value ===
-          true;
+          field.value === true;
 
         const isNo =
-          field.value ===
-          false;
+          field.value === false;
 
         return (
           <div
@@ -69,8 +60,8 @@ const FormBooleanField = ({
               className,
             )}
           >
-            <div className="mb-2.5 flex min-h-5 items-center justify-between gap-3 px-2">
-              <p className="text-foreground min-w-0 truncate text-[14px] font-medium">
+            <div className="mb-2.5 flex min-h-5 items-start justify-between gap-2 px-1 s:items-center s:gap-3 s:px-2">
+              <p className="text-foreground min-w-0 text-[13px] leading-5 font-medium whitespace-normal s:truncate s:text-[14px] s:leading-normal">
                 {label}
               </p>
 
@@ -80,7 +71,7 @@ const FormBooleanField = ({
                   title={
                     errorMessage
                   }
-                  className="text-destructive max-w-[55%] shrink-0 truncate text-end text-xs"
+                  className="text-destructive max-w-[48%] shrink-0 text-end text-[11px] leading-4 s:max-w-[55%] s:truncate s:text-xs s:leading-normal"
                 >
                   {
                     errorMessage
@@ -89,7 +80,7 @@ const FormBooleanField = ({
               )}
             </div>
 
-            <div className="grid grid-cols-2 gap-2.5">
+            <div className="grid grid-cols-2 gap-2 s:gap-2.5">
               <button
                 type="button"
                 aria-pressed={
@@ -101,7 +92,7 @@ const FormBooleanField = ({
                   )
                 }
                 className={cn(
-                  "flex h-12 cursor-pointer items-center justify-center rounded-xl border px-4 text-sm font-medium transition-colors duration-300",
+                  "flex h-12 cursor-pointer items-center justify-center rounded-xl border px-3 text-sm font-medium transition-colors duration-300 s:px-4",
                   isYes
                     ? "border-custom-primary bg-custom-primary/8 text-custom-primary"
                     : errorMessage
@@ -109,9 +100,7 @@ const FormBooleanField = ({
                       : "border-border bg-secondary-bg/35 text-muted-foreground hover:border-custom-primary/60",
                 )}
               >
-                {
-                  yesLabel
-                }
+                {yesLabel}
               </button>
 
               <button
@@ -125,7 +114,7 @@ const FormBooleanField = ({
                   )
                 }
                 className={cn(
-                  "flex h-12 cursor-pointer items-center justify-center rounded-xl border px-4 text-sm font-medium transition-colors duration-300",
+                  "flex h-12 cursor-pointer items-center justify-center rounded-xl border px-3 text-sm font-medium transition-colors duration-300 s:px-4",
                   isNo
                     ? "border-custom-primary bg-custom-primary/8 text-custom-primary"
                     : errorMessage
@@ -133,9 +122,7 @@ const FormBooleanField = ({
                       : "border-border bg-secondary-bg/35 text-muted-foreground hover:border-custom-primary/60",
                 )}
               >
-                {
-                  noLabel
-                }
+                {noLabel}
               </button>
             </div>
           </div>

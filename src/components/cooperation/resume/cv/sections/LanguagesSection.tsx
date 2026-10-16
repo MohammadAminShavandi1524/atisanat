@@ -1,8 +1,6 @@
-"use client";
+﻿"use client";
 
-import {
-  useMemo,
-} from "react";
+import { useMemo } from "react";
 
 import {
   Plus,
@@ -14,25 +12,15 @@ import {
   useFieldArray,
 } from "react-hook-form";
 
-import {
-  FormField,
-} from "@/components/FormField";
+import { FormField } from "@/components/FormField";
 
-import {
-  emptyLanguage,
-} from "../cv-resume.defaults";
+import { emptyLanguage } from "../cv-resume.defaults";
 
-import type {
-  CVResumeFormValues,
-} from "../cv-resume.types";
+import type { CVResumeFormValues } from "../cv-resume.types";
 
-import {
-  getLanguageLevelOptions,
-} from "../data/cv-options";
+import { getLanguageLevelOptions } from "../data/cv-options";
 
-import type {
-  ResumeLocale,
-} from "../data/iran-locations";
+import type { ResumeLocale } from "../data/iran-locations";
 
 import FormSection from "../fields/FormSection";
 import FormSelectField from "../fields/FormSelectField";
@@ -68,9 +56,7 @@ const LanguagesSection = ({
     remove,
   } = useFieldArray({
     control,
-
-    name:
-      "languages",
+    name: "languages",
   });
 
   const levelOptions =
@@ -84,27 +70,22 @@ const LanguagesSection = ({
 
   const listError =
     typeof errors.languages
-      ?.message ===
-    "string"
+      ?.message === "string"
       ? errors.languages
           .message
       : undefined;
 
   return (
     <FormSection
-      title={
-        t(
-          "sections.languages.title",
-        )
-      }
-      description={
-        t(
-          "sections.languages.description",
-        )
-      }
+      title={t(
+        "sections.languages.title",
+      )}
+      description={t(
+        "sections.languages.description",
+      )}
     >
       <div className="space-y-5">
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex flex-col items-stretch gap-3 s:flex-row s:items-center s:justify-between s:gap-4">
           <div className="min-w-0">
             {listError && (
               <p
@@ -112,7 +93,7 @@ const LanguagesSection = ({
                 title={
                   listError
                 }
-                className="text-destructive truncate text-xs"
+                className="text-destructive text-xs s:truncate"
               >
                 {
                   listError
@@ -128,7 +109,7 @@ const LanguagesSection = ({
                 emptyLanguage,
               )
             }
-            className="border-border text-custom-primary hover:border-custom-primary/60 inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors"
+            className="border-border text-custom-primary hover:border-custom-primary/60 inline-flex w-full shrink-0 cursor-pointer items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors s:w-auto"
           >
             <Plus
               size={17}
@@ -140,16 +121,15 @@ const LanguagesSection = ({
           </button>
         </div>
 
-        {fields.length ===
-        0 ? (
+        {fields.length === 0 ? (
           <div
-            className={`bg-secondary-bg/25 rounded-xl border border-dashed p-6 text-center ${
+            className={`bg-secondary-bg/25 rounded-xl border border-dashed p-4 text-center s:p-6 ${
               listError
                 ? "border-destructive"
                 : "border-border"
             }`}
           >
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground text-[13px] leading-6 s:text-sm">
               {t(
                 "languages.empty",
               )}
@@ -165,15 +145,14 @@ const LanguagesSection = ({
                 key={
                   field.id
                 }
-                className="border-border bg-secondary-bg/20 rounded-xl border p-4 sm:p-5"
+                className="border-border border-t bg-transparent py-5 first:border-t-0 first:pt-0 s:rounded-xl s:border s:bg-secondary-bg/20 s:p-4 s:first:border-t sm:p-5"
               >
-                <div className="mb-5 flex items-center justify-between">
-                  <h3 className="text-foreground font-semibold">
+                <div className="mb-4 flex items-center justify-between s:mb-5">
+                  <h3 className="text-foreground text-[15px] font-semibold s:text-base">
                     {t(
                       "languages.item",
                     )}{" "}
-                    {index +
-                      1}
+                    {index + 1}
                   </h3>
 
                   <button
@@ -186,20 +165,16 @@ const LanguagesSection = ({
                     className="text-muted-foreground hover:text-destructive flex size-8 cursor-pointer items-center justify-center"
                   >
                     <Trash2
-                      size={
-                        17
-                      }
+                      size={17}
                     />
                   </button>
                 </div>
 
-                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="grid grid-cols-1 gap-4 s:gap-5 sm:grid-cols-2 lg:grid-cols-4">
                   <FormField
-                    label={
-                      t(
-                        "languages.language",
-                      )
-                    }
+                    label={t(
+                      "languages.language",
+                    )}
                     register={register(
                       `languages.${index}.language`,
                     )}
@@ -216,16 +191,12 @@ const LanguagesSection = ({
                     control={
                       control
                     }
-                    label={
-                      t(
-                        "languages.read",
-                      )
-                    }
-                    placeholder={
-                      t(
-                        "placeholders.select",
-                      )
-                    }
+                    label={t(
+                      "languages.read",
+                    )}
+                    placeholder={t(
+                      "placeholders.select",
+                    )}
                     options={
                       levelOptions
                     }
@@ -242,16 +213,12 @@ const LanguagesSection = ({
                     control={
                       control
                     }
-                    label={
-                      t(
-                        "languages.write",
-                      )
-                    }
-                    placeholder={
-                      t(
-                        "placeholders.select",
-                      )
-                    }
+                    label={t(
+                      "languages.write",
+                    )}
+                    placeholder={t(
+                      "placeholders.select",
+                    )}
                     options={
                       levelOptions
                     }
@@ -268,16 +235,12 @@ const LanguagesSection = ({
                     control={
                       control
                     }
-                    label={
-                      t(
-                        "languages.speak",
-                      )
-                    }
-                    placeholder={
-                      t(
-                        "placeholders.select",
-                      )
-                    }
+                    label={t(
+                      "languages.speak",
+                    )}
+                    placeholder={t(
+                      "placeholders.select",
+                    )}
                     options={
                       levelOptions
                     }

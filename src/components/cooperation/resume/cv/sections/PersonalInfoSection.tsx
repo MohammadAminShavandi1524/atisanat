@@ -1,8 +1,14 @@
-"use client";
+﻿"use client";
 
-import { useEffect, useMemo } from "react";
+import {
+  useEffect,
+  useMemo,
+} from "react";
 
-import { Plus, Trash2 } from "lucide-react";
+import {
+  Plus,
+  Trash2,
+} from "lucide-react";
 
 import {
   Controller,
@@ -21,7 +27,10 @@ import { getDependentRelationOptions } from "../data/cv-options";
 
 import type { ResumeLocale } from "../data/iran-locations";
 
-import { getMazhabOptions, getReligionOptions } from "../data/religions";
+import {
+  getMazhabOptions,
+  getReligionOptions,
+} from "../data/religions";
 
 import FormBooleanField from "../fields/FormBooleanField";
 import FormDateField from "../fields/FormDateField";
@@ -30,240 +39,461 @@ import FormSection from "../fields/FormSection";
 import FormSelectField from "../fields/FormSelectField";
 
 interface PersonalInfoSectionProps {
-  form: UseFormReturn<CVResumeFormValues>;
-  locale: ResumeLocale;
-  t: (key: string) => string;
+  form:
+    UseFormReturn<CVResumeFormValues>;
+
+  locale:
+    ResumeLocale;
+
+  t:
+    (key: string) => string;
 }
 
-const PersonalInfoSection = ({ form, locale, t }: PersonalInfoSectionProps) => {
+const PersonalInfoSection = ({
+  form,
+  locale,
+  t,
+}: PersonalInfoSectionProps) => {
   const {
     register,
     control,
     setValue,
-    formState: { errors },
+
+    formState: {
+      errors,
+    },
   } = form;
 
-  const religion = useWatch({
-    control,
-    name: "religion",
-  });
+  const religion =
+    useWatch({
+      control,
+      name: "religion",
+    });
 
-  const mazhab = useWatch({
-    control,
-    name: "mazhab",
-  });
+  const mazhab =
+    useWatch({
+      control,
+      name: "mazhab",
+    });
 
-  const married = useWatch({
-    control,
-    name: "married",
-  });
+  const married =
+    useWatch({
+      control,
+      name: "married",
+    });
 
   const {
-    fields: dependentFields,
-    append: appendDependent,
-    remove: removeDependent,
+    fields:
+      dependentFields,
+
+    append:
+      appendDependent,
+
+    remove:
+      removeDependent,
   } = useFieldArray({
     control,
     name: "dependents",
   });
 
-  const religionOptions = useMemo(() => getReligionOptions(locale), [locale]);
+  const religionOptions =
+    useMemo(
+      () =>
+        getReligionOptions(
+          locale,
+        ),
+      [locale],
+    );
 
-  const mazhabOptions = useMemo(
-    () => getMazhabOptions(religion, locale),
-    [religion, locale],
-  );
+  const mazhabOptions =
+    useMemo(
+      () =>
+        getMazhabOptions(
+          religion,
+          locale,
+        ),
+      [
+        religion,
+        locale,
+      ],
+    );
 
-  const relationOptions = useMemo(
-    () => getDependentRelationOptions(locale),
-    [locale],
-  );
+  const relationOptions =
+    useMemo(
+      () =>
+        getDependentRelationOptions(
+          locale,
+        ),
+      [locale],
+    );
 
   useEffect(() => {
-    if (married !== true) {
-      setValue("children", "", {
-        shouldValidate: false,
-      });
+    if (
+      married !== true
+    ) {
+      setValue(
+        "children",
+        "",
+        {
+          shouldValidate:
+            false,
+        },
+      );
     }
-  }, [married, setValue]);
+  }, [
+    married,
+    setValue,
+  ]);
 
   useEffect(() => {
-    if (mazhab && !mazhabOptions.some((option) => option.value === mazhab)) {
-      setValue("mazhab", "");
+    if (
+      mazhab &&
+      !mazhabOptions.some(
+        (option) =>
+          option.value ===
+          mazhab,
+      )
+    ) {
+      setValue(
+        "mazhab",
+        "",
+      );
     }
-  }, [mazhab, mazhabOptions, setValue]);
+  }, [
+    mazhab,
+    mazhabOptions,
+    setValue,
+  ]);
 
   return (
     <FormSection
-      title={t("sections.personal.title")}
-      description={t("sections.personal.description")}
+      title={t(
+        "sections.personal.title",
+      )}
+      description={t(
+        "sections.personal.description",
+      )}
     >
       <div className="space-y-6">
         <Controller
           name="image"
           control={control}
-          render={({ field }) => (
+          render={({
+            field,
+          }) => (
             <FormImageUploadField
-              label={t("fields.image.label")}
-              placeholder={t("fields.image.placeholder")}
-              uploadingLabel={t("fields.image.uploading")}
-              removeLabel={t("fields.image.remove")}
-              invalidFileMessage={t("validation.imageInvalid")}
-              uploadErrorMessage={t("validation.imageUploadFailed")}
-              value={field.value}
-              onChange={field.onChange}
-              error={errors.image?.message}
+              label={t(
+                "fields.image.label",
+              )}
+              placeholder={t(
+                "fields.image.placeholder",
+              )}
+              uploadingLabel={t(
+                "fields.image.uploading",
+              )}
+              removeLabel={t(
+                "fields.image.remove",
+              )}
+              invalidFileMessage={t(
+                "validation.imageInvalid",
+              )}
+              uploadErrorMessage={t(
+                "validation.imageUploadFailed",
+              )}
+              value={
+                field.value
+              }
+              onChange={
+                field.onChange
+              }
+              error={
+                errors.image
+                  ?.message
+              }
             />
           )}
         />
 
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 s:gap-5 sm:grid-cols-2 lg:grid-cols-3">
           <FormField
-            label={t("fields.firstName")}
-            register={register("firstName")}
-            error={errors.firstName}
+            label={t(
+              "fields.firstName",
+            )}
+            register={register(
+              "firstName",
+            )}
+            error={
+              errors.firstName
+            }
           />
 
           <FormField
-            label={t("fields.lastName")}
-            register={register("lastName")}
-            error={errors.lastName}
+            label={t(
+              "fields.lastName",
+            )}
+            register={register(
+              "lastName",
+            )}
+            error={
+              errors.lastName
+            }
           />
 
           <FormField
-            label={t("fields.fatherName")}
-            register={register("fatherName")}
-            error={errors.fatherName}
+            label={t(
+              "fields.fatherName",
+            )}
+            register={register(
+              "fatherName",
+            )}
+            error={
+              errors.fatherName
+            }
           />
 
           <FormField
-            label={t("fields.nationalCode")}
-            register={register("nationalCode")}
-            error={errors.nationalCode}
+            label={t(
+              "fields.nationalCode",
+            )}
+            register={register(
+              "nationalCode",
+            )}
+            error={
+              errors.nationalCode
+            }
             inputMode="numeric"
             dir="ltr"
           />
 
           <FormField
-            label={t("fields.placeOfIssue")}
-            register={register("placeOfIssue")}
-            error={errors.placeOfIssue}
+            label={t(
+              "fields.placeOfIssue",
+            )}
+            register={register(
+              "placeOfIssue",
+            )}
+            error={
+              errors.placeOfIssue
+            }
           />
 
           <Controller
             name="dateOfBirth"
             control={control}
-            render={({ field }) => (
+            render={({
+              field,
+            }) => (
               <FormDateField
                 id="dateOfBirth"
-                label={t("fields.dateOfBirth")}
-                register={register("dateOfBirth")}
-                value={field.value}
-                onChange={field.onChange}
-                error={errors.dateOfBirth}
+                label={t(
+                  "fields.dateOfBirth",
+                )}
+                register={register(
+                  "dateOfBirth",
+                )}
+                value={
+                  field.value
+                }
+                onChange={
+                  field.onChange
+                }
+                error={
+                  errors.dateOfBirth
+                }
               />
             )}
           />
 
           <FormSelectField
             name="religion"
-            control={control}
-            label={t("fields.religion")}
-            placeholder={t("placeholders.select")}
-            options={religionOptions}
-            error={errors.religion}
+            control={
+              control
+            }
+            label={t(
+              "fields.religion",
+            )}
+            placeholder={t(
+              "placeholders.select",
+            )}
+            options={
+              religionOptions
+            }
+            error={
+              errors.religion
+            }
           />
 
           <FormSelectField
             name="mazhab"
-            control={control}
-            label={t("fields.mazhab")}
-            placeholder={t("placeholders.select")}
-            options={mazhabOptions}
-            error={errors.mazhab}
-            disabled={!religion}
+            control={
+              control
+            }
+            label={t(
+              "fields.mazhab",
+            )}
+            placeholder={t(
+              "placeholders.select",
+            )}
+            options={
+              mazhabOptions
+            }
+            error={
+              errors.mazhab
+            }
+            disabled={
+              !religion
+            }
           />
 
           <FormBooleanField
             name="married"
-            control={control}
-            label={t("fields.married")}
-            yesLabel={t("common.yes")}
-            noLabel={t("common.no")}
-            error={errors.married}
+            control={
+              control
+            }
+            label={t(
+              "fields.married",
+            )}
+            yesLabel={t(
+              "common.yes",
+            )}
+            noLabel={t(
+              "common.no",
+            )}
+            error={
+              errors.married
+            }
           />
 
           <FormField
-            label={t("fields.children")}
-            register={register("children")}
-            error={errors.children}
+            label={t(
+              "fields.children",
+            )}
+            register={register(
+              "children",
+            )}
+            error={
+              errors.children
+            }
             inputMode="numeric"
-            disabled={married !== true}
+            disabled={
+              married !== true
+            }
           />
         </div>
 
-        <div className="border-border border-t pt-6">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div>
-              <h3 className="text-foreground font-semibold">
-                {t("dependents.title")}
+        <div className="border-border border-t pt-5 s:pt-6">
+          <div className="flex flex-col items-stretch gap-3 s:flex-row s:flex-wrap s:items-center s:justify-between s:gap-4">
+            <div className="min-w-0">
+              <h3 className="text-foreground text-[15px] font-semibold s:text-base">
+                {t(
+                  "dependents.title",
+                )}
               </h3>
 
-              <p className="text-muted-foreground mt-1 text-sm">
-                {t("dependents.description")}
+              <p className="text-muted-foreground mt-1 text-[13px] leading-6 s:text-sm">
+                {t(
+                  "dependents.description",
+                )}
               </p>
             </div>
 
             <button
               type="button"
-              onClick={() => appendDependent(emptyDependent)}
-              className="border-border text-custom-primary hover:border-custom-primary/60 inline-flex cursor-pointer items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors"
+              onClick={() =>
+                appendDependent(
+                  emptyDependent,
+                )
+              }
+              className="border-border text-custom-primary hover:border-custom-primary/60 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors s:w-auto"
             >
-              <Plus size={17} />
+              <Plus
+                size={17}
+              />
 
-              {t("dependents.add")}
+              {t(
+                "dependents.add",
+              )}
             </button>
           </div>
 
-          {dependentFields.length > 0 && (
+          {dependentFields.length >
+            0 && (
             <div className="mt-5 space-y-4">
-              {dependentFields.map((field, index) => (
-                <div
-                  key={field.id}
-                  className="border-border bg-secondary-bg/25 rounded-xl border p-4"
-                >
-                  <div className="mb-4 flex items-center justify-between">
-                    <span className="text-foreground text-sm font-semibold">
-                      {t("dependents.item")} {index + 1}
-                    </span>
+              {dependentFields.map(
+                (
+                  field,
+                  index,
+                ) => (
+                  <div
+                    key={
+                      field.id
+                    }
+                    className="border-border border-t bg-transparent py-4 first:border-t-0 first:pt-0 s:rounded-xl s:border s:bg-secondary-bg/25 s:p-4 s:first:border-t"
+                  >
+                    <div className="mb-4 flex items-center justify-between">
+                      <span className="text-foreground text-sm font-semibold">
+                        {t(
+                          "dependents.item",
+                        )}{" "}
+                        {index + 1}
+                      </span>
 
-                    <button
-                      type="button"
-                      onClick={() => removeDependent(index)}
-                      className="text-muted-foreground hover:text-destructive flex size-8 cursor-pointer items-center justify-center"
-                    >
-                      <Trash2 size={17} />
-                    </button>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          removeDependent(
+                            index,
+                          )
+                        }
+                        className="text-muted-foreground hover:text-destructive flex size-8 cursor-pointer items-center justify-center"
+                      >
+                        <Trash2
+                          size={17}
+                        />
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-4 s:gap-5 sm:grid-cols-2">
+                      <FormField
+                        label={t(
+                          "dependents.name",
+                        )}
+                        register={register(
+                          `dependents.${index}.name`,
+                        )}
+                        error={
+                          errors
+                            .dependents?.[
+                            index
+                          ]?.name
+                        }
+                      />
+
+                      <FormSelectField
+                        name={`dependents.${index}.relation`}
+                        control={
+                          control
+                        }
+                        label={t(
+                          "dependents.relation",
+                        )}
+                        placeholder={t(
+                          "placeholders.select",
+                        )}
+                        options={
+                          relationOptions
+                        }
+                        error={
+                          errors
+                            .dependents?.[
+                            index
+                          ]?.relation
+                        }
+                      />
+                    </div>
                   </div>
-
-                  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                    <FormField
-                      label={t("dependents.name")}
-                      register={register(`dependents.${index}.name`)}
-                      error={errors.dependents?.[index]?.name}
-                    />
-
-                    <FormSelectField
-                      name={`dependents.${index}.relation`}
-                      control={control}
-                      label={t("dependents.relation")}
-                      placeholder={t("placeholders.select")}
-                      options={relationOptions}
-                      error={errors.dependents?.[index]?.relation}
-                    />
-                  </div>
-                </div>
-              ))}
+                ),
+              )}
             </div>
           )}
         </div>
