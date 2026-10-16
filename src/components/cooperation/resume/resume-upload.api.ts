@@ -1,84 +1,52 @@
-﻿export interface ResumeUploadResponse {
+﻿interface UploadResumeCallbacks {
+  onProgress?: (progress: number) => void;
+
+  onFinalizing?: () => void;
+}
+
+interface UploadResumeResponse {
   success: boolean;
   url: string;
 }
 
-interface UploadResumePdfOptions {
-  onProgress?: (progress: number) => void;
-  onFinalizing?: () => void;
-}
-
 export const uploadResumePdf = (
   file: File,
-  options: UploadResumePdfOptions = {},
-): Promise<ResumeUploadResponse> => {
-  return new Promise((resolve, reject) => {
+  callbacks: UploadResumeCallbacks = {},
+) => {
+  return new Promise<UploadResumeResponse>((resolve, reject) => {
     const formData = new FormData();
 
     formData.append("file", file);
 
     const xhr = new XMLHttpRequest();
 
-    xhr.open(
-      "POST",
-      "/api/resume",
-    );
+    xhr.open("POST", "/api/resume");
 
-    xhr.upload.onprogress = (
-      event,
-    ) => {
-      if (
-        !event.lengthComputable
-      ) {
+    xhr.upload.onprogress = (event) => {
+      if (!event.lengthComputable) {
         return;
       }
 
-      const progress =
-        Math.min(
-          99,
-          Math.round(
-            (event.loaded /
-              event.total) *
-              100,
-          ),
-        );
+      const progress = Math.round((event.loaded / event.total) * 100);
 
-      options.onProgress?.(
-        progress,
-      );
-    };
+      callbacks.onProgress?.(Math.min(progress, 100));
 
-    xhr.upload.onload = () => {
-      options.onProgress?.(
-        100,
-      );
-
-      options.onFinalizing?.();
+      if (progress >= 100) {
+        callbacks.onFinalizing?.();
+      }
     };
 
     xhr.onload = () => {
-      let responseData:
-        | ResumeUploadResponse
+      let data:
+        | UploadResumeResponse
         | {
-            success?: boolean;
-            url?: string;
             message?: string;
-          }
-        | null = null;
+          };
 
       try {
-        responseData =
-          xhr.responseText
-            ? JSON.parse(
-                xhr.responseText,
-              )
-            : null;
+        data = JSON.parse(xhr.responseText);
       } catch {
-        reject(
-          new Error(
-            "Invalid upload response.",
-          ),
-        );
+        reject(new Error("Invalid upload response"));
 
         return;
       }
@@ -86,39 +54,20 @@ export const uploadResumePdf = (
       if (
         xhr.status >= 200 &&
         xhr.status < 300 &&
-        responseData?.success &&
-        responseData.url
+        "success" in data &&
+        data.success &&
+        "url" in data
       ) {
-        resolve({
-          success: true,
-          url: responseData.url,
-        });
+        resolve(data);
 
         return;
       }
 
-      reject(
-        new Error(
-          responseData?.message ??
-            "Resume upload failed.",
-        ),
-      );
+      reject(data);
     };
 
     xhr.onerror = () => {
-      reject(
-        new Error(
-          "Resume upload failed.",
-        ),
-      );
-    };
-
-    xhr.onabort = () => {
-      reject(
-        new Error(
-          "Resume upload was cancelled.",
-        ),
-      );
+      reject(new Error("Resume upload failed"));
     };
 
     xhr.send(formData);

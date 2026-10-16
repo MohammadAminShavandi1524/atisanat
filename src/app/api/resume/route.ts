@@ -1,110 +1,32 @@
-﻿import {
-  PutObjectCommand,
-  S3Client,
-} from "@aws-sdk/client-s3";
+﻿import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
-import {
-  NextRequest,
-  NextResponse,
-} from "next/server";
+import { NextResponse } from "next/server";
 
-import { randomUUID } from "crypto";
+const s3 = new S3Client({
+  region: process.env.ARVAN_REGION!,
 
-export const runtime =
-  "nodejs";
+  endpoint: process.env.ARVAN_ENDPOINT!,
 
-const MAX_FILE_SIZE =
-  10 * 1024 * 1024;
+  forcePathStyle: true,
 
-const getS3Client = () => {
-  const endpoint =
-    process.env.ARVAN_ENDPOINT;
+  credentials: {
+    accessKeyId: process.env.ARVAN_ACCESS_KEY!,
 
-  const region =
-    process.env.ARVAN_REGION;
+    secretAccessKey: process.env.ARVAN_SECRET_KEY!,
+  },
+});
 
-  const accessKeyId =
-    process.env.ARVAN_ACCESS_KEY;
-
-  const secretAccessKey =
-    process.env.ARVAN_SECRET_KEY;
-
-  if (
-    !endpoint ||
-    !region ||
-    !accessKeyId ||
-    !secretAccessKey
-  ) {
-    throw new Error(
-      "Arvan storage configuration is incomplete.",
-    );
-  }
-
-  return new S3Client({
-    endpoint,
-    region,
-
-    credentials: {
-      accessKeyId,
-      secretAccessKey,
-    },
-
-    forcePathStyle: false,
-  });
-};
-
-const getPublicUrl = (
-  key: string,
-) => {
-  const publicBaseUrl =
-    process.env.ARVAN_PUBLIC_URL?.replace(
-      /\/+$/,
-      "",
-    );
-
-  if (publicBaseUrl) {
-    return `${publicBaseUrl}/${key}`;
-  }
-
-  const endpoint =
-    process.env.ARVAN_ENDPOINT?.replace(
-      /\/+$/,
-      "",
-    );
-
-  const bucket =
-    process.env.ARVAN_BUCKET;
-
-  if (
-    !endpoint ||
-    !bucket
-  ) {
-    throw new Error(
-      "Unable to create resume public URL.",
-    );
-  }
-
-  return `${endpoint}/${bucket}/${key}`;
-};
-
-export async function POST(
-  request: NextRequest,
-) {
+export async function POST(req: Request) {
   try {
-    const formData =
-      await request.formData();
+    const formData = await req.formData();
 
-    const file =
-      formData.get("file");
+    const file = formData.get("file");
 
-    if (
-      !(file instanceof File)
-    ) {
+    if (!(file instanceof File)) {
       return NextResponse.json(
         {
           success: false,
-          message:
-            "Resume file is required.",
+          message: "No resume uploaded",
         },
         {
           status: 400,
@@ -112,19 +34,11 @@ export async function POST(
       );
     }
 
-    const isPdf =
-      file.type ===
-        "application/pdf" ||
-      file.name
-        .toLowerCase()
-        .endsWith(".pdf");
-
-    if (!isPdf) {
+    if (file.type !== "application/pdf") {
       return NextResponse.json(
         {
           success: false,
-          message:
-            "Only PDF files are allowed.",
+          message: "Only PDF files are allowed",
         },
         {
           status: 400,
@@ -132,80 +46,47 @@ export async function POST(
       );
     }
 
-    if (
-      file.size >
-      MAX_FILE_SIZE
-    ) {
-      return NextResponse.json(
-        {
-          success: false,
-          message:
-            "PDF file must be smaller than 10 MB.",
-        },
-        {
-          status: 400,
-        },
-      );
-    }
+    const bytes = await file.arrayBuffer();
 
-    const bucket =
-      process.env.ARVAN_BUCKET;
+    const buffer = Buffer.from(bytes);
 
-    if (!bucket) {
-      throw new Error(
-        "ARVAN_BUCKET is not configured.",
-      );
-    }
+    const fileName = `${crypto.randomUUID()}.pdf`;
 
-    const buffer =
-      Buffer.from(
-        await file.arrayBuffer(),
-      );
-
-    const key =
-      `resumes/${Date.now()}-${randomUUID()}.pdf`;
-
-    const s3 =
-      getS3Client();
+    const objectKey = `resumes/pdfs/${fileName}`;
 
     await s3.send(
       new PutObjectCommand({
-        Bucket: bucket,
-        Key: key,
+        Bucket: process.env.ARVAN_BUCKET!,
+
+        Key: objectKey,
 
         Body: buffer,
 
-        ContentType:
-          "application/pdf",
+        ContentType: "application/pdf",
 
-        ContentDisposition:
-          "inline",
+        ContentDisposition: "inline",
+
+        ACL: "public-read",
       }),
     );
 
-    const url =
-      getPublicUrl(key);
+    const publicBaseUrl =
+      process.env.ARVAN_PUBLIC_URL ??
+      `${process.env.ARVAN_ENDPOINT}/${process.env.ARVAN_BUCKET}`;
 
-    return NextResponse.json(
-      {
-        success: true,
-        url,
-      },
-      {
-        status: 200,
-      },
-    );
+    const url = `${publicBaseUrl.replace(/\/$/, "")}/${objectKey}`;
+
+    return NextResponse.json({
+      success: true,
+      url,
+    });
   } catch (error) {
-    console.error(
-      "RESUME PDF UPLOAD ERROR:",
-      error,
-    );
+    console.error("RESUME PDF UPLOAD ERROR =>", error);
 
     return NextResponse.json(
       {
         success: false,
-        message:
-          "Resume upload failed.",
+        message: "Resume upload failed",
       },
       {
         status: 500,
