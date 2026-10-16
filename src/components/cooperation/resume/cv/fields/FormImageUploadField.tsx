@@ -189,7 +189,7 @@ const FormImageUploadField = ({
 
   return (
     <div className="min-w-0">
-      <div className="mb-2.5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
+      <div className="mb-2.5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 px-1.5">
         <label className="text-foreground text-[14px] font-medium">
           {label}
         </label>

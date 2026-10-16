@@ -1,9 +1,13 @@
-export interface CustomSelectOption<T extends string = string> {
+export interface CustomSelectOption<
+  T extends string = string,
+> {
   label: string;
   value: T;
 }
 
-export interface CustomSelectProps<T extends string = string> {
+export interface CustomSelectProps<
+  T extends string = string,
+> {
   id?: string;
   name?: string;
 

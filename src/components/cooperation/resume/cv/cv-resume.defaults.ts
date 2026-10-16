@@ -1,67 +1,213 @@
+// import type {
+//   CVResumeFormValues,
+// } from "./cv-resume.types";
+
+// export const cvResumeDefaultValues: CVResumeFormValues = {
+//   image: "",
+
+//   firstName: "",
+//   lastName: "",
+//   fatherName: "",
+
+//   nationalCode: "",
+//   placeOfIssue: "",
+//   dateOfBirth: "",
+
+//   religion: "",
+//   mazhab: "",
+
+//   married: null,
+//   children: "",
+
+//   dependents: [],
+
+//   province: "",
+//   city: "",
+//   address: "",
+
+//   email: "",
+//   phoneNumber: "",
+
+//   education: [],
+
+//   research: "",
+
+//   languages: [],
+
+//   workExperience: [],
+
+//   dutyStatus: "",
+//   offDutyReason: "",
+
+//   criminalConviction: null,
+
+//   physicalHealth: "",
+
+//   grantee: null,
+
+//   jobInterest: "",
+
+//   introducer: "",
+
+//   startWork: "",
+
+//   askLastBoss: null,
+
+//   lastBossName: "",
+//   lastBossAddress: "",
+//   lastBossPhoneNumber: "",
+
+//   salaryRequest: "",
+
+//   anotherJob: null,
+
+//   extra: "",
+
+//   closePeopleContact: [],
+// };
+
+// export const emptyDependent = {
+//   name: "",
+//   relation: "",
+// };
+
+// export const emptyEducation = {
+//   place: "",
+//   start: "",
+//   end: "",
+//   major: "",
+//   licence: "",
+// };
+
+// export const emptyLanguage = {
+//   language: "",
+//   read:
+//     "basic" as const,
+//   write:
+//     "basic" as const,
+//   speak:
+//     "basic" as const,
+// };
+
+// export const emptyWorkExperience = {
+//   place: "",
+//   job: "",
+//   start: "",
+//   end: "",
+//   salary: "",
+//   leaveReasone: "",
+// };
+
+// export const emptyClosePerson = {
+//   name: "",
+//   address: "",
+//   number: "",
+// };
+
 import type { CVResumeFormValues } from "./cv-resume.types";
 
 export const cvResumeDefaultValues: CVResumeFormValues = {
-  image: "",
+  image: "https://example.com/test-user.jpg",
 
-  firstName: "",
-  lastName: "",
-  fatherName: "",
+  firstName: "علی",
+  lastName: "احمدی",
+  fatherName: "رضا",
 
-  nationalCode: "",
-  placeOfIssue: "",
-  dateOfBirth: "",
+  nationalCode: "0084575948",
+  placeOfIssue: "تهران",
+  dateOfBirth: "1995-05-12",
 
-  religion: "",
-  mazhab: "",
+  religion: "islam",
+  mazhab: "shia",
 
-  married: false,
-  children: "",
+  married: true,
+  children: "1",
 
-  dependents: [],
+  dependents: [
+    {
+      name: "سارا احمدی",
+      relation: "child",
+    },
+  ],
 
-  province: "",
-  city: "",
-  address: "",
+  province: "Tehran",
+  city: "Tehran",
+  address: "تهران، خیابان ولیعصر، کوچه دهم، پلاک ۱۲",
 
-  email: "",
-  phoneNumber: "",
+  email: "test@example.com",
+  phoneNumber: "09123456789",
 
-  education: [],
+  education: [
+    {
+      place: "دانشگاه تهران",
+      start: "2014-09-23",
+      end: "2018-06-20",
+      major: "مهندسی مکانیک",
+      licence: "کارشناسی",
+    },
+  ],
 
-  research: "",
+  research: "ماشین‌کاری CNC و ساخت قطعات دقیق",
 
-  languages: [],
+  languages: [
+    {
+      language: "انگلیسی",
+      read: "advanced",
+      write: "intermediate",
+      speak: "intermediate",
+    },
+  ],
 
-  workExperience: [],
+  workExperience: [
+    {
+      place: "شرکت آتی هوش بنیان",
+      job: "مهندس مکانیک",
+      start: "2020-01-01",
+      end: "2024-01-01",
+      salary: "250000000",
+      leaveReasone: "پایان قرارداد",
+    },
+  ],
 
-  dutyStatus: "",
+  dutyStatus: "served",
   offDutyReason: "",
 
   criminalConviction: false,
 
-  physicalHealth: "",
+  physicalHealth: "از نظر جسمانی در وضعیت مناسبی هستم.",
 
-  grantee: false,
+  grantee: true,
 
-  jobInterest: "",
+  jobInterest: "ماشین‌کاری CNC و مهندسی تولید",
 
-  introducer: "",
+  introducer: "وب‌سایت شرکت",
 
-  startWork: "",
+  startWork: "2026-10-20",
 
-  askLastBoss: false,
+  askLastBoss: true,
 
-  lastBossName: "",
-  lastBossAddress: "",
-  lastBossPhoneNumber: "",
+  lastBossName: "رضا محمدی",
+  lastBossAddress: "تهران، خیابان انقلاب",
+  lastBossPhoneNumber: "09121234567",
 
-  salaryRequest: "",
+  salaryRequest: "350000000",
 
   anotherJob: false,
 
-  extra: "",
+  extra: "اطلاعات تست برای بررسی فرم",
 
-  closePeopleContact: [],
+  closePeopleContact: [
+    {
+      name: "حسین احمدی",
+      address: "تهران، خیابان آزادی",
+      number: "09121111111",
+    },
+    {
+      name: "مهدی کریمی",
+      address: "کرج، عظیمیه",
+      number: "09122222222",
+    },
+  ],
 };
 
 export const emptyDependent = {

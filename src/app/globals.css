@@ -332,4 +332,37 @@
   :lang(en) {
     font-family: var(--font-inter), sans-serif;
   }
+
+  button,
+  [role="button"],
+  select {
+    cursor: pointer;
+  }
+
+  input:not([readonly]):not([disabled]):not([type="checkbox"]):not(
+      [type="radio"]
+    ):not([type="button"]):not([type="submit"]),
+  textarea:not([readonly]):not([disabled]) {
+    cursor: text;
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    cursor: pointer;
+  }
+
+  .resume-date-picker-container,
+  .resume-date-picker-container input,
+  .custom-resume-date-picker .rmdp-day,
+  .custom-resume-date-picker .rmdp-arrow-container,
+  .custom-resume-date-picker .rmdp-header-values {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  input:disabled,
+  textarea:disabled,
+  select:disabled {
+    cursor: not-allowed;
+  }
 }

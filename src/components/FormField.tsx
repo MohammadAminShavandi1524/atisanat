@@ -1,96 +1,125 @@
-"use client";
+import type { InputHTMLAttributes, TextareaHTMLAttributes } from "react";
 
-import { cn } from "@/lib/utils";
-import type { TextareaHTMLAttributes, InputHTMLAttributes } from "react";
 import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
 
-interface BaseProps {
+import { cn } from "@/lib/utils";
+
+interface BaseFormFieldProps {
   label: string;
-  containerClassName?: string;
+  register: UseFormRegisterReturn;
   error?: FieldError;
-  register?: UseFormRegisterReturn;
+  containerClassName?: string;
 }
 
-interface InputProps extends BaseProps, InputHTMLAttributes<HTMLInputElement> {
+type InputProps = BaseFormFieldProps & {
   as?: "input";
-}
+} & Omit<InputHTMLAttributes<HTMLInputElement>, "name">;
 
-interface TextareaProps
-  extends BaseProps, TextareaHTMLAttributes<HTMLTextAreaElement> {
+type TextareaProps = BaseFormFieldProps & {
   as: "textarea";
-}
+} & Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "name">;
 
-type FormFieldProps = InputProps | TextareaProps;
+export type FormFieldProps = InputProps | TextareaProps;
 
 export const FormField = (props: FormFieldProps) => {
+  const errorMessage =
+    typeof props.error?.message === "string" ? props.error.message : undefined;
+
+  const errorId = errorMessage ? `${props.register.name}-error` : undefined;
+
+  if (props.as === "textarea") {
+    const {
+      as: _as,
+      label,
+      register,
+      error: _error,
+      containerClassName,
+      className,
+      ...textareaProps
+    } = props;
+
+    return (
+      <div className={cn("min-w-0", containerClassName)}>
+        <div className="mb-2.5 flex min-h-5 items-center justify-between gap-3 px-2">
+          <label
+            htmlFor={register.name}
+            className="text-foreground min-w-0 truncate text-[14px] font-medium"
+          >
+            {label}
+          </label>
+
+          {errorMessage && (
+            <p
+              id={errorId}
+              role="alert"
+              title={errorMessage}
+              className="text-destructive max-w-[55%] shrink-0 truncate text-end text-xs"
+            >
+              {errorMessage}
+            </p>
+          )}
+        </div>
+
+        <textarea
+          id={register.name}
+          {...textareaProps}
+          {...register}
+          aria-invalid={Boolean(errorMessage)}
+          aria-describedby={errorId}
+          className={cn(
+            "border-border bg-secondary-bg/35 text-foreground placeholder:text-muted-foreground focus:border-custom-primary min-h-28 w-full resize-y rounded-xl border px-3 py-3 text-[14px] transition-colors duration-300 outline-none disabled:cursor-not-allowed disabled:opacity-50 sm:px-4",
+            errorMessage && "border-destructive focus:border-destructive",
+            className,
+          )}
+        />
+      </div>
+    );
+  }
+
   const {
+    as: _as,
     label,
-    containerClassName,
-    error,
     register,
-    as = "input",
+    error: _error,
+    containerClassName,
     className,
-    id,
-    ...rest
+    ...inputProps
   } = props;
 
-  const fieldId = id ?? register?.name ?? rest.name;
-  const errorId = fieldId ? `${fieldId}-error` : undefined;
-
   return (
-    <div
-      className={cn("flex min-w-0 flex-col gap-2 sm:gap-3", containerClassName)}
-    >
-      <div className="flex min-w-0 flex-col items-start gap-1 px-1.5">
+    <div className={cn("min-w-0", containerClassName)}>
+      <div className="mb-2.5 flex min-h-5 items-center justify-between gap-3 px-2">
         <label
-          htmlFor={fieldId}
-          className="text-foreground max-w-full text-sm leading-6 font-semibold break-words"
+          htmlFor={register.name}
+          className="text-foreground min-w-0 truncate text-[14px] font-medium"
         >
           {label}
         </label>
 
-        {error && (
+        {errorMessage && (
           <p
             id={errorId}
             role="alert"
-            className="max-w-full pt-0.5 text-xs break-words text-red-500"
+            title={errorMessage}
+            className="text-destructive max-w-[55%] shrink-0 truncate text-end text-xs"
           >
-            {error.message}
+            {errorMessage}
           </p>
         )}
       </div>
 
-      {as === "textarea" ? (
-        <textarea
-          id={fieldId}
-          {...(rest as TextareaHTMLAttributes<HTMLTextAreaElement>)}
-          {...(register ?? {})}
-          aria-invalid={Boolean(error)}
-          aria-describedby={error ? errorId : undefined}
-          className={cn(
-            "bg-secondary-bg text-foreground placeholder:text-muted-foreground h-30 w-full min-w-0 resize-none rounded-lg border px-3 py-3 text-sm transition-colors outline-none sm:px-4 sm:py-2.5 sm:text-base rtl:text-right",
-            error
-              ? "border-red-500 focus:border-red-500"
-              : "border-foreground/8 focus:border-custom-primary",
-            className,
-          )}
-        />
-      ) : (
-        <input
-          id={fieldId}
-          {...(rest as InputHTMLAttributes<HTMLInputElement>)}
-          {...(register ?? {})}
-          aria-invalid={Boolean(error)}
-          aria-describedby={error ? errorId : undefined}
-          className={cn(
-            "bg-secondary-bg text-foreground placeholder:text-muted-foreground h-11 w-full min-w-0 rounded-lg border px-3 text-sm transition-colors outline-none sm:h-12 sm:px-4 sm:text-base rtl:text-right",
-            error
-              ? "border-red-500 focus:border-red-500"
-              : "border-foreground/8 focus:border-primary",
-            className,
-          )}
-        />
-      )}
+      <input
+        id={register.name}
+        {...inputProps}
+        {...register}
+        aria-invalid={Boolean(errorMessage)}
+        aria-describedby={errorId}
+        className={cn(
+          "border-border bg-secondary-bg/35 text-foreground placeholder:text-muted-foreground focus:border-custom-primary h-12 w-full min-w-0 rounded-xl border px-3 text-[14px] transition-colors duration-300 outline-none disabled:cursor-not-allowed disabled:opacity-50 sm:h-13 sm:px-4 ",
+          errorMessage && "border-destructive focus:border-destructive",
+          className,
+        )}
+      />
     </div>
   );
 };

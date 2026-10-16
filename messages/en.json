@@ -267,13 +267,27 @@
   },
   "Resume": {
     "cv": {
-      "eyebrow": "Career Opportunity",
       "title": "Employment Application Form",
       "description": "Please complete the requested information carefully. The information provided will be used to review your employment application.",
 
+      "relatedFields": {
+        "title": "Related Fields",
+        "note": "Please complete the employment application only if your field of study or expertise is related to one of the areas below.",
+        "items": {
+          "machineTools": "Machine Tools",
+          "molding": "Mold Making",
+          "mechanics": "Mechanical Engineering",
+          "solidDesign": "Solid Design",
+          "technicalVocational": "Technical & Vocational",
+          "precisionTurning": "Precision Turning",
+          "precisionMilling": "Precision Milling"
+        }
+      },
+
       "common": {
         "yes": "Yes",
-        "no": "No"
+        "no": "No",
+        "optional": "Optional"
       },
 
       "placeholders": {
@@ -298,7 +312,7 @@
           "description": "Add the foreign languages you know and specify your reading, writing, and speaking proficiency."
         },
         "work": {
-          "title": "Work Experience",
+          "title": "Work Experience (Optional)",
           "description": "If you have previous work experience, provide the details of your former workplaces."
         },
         "employment": {
@@ -306,7 +320,7 @@
           "description": "Complete the additional information related to your employment conditions and work history."
         },
         "contacts": {
-          "title": "Close Contacts",
+          "title": "Close Contacts (Optional)",
           "description": "Optionally provide the information of up to two people who know you well."
         }
       },
@@ -339,7 +353,7 @@
         "email": "Email",
         "phoneNumber": "Phone Number",
 
-        "research": "Professional Courses or Research Activities",
+        "research": "Professional Courses or Research Activities (Optional)",
 
         "dutyStatus": "Military Service Status",
         "offDutyReason": "Type or Reason for Exemption",
@@ -352,7 +366,7 @@
 
         "jobInterest": "What type of position are you interested in?",
 
-        "introducer": "Who introduced you to this company?",
+        "introducer": "Who introduced you to this company? (Optional)",
 
         "startWork": "When are you available to start work?",
 
@@ -366,11 +380,11 @@
 
         "anotherJob": "Do you currently have another job?",
 
-        "extra": "Additional Information"
+        "extra": "Additional Information (Optional)"
       },
 
       "dependents": {
-        "title": "Dependents",
+        "title": "Dependents (Optional)",
         "description": "If you have any dependents, add their information.",
         "add": "Add Dependent",
         "item": "Dependent",
@@ -422,14 +436,19 @@
 
       "validation": {
         "required": "This field is required.",
-        "emailInvalid": "Please enter a valid email address.",
+        "emailInvalid": "Enter a valid email address.",
         "phoneInvalid": "The mobile number must start with 09 and contain 11 digits.",
-        "nationalCodeInvalid": "The national ID must contain 10 digits.",
-        "numberInvalid": "Please enter numbers only.",
-        "exemptReasonRequired": "Please enter the type or reason for your exemption.",
-        "imageInvalid": "The image must be JPG, PNG, or WEBP and no larger than 5 MB.",
-        "imageUploadFailed": "Image upload failed. Please try again.",
-        "formInvalid": "Please review and complete the required fields."
+        "nationalCodeInvalid": "Enter a valid national ID.",
+        "numberInvalid": "Enter numbers only.",
+        "exemptReasonRequired": "Enter the type or reason for exemption.",
+        "imageInvalid": "Image must be JPG, PNG or WEBP and no larger than 5 MB.",
+        "imageUploadFailed": "Image upload failed.",
+        "formInvalid": "Please complete the highlighted fields.",
+        "educationRequired": "Add at least one education record.",
+        "languageRequired": "Add at least one language.",
+        "booleanRequired": "Select Yes or No.",
+        "childrenRequired": "Enter the number of children.",
+        "invalidDateRange": "End date cannot be earlier than start date."
       },
 
       "toast": {

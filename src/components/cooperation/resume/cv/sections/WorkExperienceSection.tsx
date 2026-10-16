@@ -1,18 +1,15 @@
 "use client";
 
-import {
-  Plus,
-  Trash2,
-} from "lucide-react";
-import {
-  type UseFormReturn,
-  useFieldArray,
-} from "react-hook-form";
+import { Plus, Trash2 } from "lucide-react";
+
+import { Controller, type UseFormReturn, useFieldArray } from "react-hook-form";
 
 import { FormField } from "@/components/FormField";
 
 import { emptyWorkExperience } from "../cv-resume.defaults";
+
 import type { CVResumeFormValues } from "../cv-resume.types";
+
 import FormDateField from "../fields/FormDateField";
 import FormSection from "../fields/FormSection";
 
@@ -21,21 +18,14 @@ interface WorkExperienceSectionProps {
   t: (key: string) => string;
 }
 
-const WorkExperienceSection = ({
-  form,
-  t,
-}: WorkExperienceSectionProps) => {
+const WorkExperienceSection = ({ form, t }: WorkExperienceSectionProps) => {
   const {
     register,
     control,
     formState: { errors },
   } = form;
 
-  const {
-    fields,
-    append,
-    remove,
-  } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: "workExperience",
   });
@@ -53,15 +43,14 @@ const WorkExperienceSection = ({
             className="border-border text-custom-primary hover:border-custom-primary/60 inline-flex cursor-pointer items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors"
           >
             <Plus size={17} />
+
             {t("work.add")}
           </button>
         </div>
 
         {fields.length === 0 ? (
           <div className="border-border bg-secondary-bg/25 rounded-xl border border-dashed p-6 text-center">
-            <p className="text-muted-foreground text-sm">
-              {t("work.empty")}
-            </p>
+            <p className="text-muted-foreground text-sm">{t("work.empty")}</p>
           </div>
         ) : (
           fields.map((field, index) => (
@@ -86,67 +75,58 @@ const WorkExperienceSection = ({
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 <FormField
                   label={t("work.place")}
-                  register={register(
-                    `workExperience.${index}.place`,
-                  )}
-                  error={
-                    errors.workExperience?.[index]?.place
-                  }
+                  register={register(`workExperience.${index}.place`)}
+                  error={errors.workExperience?.[index]?.place}
                 />
 
                 <FormField
                   label={t("work.job")}
-                  register={register(
-                    `workExperience.${index}.job`,
-                  )}
-                  error={
-                    errors.workExperience?.[index]?.job
-                  }
+                  register={register(`workExperience.${index}.job`)}
+                  error={errors.workExperience?.[index]?.job}
                 />
 
                 <FormField
                   label={t("work.salary")}
                   dir="ltr"
                   inputMode="numeric"
-                  register={register(
-                    `workExperience.${index}.salary`,
-                  )}
-                  error={
-                    errors.workExperience?.[index]?.salary
-                  }
+                  register={register(`workExperience.${index}.salary`)}
+                  error={errors.workExperience?.[index]?.salary}
                 />
 
-                <FormDateField
-                  id={`work-${index}-start`}
-                  label={t("work.start")}
-                  register={register(
-                    `workExperience.${index}.start`,
+                <Controller
+                  name={`workExperience.${index}.start`}
+                  control={control}
+                  render={({ field }) => (
+                    <FormDateField
+                      id={`work-${index}-start`}
+                      label={t("work.start")}
+                      register={register(`workExperience.${index}.start`)}
+                      value={field.value}
+                      onChange={field.onChange}
+                      error={errors.workExperience?.[index]?.start}
+                    />
                   )}
-                  error={
-                    errors.workExperience?.[index]?.start
-                  }
                 />
 
-                <FormDateField
-                  id={`work-${index}-end`}
-                  label={t("work.end")}
-                  register={register(
-                    `workExperience.${index}.end`,
+                <Controller
+                  name={`workExperience.${index}.end`}
+                  control={control}
+                  render={({ field }) => (
+                    <FormDateField
+                      id={`work-${index}-end`}
+                      label={t("work.end")}
+                      register={register(`workExperience.${index}.end`)}
+                      value={field.value}
+                      onChange={field.onChange}
+                      error={errors.workExperience?.[index]?.end}
+                    />
                   )}
-                  error={
-                    errors.workExperience?.[index]?.end
-                  }
                 />
 
                 <FormField
                   label={t("work.leaveReason")}
-                  register={register(
-                    `workExperience.${index}.leaveReasone`,
-                  )}
-                  error={
-                    errors.workExperience?.[index]
-                      ?.leaveReasone
-                  }
+                  register={register(`workExperience.${index}.leaveReasone`)}
+                  error={errors.workExperience?.[index]?.leaveReasone}
                 />
               </div>
             </div>

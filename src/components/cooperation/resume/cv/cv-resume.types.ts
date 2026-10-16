@@ -1,6 +1,12 @@
-export type LanguageLevel = "basic" | "intermediate" | "advanced";
+export type LanguageLevel =
+  | "basic"
+  | "intermediate"
+  | "advanced";
 
-export type DutyStatus = "served" | "not_served" | "exempt";
+export type DutyStatus =
+  | "served"
+  | "not_served"
+  | "exempt";
 
 export interface DependentFormItem {
   name: string;
@@ -51,7 +57,7 @@ export interface CVResumeFormValues {
   religion: string;
   mazhab: string;
 
-  married: boolean;
+  married: boolean | null;
   children: string;
 
   dependents: DependentFormItem[];
@@ -74,11 +80,15 @@ export interface CVResumeFormValues {
   dutyStatus: DutyStatus | "";
   offDutyReason: string;
 
-  criminalConviction: boolean;
+  criminalConviction:
+    | boolean
+    | null;
 
   physicalHealth: string;
 
-  grantee: boolean;
+  grantee:
+    | boolean
+    | null;
 
   jobInterest: string;
 
@@ -86,7 +96,9 @@ export interface CVResumeFormValues {
 
   startWork: string;
 
-  askLastBoss: boolean;
+  askLastBoss:
+    | boolean
+    | null;
 
   lastBossName: string;
   lastBossAddress: string;
@@ -94,11 +106,14 @@ export interface CVResumeFormValues {
 
   salaryRequest: string;
 
-  anotherJob: boolean;
+  anotherJob:
+    | boolean
+    | null;
 
   extra: string;
 
-  closePeopleContact: ClosePersonFormItem[];
+  closePeopleContact:
+    ClosePersonFormItem[];
 }
 
 export interface DependentRequestItem {
@@ -153,7 +168,9 @@ export interface CreateCVResumeRequest {
   married: boolean;
   children: string | null;
 
-  dependents: DependentRequestItem[] | null;
+  dependents:
+    | DependentRequestItem[]
+    | null;
 
   province: string;
   city: string;
@@ -162,16 +179,22 @@ export interface CreateCVResumeRequest {
   email: string;
   phone_number: string;
 
-  education: EducationRequestItem[];
+  education:
+    EducationRequestItem[];
 
   research: string | null;
 
-  languages: LanguageRequestItem[];
+  languages:
+    LanguageRequestItem[];
 
-  work_experience: WorkExperienceRequestItem[] | null;
+  work_experience:
+    | WorkExperienceRequestItem[]
+    | null;
 
   duty_status: string;
-  off_duty_reason: string | null;
+  off_duty_reason:
+    | string
+    | null;
 
   criminal_conviction: boolean;
 
@@ -181,21 +204,35 @@ export interface CreateCVResumeRequest {
 
   job_interest: string;
 
-  introducer: string | null;
+  introducer:
+    | string
+    | null;
 
   start_work: string;
 
   ask_last_boss: boolean;
 
-  last_boss_name: string | null;
-  last_boss_address: string | null;
-  last_boss_phone_number: string | null;
+  last_boss_name:
+    | string
+    | null;
+
+  last_boss_address:
+    | string
+    | null;
+
+  last_boss_phone_number:
+    | string
+    | null;
 
   salary_request: string;
 
   another_job: boolean;
 
-  extra: string | null;
+  extra:
+    | string
+    | null;
 
-  close_people_contact: ClosePersonRequestItem[] | null;
+  close_people_contact:
+    | ClosePersonRequestItem[]
+    | null;
 }

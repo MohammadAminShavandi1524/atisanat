@@ -1,4 +1,6 @@
-import type { ReactNode } from "react";
+import type {
+  ReactNode,
+} from "react";
 
 interface FormSectionProps {
   title: string;
@@ -12,8 +14,8 @@ const FormSection = ({
   children,
 }: FormSectionProps) => {
   return (
-    <section className="border-border bg-background overflow-hidden rounded-2xl border">
-      <div className="border-border bg-secondary-bg/45 border-b px-4 py-4 sm:px-6 sm:py-5 lg:px-8">
+    <section className="border-border bg-background relative rounded-2xl border">
+      <div className="border-border bg-secondary-bg/45 rounded-t-2xl border-b px-4 py-4 sm:px-6 sm:py-5 lg:px-8">
         <h2 className="text-foreground text-lg font-semibold sm:text-xl">
           {title}
         </h2>
@@ -25,7 +27,7 @@ const FormSection = ({
         )}
       </div>
 
-      <div className="p-4 sm:p-6 lg:p-8">
+      <div className="relative p-4 sm:p-6 lg:p-8">
         {children}
       </div>
     </section>

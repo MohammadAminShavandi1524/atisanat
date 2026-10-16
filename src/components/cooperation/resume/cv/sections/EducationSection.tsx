@@ -1,18 +1,15 @@
 "use client";
 
-import {
-  Plus,
-  Trash2,
-} from "lucide-react";
-import {
-  type UseFormReturn,
-  useFieldArray,
-} from "react-hook-form";
+import { Plus, Trash2 } from "lucide-react";
+
+import { Controller, type UseFormReturn, useFieldArray } from "react-hook-form";
 
 import { FormField } from "@/components/FormField";
 
 import { emptyEducation } from "../cv-resume.defaults";
+
 import type { CVResumeFormValues } from "../cv-resume.types";
+
 import FormDateField from "../fields/FormDateField";
 import FormSection from "../fields/FormSection";
 
@@ -21,24 +18,22 @@ interface EducationSectionProps {
   t: (key: string) => string;
 }
 
-const EducationSection = ({
-  form,
-  t,
-}: EducationSectionProps) => {
+const EducationSection = ({ form, t }: EducationSectionProps) => {
   const {
     register,
     control,
     formState: { errors },
   } = form;
 
-  const {
-    fields,
-    append,
-    remove,
-  } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: "education",
   });
+
+  const listError =
+    typeof errors.education?.message === "string"
+      ? errors.education.message
+      : undefined;
 
   return (
     <FormSection
@@ -46,19 +41,36 @@ const EducationSection = ({
       description={t("sections.education.description")}
     >
       <div className="space-y-6">
-        <div className="flex justify-end">
+        <div className="flex items-center justify-between gap-4">
+          <div className="min-w-0">
+            {listError && (
+              <p
+                role="alert"
+                className="text-destructive truncate text-xs"
+                title={listError}
+              >
+                {listError}
+              </p>
+            )}
+          </div>
+
           <button
             type="button"
             onClick={() => append(emptyEducation)}
-            className="border-border text-custom-primary hover:border-custom-primary/60 inline-flex cursor-pointer items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors"
+            className="border-border text-custom-primary hover:border-custom-primary/60 inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors"
           >
             <Plus size={17} />
+
             {t("education.add")}
           </button>
         </div>
 
         {fields.length === 0 ? (
-          <div className="border-border bg-secondary-bg/25 rounded-xl border border-dashed p-6 text-center">
+          <div
+            className={`bg-secondary-bg/25 rounded-xl border border-dashed p-6 text-center ${
+              listError ? "border-destructive" : "border-border"
+            }`}
+          >
             <p className="text-muted-foreground text-sm">
               {t("education.empty")}
             </p>
@@ -87,54 +99,50 @@ const EducationSection = ({
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                   <FormField
                     label={t("education.place")}
-                    register={register(
-                      `education.${index}.place`,
-                    )}
-                    error={
-                      errors.education?.[index]?.place
-                    }
+                    register={register(`education.${index}.place`)}
+                    error={errors.education?.[index]?.place}
                   />
 
                   <FormField
                     label={t("education.major")}
-                    register={register(
-                      `education.${index}.major`,
-                    )}
-                    error={
-                      errors.education?.[index]?.major
-                    }
+                    register={register(`education.${index}.major`)}
+                    error={errors.education?.[index]?.major}
                   />
 
                   <FormField
                     label={t("education.licence")}
-                    register={register(
-                      `education.${index}.licence`,
-                    )}
-                    error={
-                      errors.education?.[index]?.licence
-                    }
+                    register={register(`education.${index}.licence`)}
+                    error={errors.education?.[index]?.licence}
                   />
 
-                  <FormDateField
-                    id={`education-${index}-start`}
-                    label={t("education.start")}
-                    register={register(
-                      `education.${index}.start`,
+                  <Controller
+                    name={`education.${index}.start`}
+                    control={control}
+                    render={({ field }) => (
+                      <FormDateField
+                        id={`education-${index}-start`}
+                        label={t("education.start")}
+                        register={register(`education.${index}.start`)}
+                        value={field.value}
+                        onChange={field.onChange}
+                        error={errors.education?.[index]?.start}
+                      />
                     )}
-                    error={
-                      errors.education?.[index]?.start
-                    }
                   />
 
-                  <FormDateField
-                    id={`education-${index}-end`}
-                    label={t("education.end")}
-                    register={register(
-                      `education.${index}.end`,
+                  <Controller
+                    name={`education.${index}.end`}
+                    control={control}
+                    render={({ field }) => (
+                      <FormDateField
+                        id={`education-${index}-end`}
+                        label={t("education.end")}
+                        register={register(`education.${index}.end`)}
+                        value={field.value}
+                        onChange={field.onChange}
+                        error={errors.education?.[index]?.end}
+                      />
                     )}
-                    error={
-                      errors.education?.[index]?.end
-                    }
                   />
                 </div>
               </div>

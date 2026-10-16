@@ -1,14 +1,9 @@
 "use client";
 
-import {
-  useEffect,
-  useMemo,
-} from "react";
+import { useEffect, useMemo } from "react";
 
-import {
-  Plus,
-  Trash2,
-} from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
+
 import {
   Controller,
   type UseFormReturn,
@@ -19,15 +14,15 @@ import {
 import { FormField } from "@/components/FormField";
 
 import { emptyDependent } from "../cv-resume.defaults";
+
 import type { CVResumeFormValues } from "../cv-resume.types";
-import {
-  getDependentRelationOptions,
-} from "../data/cv-options";
+
+import { getDependentRelationOptions } from "../data/cv-options";
+
 import type { ResumeLocale } from "../data/iran-locations";
-import {
-  getMazhabOptions,
-  getReligionOptions,
-} from "../data/religions";
+
+import { getMazhabOptions, getReligionOptions } from "../data/religions";
+
 import FormBooleanField from "../fields/FormBooleanField";
 import FormDateField from "../fields/FormDateField";
 import FormImageUploadField from "../fields/FormImageUploadField";
@@ -40,11 +35,7 @@ interface PersonalInfoSectionProps {
   t: (key: string) => string;
 }
 
-const PersonalInfoSection = ({
-  form,
-  locale,
-  t,
-}: PersonalInfoSectionProps) => {
+const PersonalInfoSection = ({ form, locale, t }: PersonalInfoSectionProps) => {
   const {
     register,
     control,
@@ -76,10 +67,7 @@ const PersonalInfoSection = ({
     name: "dependents",
   });
 
-  const religionOptions = useMemo(
-    () => getReligionOptions(locale),
-    [locale],
-  );
+  const religionOptions = useMemo(() => getReligionOptions(locale), [locale]);
 
   const mazhabOptions = useMemo(
     () => getMazhabOptions(religion, locale),
@@ -92,25 +80,18 @@ const PersonalInfoSection = ({
   );
 
   useEffect(() => {
-    if (!married) {
-      setValue("children", "");
+    if (married !== true) {
+      setValue("children", "", {
+        shouldValidate: false,
+      });
     }
   }, [married, setValue]);
 
   useEffect(() => {
-    if (
-      mazhab &&
-      !mazhabOptions.some(
-        (option) => option.value === mazhab,
-      )
-    ) {
+    if (mazhab && !mazhabOptions.some((option) => option.value === mazhab)) {
       setValue("mazhab", "");
     }
-  }, [
-    mazhab,
-    mazhabOptions,
-    setValue,
-  ]);
+  }, [mazhab, mazhabOptions, setValue]);
 
   return (
     <FormSection
@@ -169,11 +150,19 @@ const PersonalInfoSection = ({
             error={errors.placeOfIssue}
           />
 
-          <FormDateField
-            id="dateOfBirth"
-            label={t("fields.dateOfBirth")}
-            register={register("dateOfBirth")}
-            error={errors.dateOfBirth}
+          <Controller
+            name="dateOfBirth"
+            control={control}
+            render={({ field }) => (
+              <FormDateField
+                id="dateOfBirth"
+                label={t("fields.dateOfBirth")}
+                register={register("dateOfBirth")}
+                value={field.value}
+                onChange={field.onChange}
+                error={errors.dateOfBirth}
+              />
+            )}
           />
 
           <FormSelectField
@@ -201,6 +190,7 @@ const PersonalInfoSection = ({
             label={t("fields.married")}
             yesLabel={t("common.yes")}
             noLabel={t("common.no")}
+            error={errors.married}
           />
 
           <FormField
@@ -208,7 +198,7 @@ const PersonalInfoSection = ({
             register={register("children")}
             error={errors.children}
             inputMode="numeric"
-            disabled={!married}
+            disabled={married !== true}
           />
         </div>
 
@@ -230,6 +220,7 @@ const PersonalInfoSection = ({
               className="border-border text-custom-primary hover:border-custom-primary/60 inline-flex cursor-pointer items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors"
             >
               <Plus size={17} />
+
               {t("dependents.add")}
             </button>
           </div>
@@ -258,12 +249,8 @@ const PersonalInfoSection = ({
                   <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                     <FormField
                       label={t("dependents.name")}
-                      register={register(
-                        `dependents.${index}.name`,
-                      )}
-                      error={
-                        errors.dependents?.[index]?.name
-                      }
+                      register={register(`dependents.${index}.name`)}
+                      error={errors.dependents?.[index]?.name}
                     />
 
                     <FormSelectField
@@ -272,9 +259,7 @@ const PersonalInfoSection = ({
                       label={t("dependents.relation")}
                       placeholder={t("placeholders.select")}
                       options={relationOptions}
-                      error={
-                        errors.dependents?.[index]?.relation
-                      }
+                      error={errors.dependents?.[index]?.relation}
                     />
                   </div>
                 </div>

@@ -1,22 +1,17 @@
 "use client";
 
-import {
-  useEffect,
-  useMemo,
-} from "react";
+import { useEffect, useMemo } from "react";
 
-import {
-  type UseFormReturn,
-  useWatch,
-} from "react-hook-form";
+import { Controller, type UseFormReturn, useWatch } from "react-hook-form";
 
 import { FormField } from "@/components/FormField";
 
 import type { CVResumeFormValues } from "../cv-resume.types";
-import {
-  getDutyStatusOptions,
-} from "../data/cv-options";
+
+import { getDutyStatusOptions } from "../data/cv-options";
+
 import type { ResumeLocale } from "../data/iran-locations";
+
 import FormBooleanField from "../fields/FormBooleanField";
 import FormDateField from "../fields/FormDateField";
 import FormSection from "../fields/FormSection";
@@ -28,15 +23,12 @@ interface EmploymentSectionProps {
   t: (key: string) => string;
 }
 
-const EmploymentSection = ({
-  form,
-  locale,
-  t,
-}: EmploymentSectionProps) => {
+const EmploymentSection = ({ form, locale, t }: EmploymentSectionProps) => {
   const {
     register,
     control,
     setValue,
+
     formState: { errors },
   } = form;
 
@@ -50,10 +42,7 @@ const EmploymentSection = ({
     name: "askLastBoss",
   });
 
-  const dutyOptions = useMemo(
-    () => getDutyStatusOptions(locale),
-    [locale],
-  );
+  const dutyOptions = useMemo(() => getDutyStatusOptions(locale), [locale]);
 
   useEffect(() => {
     if (dutyStatus !== "exempt") {
@@ -62,9 +51,11 @@ const EmploymentSection = ({
   }, [dutyStatus, setValue]);
 
   useEffect(() => {
-    if (!askLastBoss) {
+    if (askLastBoss !== true) {
       setValue("lastBossName", "");
+
       setValue("lastBossAddress", "");
+
       setValue("lastBossPhoneNumber", "");
     }
   }, [askLastBoss, setValue]);
@@ -99,6 +90,7 @@ const EmploymentSection = ({
             label={t("fields.criminalConviction")}
             yesLabel={t("common.yes")}
             noLabel={t("common.no")}
+            error={errors.criminalConviction}
           />
 
           <FormBooleanField
@@ -107,6 +99,7 @@ const EmploymentSection = ({
             label={t("fields.grantee")}
             yesLabel={t("common.yes")}
             noLabel={t("common.no")}
+            error={errors.grantee}
           />
 
           <FormField
@@ -121,11 +114,19 @@ const EmploymentSection = ({
             error={errors.introducer}
           />
 
-          <FormDateField
-            id="startWork"
-            label={t("fields.startWork")}
-            register={register("startWork")}
-            error={errors.startWork}
+          <Controller
+            name="startWork"
+            control={control}
+            render={({ field }) => (
+              <FormDateField
+                id="startWork"
+                label={t("fields.startWork")}
+                register={register("startWork")}
+                value={field.value}
+                onChange={field.onChange}
+                error={errors.startWork}
+              />
+            )}
           />
 
           <FormField
@@ -142,6 +143,7 @@ const EmploymentSection = ({
             label={t("fields.anotherJob")}
             yesLabel={t("common.yes")}
             noLabel={t("common.no")}
+            error={errors.anotherJob}
           />
         </div>
 
@@ -159,9 +161,10 @@ const EmploymentSection = ({
             label={t("fields.askLastBoss")}
             yesLabel={t("common.yes")}
             noLabel={t("common.no")}
+            error={errors.askLastBoss}
           />
 
-          {askLastBoss && (
+          {askLastBoss === true && (
             <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
               <FormField
                 label={t("fields.lastBossName")}
@@ -173,9 +176,7 @@ const EmploymentSection = ({
                 label={t("fields.lastBossPhoneNumber")}
                 type="tel"
                 dir="ltr"
-                register={register(
-                  "lastBossPhoneNumber",
-                )}
+                register={register("lastBossPhoneNumber")}
                 error={errors.lastBossPhoneNumber}
               />
 

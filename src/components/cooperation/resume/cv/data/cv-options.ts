@@ -38,13 +38,13 @@ const languageLevels: LocalizedOption[] = [
 const dutyStatuses: LocalizedOption[] = [
   {
     value: "served",
-    fa: "انجام دادهام",
-    en: "Completed",
+    fa: "پایان خدمت",
+    en: "Completed Service",
   },
   {
     value: "not_served",
-    fa: "انجام ندادهام",
-    en: "Not completed",
+    fa: "مشمول",
+    en: "Not Completed",
   },
   {
     value: "exempt",
@@ -88,15 +88,12 @@ const dependentRelations: LocalizedOption[] = [
 
 export const getLanguageLevelOptions = (
   locale: ResumeLocale,
-): CustomSelectOption[] =>
-  createLocalizedOptions(languageLevels, locale);
+): CustomSelectOption[] => createLocalizedOptions(languageLevels, locale);
 
 export const getDutyStatusOptions = (
   locale: ResumeLocale,
-): CustomSelectOption[] =>
-  createLocalizedOptions(dutyStatuses, locale);
+): CustomSelectOption[] => createLocalizedOptions(dutyStatuses, locale);
 
 export const getDependentRelationOptions = (
   locale: ResumeLocale,
-): CustomSelectOption[] =>
-  createLocalizedOptions(dependentRelations, locale);
+): CustomSelectOption[] => createLocalizedOptions(dependentRelations, locale);
