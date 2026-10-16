@@ -1,37 +1,32 @@
 const Hero = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-black">
-      <div className="relative aspect-[4/5] w-full sm:aspect-[2/1]">
-        <picture>
-          <source media="(max-width: 639px)" srcSet="/mobile-poster.webp" />
-
-          <img
-            src="/poster.webp"
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 size-full object-cover"
-          />
-        </picture>
-
+    <>
+      <section className="relative aspect-[4/5] w-full overflow-hidden bg-black sm:hidden">
         <video
-          className="absolute inset-0 size-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover"
+          src="/mobile-video.webm"
+          poster="/mobile-poster.webp"
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
-          poster="/poster.webp"
-        >
-          <source
-            media="(max-width: 639px)"
-            src="/mobile-video.webm"
-            type="video/webm"
-          />
+        />
+      </section>
 
-          <source src="/video.webm" type="video/webm" />
-        </video>
-      </div>
-    </section>
+      <section className="relative hidden aspect-[2/1] w-full overflow-hidden bg-black sm:block">
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          src="/video.webm"
+          poster="/poster.webp"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        />
+      </section>
+    </>
   );
 };
 
