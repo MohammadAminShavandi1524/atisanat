@@ -1,6 +1,17 @@
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import {
+  PutObjectCommand,
+  S3Client,
+} from "@aws-sdk/client-s3";
 
 import { NextResponse } from "next/server";
+
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
+
+const allowedTypes = new Map([
+  ["image/jpeg", "jpg"],
+  ["image/png", "png"],
+  ["image/webp", "webp"],
+]);
 
 const s3 = new S3Client({
   region: process.env.ARVAN_REGION!,
@@ -11,14 +22,13 @@ const s3 = new S3Client({
 
   credentials: {
     accessKeyId: process.env.ARVAN_ACCESS_KEY!,
-
     secretAccessKey: process.env.ARVAN_SECRET_KEY!,
   },
 });
 
-export async function POST(req: Request) {
+export async function POST(request: Request) {
   try {
-    const formData = await req.formData();
+    const formData = await request.formData();
 
     const file = formData.get("file");
 
@@ -26,7 +36,7 @@ export async function POST(req: Request) {
       return NextResponse.json(
         {
           success: false,
-          message: "No resume uploaded",
+          message: "No image uploaded",
         },
         {
           status: 400,
@@ -34,11 +44,25 @@ export async function POST(req: Request) {
       );
     }
 
-    if (file.type !== "application/pdf") {
+    const extension = allowedTypes.get(file.type);
+
+    if (!extension) {
       return NextResponse.json(
         {
           success: false,
-          message: "Only PDF files are allowed",
+          message: "Unsupported image type",
+        },
+        {
+          status: 400,
+        },
+      );
+    }
+
+    if (file.size > MAX_FILE_SIZE) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Image is too large",
         },
         {
           status: 400,
@@ -50,9 +74,11 @@ export async function POST(req: Request) {
 
     const buffer = Buffer.from(bytes);
 
-    const fileName = `${crypto.randomUUID()}.pdf`;
+    const fileName =
+      `${crypto.randomUUID()}.${extension}`;
 
-    const objectKey = `resumes/pdfs/${fileName}`;
+    const objectKey =
+      `resumes/images/${fileName}`;
 
     await s3.send(
       new PutObjectCommand({
@@ -62,7 +88,7 @@ export async function POST(req: Request) {
 
         Body: buffer,
 
-        ContentType: "application/pdf",
+        ContentType: file.type,
 
         ContentDisposition: "inline",
 
@@ -74,19 +100,23 @@ export async function POST(req: Request) {
       process.env.ARVAN_PUBLIC_URL ??
       `${process.env.ARVAN_ENDPOINT}/${process.env.ARVAN_BUCKET}`;
 
-    const url = `${publicBaseUrl.replace(/\/$/, "")}/${objectKey}`;
+    const url =
+      `${publicBaseUrl.replace(/\/+$/, "")}/${objectKey}`;
 
     return NextResponse.json({
       success: true,
       url,
     });
   } catch (error) {
-    console.error("RESUME PDF UPLOAD ERROR =>", error);
+    console.error(
+      "CV IMAGE UPLOAD ERROR:",
+      error,
+    );
 
     return NextResponse.json(
       {
         success: false,
-        message: "Resume upload failed",
+        message: "Image upload failed",
       },
       {
         status: 500,

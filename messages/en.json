@@ -266,82 +266,180 @@
     }
   },
   "Resume": {
-    "title": "Submit Resume",
-    "description": "Complete your information and submit your resume as a PDF file.",
-    "fields": {
-      "title": "Related Fields",
-      "machineTools": "Machine Tools",
-      "moldMaking": "Mold Making",
-      "mechanicalEngineering": "Mechanical Engineering",
-      "solidMechanicsDesign": "Solid Mechanics Design",
-      "technicalVocational": "Technical and Vocational Training",
-      "precisionTurning": "Precision Turning",
-      "precisionMilling": "Precision Milling"
-    },
-    "form": {
-      "fullName": "Full Name",
-      "fullNamePlaceholder": "Full name",
-      "phone": "Phone Number",
-      "phonePlaceholder": "09123456789",
-      "email": "Email",
-      "emailPlaceholder": "example@email.com",
-      "submit": "Submit Resume",
-      "submitting": "Submitting...",
-      "resume": {
-        "label": "Resume File",
-        "placeholder": "Select or drop your resume PDF here",
-        "uploading": "Uploading resume",
-        "finalizing": "Finalizing upload",
-        "remove": "Remove resume file"
-      }
-    },
-    "validation": {
-      "fullNameRequired": "Full name is required.",
-      "emailRequired": "Email is required.",
-      "emailInvalid": "Please enter a valid email address.",
-      "phoneRequired": "Phone number is required.",
-      "phoneInvalid": "Please enter a valid phone number.",
-      "resumeRequired": "Resume file is required.",
-      "resumeInvalid": "Resume file must be in PDF format.",
-      "resumeUploadFailed": "Resume file upload failed."
-    },
-    "toast": {
-      "success": "Your resume was submitted successfully.",
-      "error": "There was an error submitting your resume.",
-      "uploadError": "There was an error uploading your resume."
-    },
+    "cv": {
+      "eyebrow": "Career Opportunity",
+      "title": "Employment Application Form",
+      "description": "Please complete the requested information carefully. The information provided will be used to review your employment application.",
 
-    "method": {
-      "title": "Choose How to Submit Your Resume",
-      "description": "Select the method that works best for you.",
-      "file": {
-        "title": "Upload Resume (PDF)",
-        "description": "Enter your contact information and upload your resume as a PDF file."
+      "common": {
+        "yes": "Yes",
+        "no": "No"
       },
-      "questions": {
-        "title": "Answer Resume Questions",
-        "description": "Answer the questions below to submit your resume without uploading a file."
-      }
-    },
-    "dynamic": {
-      "title": "Resume Questions",
-      "description": "Please answer all the following questions to complete your resume submission.",
-      "loading": "Loading resume questions...",
-      "loadError": "Unable to load the resume questions.",
-      "retry": "Try Again",
-      "empty": "No resume questions are available at the moment.",
-      "form": {
-        "answerPlaceholder": "Write your answer here...",
-        "submit": "Submit Answers",
-        "submitting": "Submitting..."
+
+      "placeholders": {
+        "select": "Select an option"
       },
+
+      "sections": {
+        "personal": {
+          "title": "Personal Information",
+          "description": "Enter your identity and personal information."
+        },
+        "contact": {
+          "title": "Contact & Residence Information",
+          "description": "Enter your contact details and residential address."
+        },
+        "education": {
+          "title": "Education & Research",
+          "description": "Enter your educational background, professional courses, or research activities."
+        },
+        "languages": {
+          "title": "Foreign Languages",
+          "description": "Add the foreign languages you know and specify your reading, writing, and speaking proficiency."
+        },
+        "work": {
+          "title": "Work Experience",
+          "description": "If you have previous work experience, provide the details of your former workplaces."
+        },
+        "employment": {
+          "title": "Additional Employment Information",
+          "description": "Complete the additional information related to your employment conditions and work history."
+        },
+        "contacts": {
+          "title": "Close Contacts",
+          "description": "Optionally provide the information of up to two people who know you well."
+        }
+      },
+
+      "fields": {
+        "image": {
+          "label": "Applicant Photo",
+          "placeholder": "Click or drop an image here to upload",
+          "uploading": "Uploading image...",
+          "remove": "Remove image"
+        },
+
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "fatherName": "Father's Name",
+        "nationalCode": "National ID",
+        "placeOfIssue": "Place of Issue",
+        "dateOfBirth": "Date of Birth",
+
+        "religion": "Religion",
+        "mazhab": "Denomination",
+
+        "married": "Are you married?",
+        "children": "Number of Children",
+
+        "province": "Province",
+        "city": "City",
+        "address": "Residential Address",
+
+        "email": "Email",
+        "phoneNumber": "Phone Number",
+
+        "research": "Professional Courses or Research Activities",
+
+        "dutyStatus": "Military Service Status",
+        "offDutyReason": "Type or Reason for Exemption",
+
+        "criminalConviction": "Do you have any criminal convictions?",
+
+        "physicalHealth": "Describe your current physical health",
+
+        "grantee": "Can you provide property or financial collateral if required?",
+
+        "jobInterest": "What type of position are you interested in?",
+
+        "introducer": "Who introduced you to this company?",
+
+        "startWork": "When are you available to start work?",
+
+        "askLastBoss": "May we contact your previous manager regarding your work history?",
+
+        "lastBossName": "Previous Direct Manager's Full Name",
+        "lastBossAddress": "Previous Direct Manager's Address",
+        "lastBossPhoneNumber": "Previous Direct Manager's Phone Number",
+
+        "salaryRequest": "Requested Salary in IRR",
+
+        "anotherJob": "Do you currently have another job?",
+
+        "extra": "Additional Information"
+      },
+
+      "dependents": {
+        "title": "Dependents",
+        "description": "If you have any dependents, add their information.",
+        "add": "Add Dependent",
+        "item": "Dependent",
+        "name": "Full Name",
+        "relation": "Relationship"
+      },
+
+      "education": {
+        "add": "Add Education",
+        "empty": "No educational record has been added yet.",
+        "item": "Education",
+        "place": "Institution",
+        "major": "Field of Study",
+        "licence": "Degree",
+        "start": "Start Date",
+        "end": "End Date"
+      },
+
+      "languages": {
+        "add": "Add Language",
+        "empty": "No language has been added yet.",
+        "item": "Language",
+        "language": "Language Name",
+        "read": "Reading",
+        "write": "Writing",
+        "speak": "Speaking"
+      },
+
+      "work": {
+        "add": "Add Work Experience",
+        "empty": "Add your work experience if applicable.",
+        "item": "Work Experience",
+        "place": "Company or Organization",
+        "job": "Job Title",
+        "salary": "Salary & Benefits in IRR",
+        "start": "Start Date",
+        "end": "End Date",
+        "leaveReason": "Reason for Leaving"
+      },
+
+      "contacts": {
+        "add": "Add Contact",
+        "empty": "No close contact has been added.",
+        "item": "Contact",
+        "name": "Full Name",
+        "number": "Phone Number",
+        "address": "Address"
+      },
+
       "validation": {
-        "answerRequired": "This question must be answered.",
-        "allAnswersRequired": "Please answer all questions before submitting."
+        "required": "This field is required.",
+        "emailInvalid": "Please enter a valid email address.",
+        "phoneInvalid": "The mobile number must start with 09 and contain 11 digits.",
+        "nationalCodeInvalid": "The national ID must contain 10 digits.",
+        "numberInvalid": "Please enter numbers only.",
+        "exemptReasonRequired": "Please enter the type or reason for your exemption.",
+        "imageInvalid": "The image must be JPG, PNG, or WEBP and no larger than 5 MB.",
+        "imageUploadFailed": "Image upload failed. Please try again.",
+        "formInvalid": "Please review and complete the required fields."
       },
+
       "toast": {
-        "success": "Your answers were submitted successfully.",
-        "error": "There was an error submitting your answers."
+        "success": "Your employment application was submitted successfully.",
+        "error": "We could not submit your application. Please try again."
+      },
+
+      "submit": {
+        "button": "Submit Application",
+        "submitting": "Submitting..."
       }
     }
   },
