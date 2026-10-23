@@ -1,17 +1,50 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import Image from "next/image";
 
 import { Download, FileText } from "lucide-react";
 
 import { useLocale } from "next-intl";
 
-import { standardTables } from "./standard-tables.data";
+import {
+  getStandardTables,
+  type StandardTableParent,
+} from "./standard-tables.data";
 
 const StandardTablesPage = () => {
   const locale = useLocale();
 
   const isFa = locale === "fa";
+
+  const [standardTables, setStandardTables] = useState<StandardTableParent[]>(
+    [],
+  );
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const fetchTables = async () => {
+      try {
+        const data = await getStandardTables(controller.signal);
+
+        if (!controller.signal.aborted) {
+          setStandardTables(data);
+        }
+      } catch (error) {
+        if (!controller.signal.aborted) {
+          console.error("GET STANDARD TABLES ERROR =>", error);
+        }
+      }
+    };
+
+    fetchTables();
+
+    return () => {
+      controller.abort();
+    };
+  }, []);
 
   return (
     <main className="bg-background text-foreground">
@@ -47,6 +80,7 @@ const StandardTablesPage = () => {
                       sizes="300px"
                       className="object-cover"
                       priority={table.id === 1}
+                      unoptimized
                     />
                   </div>
                 </div>

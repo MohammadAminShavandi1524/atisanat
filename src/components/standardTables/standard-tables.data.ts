@@ -2,7 +2,7 @@ export interface StandardTableChild {
   id: number;
   name_en: string;
   name_fa: string;
-  size: "A3" | "A4" | "A5";
+  size: string;
   file: string;
 }
 
@@ -16,78 +16,83 @@ export interface StandardTableParent {
   children: StandardTableChild[];
 }
 
-export const standardTables: StandardTableParent[] = [
-  {
-    id: 1,
+interface ChartParentResponse {
+  id: number;
+  name_en: string;
+  name_fa: string;
+  description_en: string;
+  description_fa: string;
+  image: string;
+  created: string;
+}
 
-    name_en: "Engineering Standard Tables",
-    name_fa: "جداول استاندارد مهندسی",
+interface ChartChildResponse {
+  id: number;
+  chart: ChartParentResponse;
+  name_en: string;
+  name_fa: string;
+  size: string;
+  file: string;
+  created: string;
+}
 
-    description_en:
-      "A collection of technical standard tables prepared for engineering and manufacturing reference.",
+export async function getStandardTables(
+  signal?: AbortSignal,
+): Promise<StandardTableParent[]> {
+  const parentRes = await fetch("/api/chart/parent/get", {
+    signal,
+  });
 
-    description_fa:
-      "مجموعه‌ای از جداول استاندارد فنی برای استفاده در محاسبات مهندسی و فرآیندهای تولید.",
+  if (!parentRes.ok) {
+    throw new Error("Failed to fetch standard table parents");
+  }
 
-    cover: "/cover.jpeg",
+  const parents: ChartParentResponse[] = await parentRes.json();
 
-    children: [
-      {
-        id: 1,
-        name_en: "Engineering Standard Table - A3",
-        name_fa: "جدول استاندارد مهندسی - A3",
-        size: "A3",
-        file: "/cover.jpeg",
-      },
+  if (!Array.isArray(parents)) {
+    throw new Error("Invalid standard table parents response");
+  }
 
-      {
-        id: 2,
-        name_en: "Engineering Standard Table - A4",
-        name_fa: "جدول استاندارد مهندسی - A4",
-        size: "A4",
-        file: "/cover.jpeg",
-      },
+  const tables = await Promise.all(
+    parents.map(async (parent) => {
+      const childRes = await fetch(
+        `/api/chart/child/get_by_parent/${parent.id}`,
+        {
+          signal,
+        },
+      );
 
-      {
-        id: 3,
-        name_en: "Engineering Standard Table - A5",
-        name_fa: "جدول استاندارد مهندسی - A5",
-        size: "A5",
-        file: "/cover.jpeg",
-      },
-    ],
-  },
+      if (!childRes.ok) {
+        throw new Error(
+          `Failed to fetch standard table children for parent ${parent.id}`,
+        );
+      }
 
-  {
-    id: 2,
+      const children: ChartChildResponse[] = await childRes.json();
 
-    name_en: "Machining Standard Tables",
-    name_fa: "جداول استاندارد ماشین‌کاری",
+      if (!Array.isArray(children)) {
+        throw new Error(
+          `Invalid standard table children response for parent ${parent.id}`,
+        );
+      }
 
-    description_en:
-      "Technical reference tables for machining processes, dimensions and workshop calculations.",
+      return {
+        id: parent.id,
+        name_en: parent.name_en,
+        name_fa: parent.name_fa,
+        description_en: parent.description_en,
+        description_fa: parent.description_fa,
+        cover: parent.image,
+        children: children.map((child) => ({
+          id: child.id,
+          name_en: child.name_en,
+          name_fa: child.name_fa,
+          size: child.size,
+          file: child.file,
+        })),
+      };
+    }),
+  );
 
-    description_fa:
-      "جداول مرجع فنی مرتبط با فرآیندهای ماشین‌کاری، ابعاد و محاسبات مورد استفاده در صنعت.",
-
-    cover: "/cover.jpeg",
-
-    children: [
-      {
-        id: 4,
-        name_en: "Machining Reference Table - A4",
-        name_fa: "جدول مرجع ماشین‌کاری - A4",
-        size: "A4",
-        file: "/cover.jpeg",
-      },
-
-      {
-        id: 5,
-        name_en: "Machining Reference Table - A5",
-        name_fa: "جدول مرجع ماشین‌کاری - A5",
-        size: "A5",
-        file: "/cover.jpeg",
-      },
-    ],
-  },
-];
+  return tables;
+}
