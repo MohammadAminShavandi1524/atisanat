@@ -8,7 +8,7 @@ import { X } from "lucide-react";
 
 import gsap from "gsap";
 
-import type { Product, ProductLocale } from "@/data/products.data";
+import type { Product, ProductLocale } from "./products.api";
 
 interface ProductModalProps {
   product: Product | null;
@@ -172,7 +172,7 @@ const ProductModal = ({ product, locale, onClose }: ProductModalProps) => {
         </button>
 
         {/* Image */}
-        <div className=" relative min-h-[240px] sm:min-h-[360px] lg:min-h-[560px]">
+        <div className="relative min-h-[240px] sm:min-h-[360px] lg:min-h-[560px]">
           <Image
             src={activeProduct.image}
             alt={title}
@@ -180,6 +180,7 @@ const ProductModal = ({ product, locale, onClose }: ProductModalProps) => {
             sizes="(max-width: 1024px) 100vw, 55vw"
             className="object-contain p-5 sm:p-6 lg:p-8"
             priority
+            unoptimized
           />
         </div>
 

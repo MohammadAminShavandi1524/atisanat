@@ -1,10 +1,6 @@
 "use client";
 
-import type {
-  Product,
-  ProductCategory,
-  ProductLocale,
-} from "@/data/products.data";
+import type { Product, ProductCategory, ProductLocale } from "./products.api";
 
 import ProductCard from "./ProductCard";
 
@@ -35,7 +31,7 @@ const ProductCategorySection = ({
       </div>
 
       {/* Products */}
-      <div className="grid grid-cols-1 s:grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4 xl:grid-cols-6 2xl:gap-5">
+      <div className="s:grid-cols-2 grid grid-cols-1 gap-3 sm:grid-cols-3 md:gap-4 xl:grid-cols-6 2xl:gap-5">
         {products.map((product, index) => {
           const isFirstOfLastTwo =
             remainder === 2 && index === products.length - 2;

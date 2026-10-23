@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-import type { Product, ProductLocale } from "@/data/products.data";
+import type { Product, ProductLocale } from "./products.api";
 
 interface ProductCardProps {
   product: Product;
@@ -28,13 +28,14 @@ const ProductCard = ({ product, locale, onOpen }: ProductCardProps) => {
         </div>
 
         {/* Image */}
-        <div className=" relative aspect-square w-full">
+        <div className="relative aspect-square w-full">
           <Image
             src={product.image}
             alt={title}
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
             className="object-contain p-2 sm:p-3 xl:p-3 2xl:p-4"
+            unoptimized
           />
         </div>
       </button>
