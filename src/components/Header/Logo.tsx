@@ -25,7 +25,7 @@ const Logo = ({ variant = "desktop" }: LogoProps) => {
       <Link
         href={`/${locale}`}
         onClick={() => undefined}
-        className="text-foreground s:text-[20px] text-[18px] leading-none font-semibold"
+        className="text-foreground s:text-[20px] text-[18px] leading-none font-semibold rtl:font-Vazir rtl:font-medium"
         aria-label={t("logoName")}
       >
         {t("logoName")}
@@ -52,7 +52,7 @@ const Logo = ({ variant = "desktop" }: LogoProps) => {
           />
         </div>
 
-        <span className="text-foreground hidden rtl:pt-1.5 ltr:pt-2 text-[22px] leading-none font-semibold whitespace-nowrap sm:inline sm:text-[23px]">
+        <span className="text-foreground hidden rtl:pt-1.5 ltr:pt-2 text-[22px] leading-none font-semibold whitespace-nowrap sm:inline sm:text-[23px] rtl:font-Vazir rtl:font-medium">
           {t("logoName")}
         </span>
       </Link>
@@ -90,7 +90,7 @@ const Logo = ({ variant = "desktop" }: LogoProps) => {
           "text-foreground col-start-1 row-start-1 pt-2 leading-none font-semibold whitespace-nowrap",
           locale === "en"
             ? "text-[20px] xl:text-[21px] 2xl:text-[23px]"
-            : "text-[21px] xl:text-[23px] 2xl:text-[26px]",
+            : "text-[21px] xl:text-[23px] 2xl:text-[26px] font-Vazir font-medium",
         )}
       >
         {t("logoName")}

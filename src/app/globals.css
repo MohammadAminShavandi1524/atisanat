@@ -2,6 +2,46 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+@font-face {
+  font-family: "Vazir";
+  src: url("../vazir-font/Vazir.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazir";
+  src: url("../vazir-font/Vazir-Medium.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazir";
+  src: url("../vazir-font/Vazir-Bold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazir";
+  src: url("../vazir-font/Vazir-Light.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazir";
+  src: url("../vazir-font/Vazir-Thin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -19,6 +59,7 @@
 
   /* Font */
   --font-IRANYekanX: "IRANYekanX";
+  --font-Vazir: "Vazir", sans-serif;
 
   /* Radius */
   --radius-sm: calc(var(--radius) - 4px);

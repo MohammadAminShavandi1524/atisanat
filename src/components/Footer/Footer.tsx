@@ -83,7 +83,7 @@ const Footer = () => {
             aria-label={brandT("logoName")}
             className="inline-flex items-center gap-2.5"
           >
-            <div className="relative aspect-[1520/403] w-[120px] shrink-0 max-s:hidden">
+            <div className="max-s:hidden relative aspect-[1520/403] w-[120px] shrink-0">
               <Image
                 src="/logo.png"
                 alt={brandT("logoName")}
@@ -93,7 +93,7 @@ const Footer = () => {
               />
             </div>
 
-            <span className="text-foreground pt-1 text-[22px] leading-none font-semibold">
+            <span className="text-foreground rtl:font-Vazir pt-1 text-[22px] leading-none font-medium">
               {brandT("logoName")}
             </span>
           </Link>
@@ -235,7 +235,7 @@ const Footer = () => {
                   />
                 </div>
 
-                <span className="text-foreground pt-3.25 text-[28px] leading-none font-semibold">
+                <span className="text-foreground rtl:font-Vazir pt-3.25 text-[28px] leading-none font-medium">
                   {brandT("logoName")}
                 </span>
               </Link>
