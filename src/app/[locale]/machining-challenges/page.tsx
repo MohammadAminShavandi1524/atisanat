@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -8,7 +8,11 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 
-import { machiningChallenges } from "@/data/machining-challenges.data";
+import {
+  BLOG_READ_TIME,
+  getLatestBlogs,
+  type ParentBlog,
+} from "@/components/machiningChallenges/machining-challenges.api";
 
 const MachiningChallengesPage = () => {
   const locale = useLocale();
@@ -17,8 +21,38 @@ const MachiningChallengesPage = () => {
   const isRTL = locale === "fa";
   const ArrowIcon = isRTL ? ArrowLeft : ArrowRight;
 
+  const [machiningChallenges, setMachiningChallenges] = useState<ParentBlog[]>(
+    [],
+  );
+
   const titleRefs = useRef<Record<number, HTMLAnchorElement | null>>({});
   const [titleHeights, setTitleHeights] = useState<Record<number, number>>({});
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const fetchChallenges = async () => {
+      setMachiningChallenges([]);
+
+      try {
+        const data = await getLatestBlogs(locale, controller.signal);
+
+        if (!controller.signal.aborted) {
+          setMachiningChallenges(data);
+        }
+      } catch (error) {
+        if (!controller.signal.aborted) {
+          console.error("LATEST MACHINING CHALLENGES ERROR =>", error);
+        }
+      }
+    };
+
+    fetchChallenges();
+
+    return () => {
+      controller.abort();
+    };
+  }, [locale]);
 
   useLayoutEffect(() => {
     const measureTitles = () => {
@@ -69,7 +103,7 @@ const MachiningChallengesPage = () => {
       resizeObserver.disconnect();
       window.removeEventListener("resize", measureTitles);
     };
-  }, [locale]);
+  }, [locale, machiningChallenges]);
 
   return (
     <main
@@ -100,21 +134,17 @@ const MachiningChallengesPage = () => {
       <section className="w90 py-12 sm:py-14 md:py-16 lg:py-18 xl:py-20">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 xl:gap-10">
           {machiningChallenges.map((challenge) => {
-            const title = isRTL ? challenge.title.fa : challenge.title.en;
-            const description = isRTL
-              ? challenge.description.fa
-              : challenge.description.en;
-            const category = isRTL
-              ? challenge.category.fa
-              : challenge.category.en;
-            const tags = isRTL ? challenge.tags.fa : challenge.tags.en;
+            const title = challenge.title;
+            const description = challenge.description;
+            const category = challenge.category.name;
+            const tags = challenge.tags;
 
             const visibleTags = Array.from(new Set([category, ...tags])).slice(
               0,
               3,
             );
 
-            const href = `/${locale}/machining-challenges/${challenge.slug}`;
+            const href = `/${locale}/machining-challenges/${encodeURIComponent(challenge.slug)}`;
 
             return (
               <article
@@ -125,13 +155,16 @@ const MachiningChallengesPage = () => {
                   href={href}
                   className="relative block aspect-[16/9] w-full overflow-hidden"
                 >
-                  <Image
-                    src={challenge.image}
-                    alt={title}
-                    fill
-                    sizes="(max-width: 767px) 100vw, 50vw"
-                    className="object-cover"
-                  />
+                  {challenge.image && (
+                    <Image
+                      src={challenge.image}
+                      alt={title}
+                      fill
+                      sizes="(max-width: 767px) 100vw, 50vw"
+                      className="object-cover"
+                      unoptimized
+                    />
+                  )}
                 </Link>
 
                 <div className="flex flex-1 flex-col p-5 sm:p-7 xl:p-8">
@@ -169,7 +202,7 @@ const MachiningChallengesPage = () => {
 
                   <div className="border-border mt-auto flex items-center justify-between border-t pt-5">
                     <span className="text-muted-foreground text-xs sm:text-[13px]">
-                      {challenge.readTime} {t("article.readTime")}
+                      {BLOG_READ_TIME} {t("article.readTime")}
                     </span>
 
                     <Link
