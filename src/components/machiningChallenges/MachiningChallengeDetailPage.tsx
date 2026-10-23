@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -16,43 +16,133 @@ import ChallengeFooter from "@/components/machiningChallenges/ChallengeFooter";
 import { animateMachiningChallengesPage } from "@/components/machiningChallenges/machiningChallengesAnimations";
 
 import {
-  getMachiningChallengeBySlug,
-  getRelatedMachiningChallenges,
-} from "@/data/machining-challenges.data";
+  BLOG_READ_TIME,
+  getLatestBlogs,
+  getBlogChildren,
+  getRelatedBlogs,
+  type BlogDetails,
+  type ParentBlog,
+} from "./machining-challenges.api";
 
 const MachiningChallengeDetailPage = () => {
   const locale = useLocale();
   const params = useParams();
+
   const rootRef = useRef<HTMLDivElement>(null);
 
   const t = useTranslations("MachiningChallengesPage.article");
-  const slug = params.slug as string;
 
-  const challenge = getMachiningChallengeBySlug(slug);
+  const slug = params.slug as string;
+  const isRTL = locale === "fa";
+  const lang = isRTL ? "fa" : "en";
+
+  const [details, setDetails] = useState<BlogDetails | null>(null);
+  const [relatedBlogs, setRelatedBlogs] = useState<ParentBlog[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!rootRef.current || !challenge) return;
+    const controller = new AbortController();
+
+    const fetchDetails = async () => {
+      setLoading(true);
+      setDetails(null);
+      setRelatedBlogs([]);
+
+      try {
+        // Find the selected article by its URL slug.
+        const blogs = await getLatestBlogs(lang, controller.signal);
+
+        const normalizedSlug = (() => {
+          try {
+            return decodeURIComponent(slug);
+          } catch {
+            return slug;
+          }
+        })();
+
+        const selectedBlog = blogs.find((blog) => blog.slug === normalizedSlug);
+
+        if (!selectedBlog) {
+          return;
+        }
+
+        // Both language versions are returned by children.
+        const childrenResponse = await getBlogChildren(
+          selectedBlog.id,
+          controller.signal,
+        );
+
+        if (controller.signal.aborted) return;
+
+        const selectedDetails = childrenResponse[lang];
+
+        if (selectedDetails?.parent?.id !== selectedBlog.id) {
+          console.error(
+            "BLOG DETAILS ERROR =>",
+            "Article language or ID mismatch",
+          );
+          return;
+        }
+
+        setDetails(selectedDetails);
+
+        // Related articles are an independent request.
+        // An empty response is valid.
+        try {
+          const related = await getRelatedBlogs(
+            selectedBlog.id,
+            controller.signal,
+          );
+
+          if (!controller.signal.aborted) {
+            setRelatedBlogs(
+              related.filter(
+                (blog) =>
+                  blog.id !== selectedBlog.id &&
+                  blog.lang === lang &&
+                  blog.published,
+              ),
+            );
+          }
+        } catch (error) {
+          if (!controller.signal.aborted) {
+            console.error("RELATED BLOGS ERROR =>", error);
+          }
+        }
+      } catch (error) {
+        if (!controller.signal.aborted) {
+          console.error("BLOG DETAILS ERROR =>", error);
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchDetails();
+
+    return () => controller.abort();
+  }, [lang, slug]);
+
+  useEffect(() => {
+    if (!rootRef.current || !details || loading) {
+      return;
+    }
 
     return animateMachiningChallengesPage(rootRef.current);
-  }, [locale, slug, challenge]);
+  }, [locale, slug, details, loading]);
 
-  if (!challenge) {
+  if (loading || !details) {
     return null;
   }
 
-  const isRTL = locale === "fa";
+  const challenge = details.parent;
 
-  const title = isRTL ? challenge.title.fa : challenge.title.en;
-
-  const description = isRTL
-    ? challenge.description.fa
-    : challenge.description.en;
-
-  const category = isRTL ? challenge.category.fa : challenge.category.en;
-
-  const tags = isRTL ? challenge.tags.fa : challenge.tags.en;
-
-  const relatedChallenges = getRelatedMachiningChallenges(slug);
+  const title = challenge.title;
+  const description = challenge.description;
+  const category = challenge.category.name;
+  const tags = challenge.tags;
 
   return (
     <div ref={rootRef} dir={isRTL ? "rtl" : "ltr"} className="bg-background">
@@ -82,21 +172,24 @@ const MachiningChallengeDetailPage = () => {
               </span>
 
               <span className="text-muted-foreground text-xs sm:text-sm">
-                {challenge.readTime} {t("readTime")}
+                {BLOG_READ_TIME} {t("readTime")}
               </span>
             </div>
           </div>
 
           {/* Image */}
           <div className="challenge-hero-image border-border relative aspect-[16/9] w-full overflow-hidden rounded-2xl border">
-            <Image
-              alt={title}
-              src={challenge.image}
-              fill
-              sizes="(max-width: 1023px) 100vw, 52vw"
-              className="object-cover"
-              priority
-            />
+            {challenge.image && (
+              <Image
+                alt={title}
+                src={challenge.image}
+                fill
+                sizes="(max-width: 1023px) 100vw, 52vw"
+                className="object-cover"
+                priority
+                unoptimized
+              />
+            )}
           </div>
         </div>
       </section>
@@ -106,14 +199,12 @@ const MachiningChallengeDetailPage = () => {
         <div className="grid grid-cols-1 items-start gap-12 md:gap-16 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-8 xl:grid-cols-[minmax(0,1fr)_340px] xl:gap-12 2xl:grid-cols-[minmax(0,1fr)_360px] 2xl:gap-16">
           {/* Main Content */}
           <div className="challenge-content border-border min-w-0 lg:border-e lg:pe-8 xl:pe-10 2xl:pe-14">
-            {challenge.sections.map((section) => (
+            {details.child.map((section) => (
               <ChallengeSection
                 key={section.id}
-                title={isRTL ? section.title.fa : section.title.en}
-                description={
-                  isRTL ? section.description.fa : section.description.en
-                }
-                image={section.image}
+                title={section.title}
+                description={section.description}
+                image={section.image ?? undefined}
               />
             ))}
           </div>
@@ -136,29 +227,27 @@ const MachiningChallengeDetailPage = () => {
               </div>
 
               <div className="px-4 sm:px-5 xl:px-6">
-                {relatedChallenges.map((related) => {
-                  const relatedTitle = isRTL
-                    ? related.title.fa
-                    : related.title.en;
-
-                  const relatedCategory = isRTL
-                    ? related.category.fa
-                    : related.category.en;
+                {relatedBlogs.map((related) => {
+                  const relatedTitle = related.title;
+                  const relatedCategory = related.category.name;
 
                   return (
                     <Link
                       key={related.id}
-                      href={`/${locale}/machining-challenges/${related.slug}`}
+                      href={`/${locale}/machining-challenges/${encodeURIComponent(related.slug)}`}
                       className="group/news border-border flex items-center gap-3 border-b py-4 last:border-b-0 sm:gap-4 sm:py-5"
                     >
                       <div className="border-border xss:w-28 relative aspect-[16/9] w-24 shrink-0 overflow-hidden rounded-lg border lg:w-24 xl:w-28">
-                        <Image
-                          src={related.image}
-                          alt={relatedTitle}
-                          fill
-                          sizes="112px"
-                          className="object-cover"
-                        />
+                        {related.image && (
+                          <Image
+                            src={related.image}
+                            alt={relatedTitle}
+                            fill
+                            sizes="112px"
+                            className="object-cover"
+                            unoptimized
+                          />
+                        )}
                       </div>
 
                       <div className="flex min-w-0 flex-1 flex-col justify-center">

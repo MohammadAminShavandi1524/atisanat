@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,29 +9,10 @@ import { ArrowUpLeft, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 
-const challenges = [
-  {
-    id: 1,
-    slug: "controlling-chatter-in-milling",
-    image: "/home/machining-challenges/chatter.png",
-    titleKey: "items.chatter.title",
-    descriptionKey: "items.chatter.description",
-  },
-  {
-    id: 2,
-    slug: "reducing-tool-wear",
-    image: "/home/machining-challenges/tool-wear2.png",
-    titleKey: "items.toolWear.title",
-    descriptionKey: "items.toolWear.description",
-  },
-  {
-    id: 3,
-    slug: "improving-surface-finish",
-    image: "/home/machining-challenges/surface-finish.png",
-    titleKey: "items.surfaceFinish.title",
-    descriptionKey: "items.surfaceFinish.description",
-  },
-] as const;
+import {
+  getLatestBlogs,
+  type ParentBlog,
+} from "@/components/machiningChallenges/machining-challenges.api";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -37,8 +20,34 @@ const MachiningChallenges = () => {
   const locale = useLocale();
   const t = useTranslations("Home.MachiningChallenges");
 
+  const [challenges, setChallenges] = useState<ParentBlog[]>([]);
+
   const isRTL = locale === "fa";
   const ArrowIcon = isRTL ? ArrowUpLeft : ArrowUpRight;
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const fetchChallenges = async () => {
+      try {
+        const data = await getLatestBlogs(locale, controller.signal);
+
+        if (!controller.signal.aborted) {
+          setChallenges(data.slice(0, 3));
+        }
+      } catch (error) {
+        if (!controller.signal.aborted) {
+          console.error("HOME MACHINING CHALLENGES ERROR =>", error);
+        }
+      }
+    };
+
+    fetchChallenges();
+
+    return () => {
+      controller.abort();
+    };
+  }, [locale]);
 
   return (
     <section className="bg-background overflow-hidden">
@@ -65,7 +74,7 @@ const MachiningChallenges = () => {
           {t("title")}
         </motion.h2>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:grid-rows-[auto_auto_auto_auto] lg:gap-x-6 lg:gap-y-0">
+        <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-[auto_auto_auto_auto] lg:gap-x-6 lg:gap-y-0">
           {challenges.map((challenge, index) => (
             <motion.article
               key={challenge.id}
@@ -89,7 +98,7 @@ const MachiningChallenges = () => {
               className="group bg-secondary-bg shadow-primary h-full min-w-0 overflow-hidden rounded-[12px] lg:row-span-4 lg:grid lg:grid-rows-[subgrid]"
             >
               <Link
-                href={`/${locale}/machining-challenges/${challenge.slug}`}
+                href={`/${locale}/machining-challenges/${encodeURIComponent(challenge.slug)}`}
                 className="flex h-full min-w-0 flex-col lg:row-span-4 lg:grid lg:grid-rows-[subgrid]"
               >
                 {/* Image */}
@@ -104,13 +113,16 @@ const MachiningChallenges = () => {
                     }}
                     className="absolute inset-0"
                   >
-                    <Image
-                      src={challenge.image}
-                      alt={t(challenge.titleKey)}
-                      fill
-                      sizes="(max-width: 639px) 90vw, (max-width: 1023px) 44vw, 30vw"
-                      className="object-cover"
-                    />
+                    {challenge.image && (
+                      <Image
+                        src={challenge.image}
+                        alt={challenge.title}
+                        fill
+                        sizes="(max-width: 639px) 90vw, (max-width: 1023px) 44vw, 30vw"
+                        className="object-cover"
+                        unoptimized
+                      />
+                    )}
                   </motion.div>
 
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
@@ -121,14 +133,14 @@ const MachiningChallenges = () => {
                   {/* Title */}
                   <div className="lg:px-5 lg:pt-6">
                     <h3 className="text-foreground group-hover:text-custom-primary line-clamp-2 pb-2 text-[20px] leading-[1.45] font-semibold transition-colors duration-500 sm:text-[18px] xl:text-xl">
-                      {t(challenge.titleKey)}
+                      {challenge.title}
                     </h3>
                   </div>
 
                   {/* Description */}
                   <div className="mt-2 min-h-0 sm:mt-3 sm:min-h-[84px] lg:mt-0 lg:min-h-0 lg:px-5 lg:pt-3">
                     <p className="text-muted-foreground line-clamp-3 text-justify text-[14px] leading-6 sm:text-[15px] sm:leading-7">
-                      {t(challenge.descriptionKey)}
+                      {challenge.description}
                     </p>
                   </div>
 
