@@ -13,9 +13,7 @@ export async function GET(req: Request, { params }: RouteProps) {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/chart/child/get_by_parent/${chart_id}/`,
       {
-        next: {
-          revalidate: 600,
-        },
+        cache: "no-store",
       },
     );
 

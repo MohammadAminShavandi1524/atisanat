@@ -9,9 +9,7 @@ export async function GET(req: Request) {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/blog/get_blogs/parent/${lang}/`,
       {
-        next: {
-          revalidate: 600,
-        },
+        cache: "no-store",
       },
     );
 

@@ -5,9 +5,7 @@ export async function GET() {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/chart/parent/get/`,
       {
-        next: {
-          revalidate: 600,
-        },
+        cache: "no-store",
       },
     );
 
