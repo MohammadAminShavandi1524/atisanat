@@ -7,7 +7,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 
 import FAQItem from "./FAQItem";
-import { faqItems } from "./faq.data";
+import { getFAQs, type FAQ } from "./faq.api";
 import { animateFAQPage } from "./faqAnimations";
 
 const FAQSection = () => {
@@ -17,14 +17,47 @@ const FAQSection = () => {
   const isRTL = locale === "fa";
   const ArrowIcon = isRTL ? ArrowLeft : ArrowRight;
 
+  const [faqItems, setFaqItems] = useState<FAQ[]>([]);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
+
   const rootRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (!rootRef.current) return;
+    const controller = new AbortController();
+
+    const fetchFAQs = async () => {
+      setLoading(true);
+
+      try {
+        const data = await getFAQs(controller.signal);
+
+        if (!controller.signal.aborted) {
+          setFaqItems(data);
+        }
+      } catch (error) {
+        if (!controller.signal.aborted) {
+          console.error("GET FAQ ERROR =>", error);
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchFAQs();
+
+    return () => {
+      controller.abort();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!rootRef.current || loading) return;
 
     return animateFAQPage(rootRef.current, isRTL);
-  }, [isRTL]);
+  }, [isRTL, loading, faqItems]);
 
   return (
     <section
@@ -69,29 +102,42 @@ const FAQSection = () => {
             </Link>
           </aside>
 
-          <div
-            ref={(element) => {
-              if (element) {
-                element.classList.add("faq-list");
-              }
-            }}
-            className="space-y-3"
-          >
-            {faqItems.map((item, index) => (
-              <div key={item.id} className="faq-list-item">
-                <FAQItem
-                  id={item.id}
-                  question={item.question[isRTL ? "fa" : "en"]}
-                  answer={item.answer[isRTL ? "fa" : "en"]}
-                  isOpen={activeIndex === index}
-                  onToggle={() => {
-                    setActiveIndex((current) =>
-                      current === index ? null : index,
-                    );
-                  }}
-                />
-              </div>
-            ))}
+          <div className="faq-list space-y-3" aria-busy={loading}>
+            {loading
+              ? Array.from({ length: 6 }).map((_, index) => (
+                  <div
+                    key={index}
+                    className="border-border bg-card flex min-h-[72px] items-center justify-between gap-4 rounded-xl border px-4 py-4 sm:min-h-[82px] sm:gap-6 sm:px-6 sm:py-5"
+                    aria-hidden="true"
+                  >
+                    <div
+                      className={`bg-secondary-bg h-4 animate-pulse rounded-md sm:h-5 ${
+                        index % 3 === 0
+                          ? "w-[75%]"
+                          : index % 3 === 1
+                            ? "w-[58%]"
+                            : "w-[68%]"
+                      }`}
+                    />
+
+                    <div className="border-border bg-secondary-bg size-9 shrink-0 animate-pulse rounded-lg border sm:size-10" />
+                  </div>
+                ))
+              : faqItems.map((item, index) => (
+                  <div key={item.id} className="faq-list-item">
+                    <FAQItem
+                      id={item.id}
+                      question={isRTL ? item.question_fa : item.question_en}
+                      answer={isRTL ? item.answer_fa : item.answer_en}
+                      isOpen={activeIndex === index}
+                      onToggle={() => {
+                        setActiveIndex((current) =>
+                          current === index ? null : index,
+                        );
+                      }}
+                    />
+                  </div>
+                ))}
           </div>
         </div>
       </div>
