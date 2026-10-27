@@ -5,9 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
-import { ArrowLeft, FileText } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 import { useLocale, useTranslations } from "next-intl";
 
@@ -28,6 +28,8 @@ const MachiningChallengeDetailPage = () => {
   const t = useTranslations("MachiningChallengesPage.article");
 
   const params = useParams();
+  const router = useRouter();
+
   const slug = params.slug as string;
 
   const rootRef = useRef<HTMLDivElement>(null);
@@ -48,8 +50,6 @@ const MachiningChallengeDetailPage = () => {
       setRelatedChallenges([]);
 
       try {
-        const blogs = await getLatestBlogs(lang, controller.signal);
-
         let normalizedSlug = slug;
 
         try {
@@ -58,14 +58,34 @@ const MachiningChallengeDetailPage = () => {
           normalizedSlug = slug;
         }
 
-        const selectedBlog = blogs.find((blog) => blog.slug === normalizedSlug);
+        // Get both languages so the previous language's slug can be resolved.
+        const [faBlogs, enBlogs] = await Promise.all([
+          getLatestBlogs("fa", controller.signal),
+          getLatestBlogs("en", controller.signal),
+        ]);
 
-        if (!selectedBlog) {
+        if (controller.signal.aborted) {
           return;
         }
 
+        const allBlogs = [...faBlogs, ...enBlogs];
+
+        const sourceBlog = allBlogs.find(
+          (blog) => blog.slug === normalizedSlug,
+        );
+
+        if (!sourceBlog) {
+          console.error(
+            "BLOG DETAILS ERROR =>",
+            "Article not found for slug:",
+            normalizedSlug,
+          );
+          return;
+        }
+
+        // Children API returns both fa and en article details.
         const childrenResponse = await getBlogChildren(
-          selectedBlog.id,
+          sourceBlog.id,
           controller.signal,
         );
 
@@ -75,11 +95,24 @@ const MachiningChallengeDetailPage = () => {
 
         const currentDetails = childrenResponse[lang];
 
-        if (!currentDetails || currentDetails.parent.id !== selectedBlog.id) {
+        if (!currentDetails?.parent) {
           console.error(
             "BLOG DETAILS ERROR =>",
-            "Article not found for selected language",
+            "Article not found for selected language:",
+            lang,
           );
+          return;
+        }
+
+        const currentBlog = currentDetails.parent;
+
+        // Update the URL to the correct slug for the selected language.
+        if (currentBlog.slug !== normalizedSlug) {
+          router.replace(
+            `/${locale}/machining-challenges/${encodeURIComponent(currentBlog.slug)}`,
+            { scroll: false },
+          );
+
           return;
         }
 
@@ -87,7 +120,7 @@ const MachiningChallengeDetailPage = () => {
 
         try {
           const related = await getRelatedBlogs(
-            selectedBlog.id,
+            currentBlog.id,
             controller.signal,
           );
 
@@ -95,7 +128,7 @@ const MachiningChallengeDetailPage = () => {
             setRelatedChallenges(
               related.filter(
                 (item) =>
-                  item.id !== selectedBlog.id &&
+                  item.id !== currentBlog.id &&
                   item.lang === lang &&
                   item.published,
               ),
@@ -122,7 +155,7 @@ const MachiningChallengeDetailPage = () => {
     return () => {
       controller.abort();
     };
-  }, [lang, slug]);
+  }, [lang, locale, slug, router]);
 
   if (loading || !details) {
     return <div className="min-h-250"></div>;
@@ -226,8 +259,6 @@ const MachiningChallengeDetailPage = () => {
               <div className="px-4 sm:px-5 xl:px-6">
                 {relatedChallenges.length === 0 ? (
                   <div className="flex min-h-[220px] flex-col items-center justify-center gap-3 py-8 text-center sm:min-h-[260px]">
-                   
-
                     <p className="text-foreground text-sm font-medium">
                       {isRTL
                         ? "در حال حاضر مقاله مرتبطی وجود ندارد"
