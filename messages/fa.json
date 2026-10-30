@@ -109,6 +109,11 @@
       "columnDrill": {
         "title": "دریل ستونی MS32B",
         "description": "برای انجام عملیات سوراخ‌کاری در فرآیند ساخت قطعات."
+      },
+
+      "cncLatheC": {
+        "title": "تراش CNC با محور C",
+        "description": "تراش CNC کره‌ای HWACHEON با محور C و انتقال قدرت گیربکسی، مناسب ماشین‌کاری سنگین."
       }
     },
     "Industries": {

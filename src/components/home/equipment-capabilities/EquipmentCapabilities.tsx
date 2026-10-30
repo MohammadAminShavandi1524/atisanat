@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -32,6 +33,10 @@ const equipment = {
       id: "manualLathe",
       image: "/home/machines/4.webp",
     },
+    {
+      id: "cncLatheC",
+      image: "/home/machines/7.jpg",
+    },
   ],
   right: {
     id: "columnDrill",
@@ -47,7 +52,7 @@ const mobileEquipment = [
   },
   ...equipment.center.map((item) => ({
     ...item,
-    orientation: "landscape",
+    orientation: "landscape" as const,
   })),
   {
     id: equipment.right.id,
@@ -140,9 +145,9 @@ const EquipmentCard = ({
           duration: 0.65,
           ease,
         }}
-        className="absolute inset-x-5 bottom-[72px] z-10 sm:inset-x-6 lg:bottom-6"
+        className="absolute inset-x-4 bottom-[72px] z-10 sm:inset-x-5 lg:bottom-6"
       >
-        <h3 className="text-[19px] leading-[1.35] font-semibold text-white sm:text-[22px]">
+        <h3 className="text-[19px] leading-[1.35] font-semibold text-white sm:text-[22px] xl:text-[17px] 2xl:text-[22px]">
           {t(`${id}.title`)}
         </h3>
       </motion.div>
@@ -165,9 +170,9 @@ const EquipmentCard = ({
             ease,
           },
         }}
-        className="absolute inset-x-5 bottom-5 z-10 min-h-[60px] overflow-hidden sm:inset-x-6 lg:h-[48px]"
+        className="absolute inset-x-4 bottom-5 z-10 min-h-[60px] overflow-hidden sm:inset-x-5 lg:h-[48px]"
       >
-        <p className="line-clamp-3 text-[13px] leading-6 text-white/80 sm:text-[14px]">
+        <p className="line-clamp-3  text-[12px] leading-5 text-white/80 sm:text-[14px]">
           {t(`${id}.description`)}
         </p>
       </motion.div>
@@ -253,41 +258,63 @@ const EquipmentCapabilities = () => {
         {/* Desktop */}
         <div
           onMouseLeave={() => setActiveId(null)}
-          className="equipment-grid hidden aspect-[17/6] grid-cols-[1.125fr_2fr_1.125fr] gap-4 lg:grid"
+          className="equipment-grid hidden aspect-[14/5] grid-cols-[1.125fr_3fr_1.125fr] gap-x-3 gap-y-4 lg:grid xl:aspect-[5/2] 2xl:aspect-[8/3]"
         >
-          <div className="min-w-0">
+          {/* Left tall card */}
+          <div className="min-h-0 min-w-0">
             <EquipmentCard
               id={equipment.left.id}
               image={equipment.left.image}
               activeId={activeId}
               setActiveId={setActiveId}
-              sizes="27vw"
+              sizes="22vw"
               isDesktop={isDesktop}
             />
           </div>
 
-          <div className="grid min-w-0 grid-cols-2 grid-rows-2 gap-4">
-            {equipment.center.map((item) => (
-              <div key={item.id} className="min-h-0 min-w-0">
-                <EquipmentCard
-                  id={item.id}
-                  image={item.image}
-                  activeId={activeId}
-                  setActiveId={setActiveId}
-                  sizes="24vw"
-                  isDesktop={isDesktop}
-                />
-              </div>
-            ))}
+          {/* Center: 3 cards above, 2 cards below */}
+          <div className="grid min-h-0 min-w-0 grid-rows-2 gap-x-3 gap-y-4">
+            {/* Top row */}
+            <div className="grid min-h-0 min-w-0 grid-cols-3 gap-x-2 gap-y-4">
+              {equipment.center.slice(0, 3).map((item) => (
+                <div key={item.id} className="min-h-0 min-w-0">
+                  <EquipmentCard
+                    id={item.id}
+                    image={item.image}
+                    activeId={activeId}
+                    setActiveId={setActiveId}
+                    sizes="(min-width: 1024px) 18vw, 100vw"
+                    isDesktop={isDesktop}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Bottom row */}
+            <div className="grid min-h-0 min-w-0 grid-cols-2 gap-x-3 gap-y-4">
+              {equipment.center.slice(3).map((item) => (
+                <div key={item.id} className="min-h-0 min-w-0">
+                  <EquipmentCard
+                    id={item.id}
+                    image={item.image}
+                    activeId={activeId}
+                    setActiveId={setActiveId}
+                    sizes="(min-width: 1024px) 28vw, 100vw"
+                    isDesktop={isDesktop}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="min-w-0">
+          {/* Right tall card */}
+          <div className="min-h-0 min-w-0">
             <EquipmentCard
               id={equipment.right.id}
               image={equipment.right.image}
               activeId={activeId}
               setActiveId={setActiveId}
-              sizes="27vw"
+              sizes="22vw"
               isDesktop={isDesktop}
             />
           </div>

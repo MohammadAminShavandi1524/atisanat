@@ -44,8 +44,6 @@ const Nav = () => {
           href={`/${locale}/machining-challenges`}
         />
 
-        <NavItem label={t("contactUs")} href={`/${locale}/contact-us`} />
-
         <NavItem label={t("aboutUs")} href={`/${locale}/about-us`} />
       </ul>
     </nav>

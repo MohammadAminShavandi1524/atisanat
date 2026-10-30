@@ -83,17 +83,17 @@
 
       "threeHalfAxis": {
         "title": "3.5-Axis CNC Milling",
-        "description": "Equipped with a rotary table for precise machining from multiple angles."
+        "description": "Rotary table for precise multi-angle machining."
       },
 
       "threeAxis": {
         "title": "4-Axis CNC Milling",
-        "description": "Suitable for complex components and multi-sided machining operations."
+        "description": "Ideal for complex parts and multi-sided machining."
       },
 
       "fourAxis": {
         "title": "3-Axis CNC Milling",
-        "description": "For precise industrial component machining and controlled manufacturing processes."
+        "description": "Precise machining of industrial components."
       },
 
       "manualLathe": {
@@ -109,6 +109,11 @@
       "columnDrill": {
         "title": "MS32B Column Drill",
         "description": "Used for drilling operations during component manufacturing."
+      },
+
+      "cncLatheC": {
+        "title": "C-Axis CNC Lathe",
+        "description": "HWACHEON C-axis CNC lathe with geared power transmission, ideal for heavy-duty machining."
       }
     },
     "Industries": {

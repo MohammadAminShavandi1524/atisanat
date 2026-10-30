@@ -16,10 +16,13 @@ const CooperationDropdown = () => {
   const isEnglish = locale === "en";
 
   const href = `/${locale}/cooperation`;
+  const contactHref = `/${locale}/contact-us`;
 
   const isActive =
     pathname === href ||
-    (href.split("/").length > 2 && pathname.startsWith(`${href}/`));
+    (href.split("/").length > 2 && pathname.startsWith(`${href}/`)) ||
+    pathname === contactHref ||
+    pathname.startsWith(`${contactHref}/`);
 
   const items = [
     {
@@ -29,6 +32,10 @@ const CooperationDropdown = () => {
     {
       label: t("businessCooperation"),
       href: `/${locale}/cooperation/business`,
+    },
+    {
+      label: t("contactUs"),
+      href: contactHref,
     },
   ];
 
